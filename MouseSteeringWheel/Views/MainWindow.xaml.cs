@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MouseSteeringWheel.Tests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace MouseSteeringWheel
         public MainWindow()
         {
             InitializeComponent();
+            var test = new VJoyTest();
+            test.JoyStickEnabledTest();
+            Console.WriteLine("App Launched");
         }
     }
 }
