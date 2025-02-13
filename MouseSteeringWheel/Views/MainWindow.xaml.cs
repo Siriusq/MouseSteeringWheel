@@ -1,4 +1,6 @@
 ﻿using MouseSteeringWheel.Tests;
+using MouseSteeringWheel.Services;
+using MouseSteeringWheel.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,12 @@ namespace MouseSteeringWheel.Views
         public MainWindow()
         {
             InitializeComponent();
-            var test = new VJoyTest();
-            test.JoyStickEnabledTest();
-            Console.WriteLine("App Launched");
+            var messageBoxService = new MessageBoxService();
+            var viewModel = new MainWindowViewModel(messageBoxService);
+            this.DataContext = viewModel;
+
+            //初始化vJoy
+            viewModel.InitializevJoy();
         }
     }
 }
