@@ -1,21 +1,13 @@
 ﻿using MouseSteeringWheel.Views;
+using System.Windows;
 
 namespace MouseSteeringWheel.Services
 {
     public class MessageBoxService : IMessageBoxService
     {
-        public void ShowMessage(string message)
-        {
-            var errorWindow = new ErrorMessageWindow(message);
-            errorWindow.ShowDialog();
-        }
-
         public void ShowMessage(string message, string title)
         {
-            var errorWindow = new ErrorMessageWindow(message) { 
-                Title = title
-            };
-            errorWindow.ShowDialog();
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

@@ -26,8 +26,11 @@ namespace MouseSteeringWheel.Views
         public MainWindow()
         {
             InitializeComponent();
+
             var messageBoxService = new MessageBoxService();
-            var viewModel = new MainWindowViewModel(messageBoxService);
+            var vJoyService = new vJoyService(messageBoxService);
+            var viewModel = new MainWindowViewModel(vJoyService);
+
             this.DataContext = viewModel;
 
             //初始化vJoy
