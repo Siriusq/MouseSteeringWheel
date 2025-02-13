@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MouseSteeringWheel
+namespace MouseSteeringWheel.Views
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
