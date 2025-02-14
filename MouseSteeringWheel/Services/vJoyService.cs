@@ -115,5 +115,14 @@ namespace MouseSteeringWheel.Services
             return true;
         }
 
+
+
+        // 获取vJoy设备的摇杆X轴状态
+        public double GetJoystickX()
+        {
+            vJoy.JoystickState state = new vJoy.JoystickState();
+            return state.AxisX;
+        }
+
     }
 }

@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MouseSteeringWheel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="0" Width="0"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ResizeMode="NoResize">
+    <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <!-- 完整圆弧 -->
+        <Path Name="JoystickArc" Stroke="DarkGray" StrokeThickness="3"
+              Data="M 0,0 A 150,150 0 0 1 300,0" Canvas.Left="-150.75" Canvas.Top="0" Opacity="0.5"/>
+
+        <!-- 摇杆指示器（圆珠） -->
+        <Ellipse Name="JoystickPosition" Width="20" Height="20" Fill="Orange" Canvas.Left="-10" Canvas.Top="-160.75">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform CenterX="10" CenterY="160" Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    </Canvas>
 </Window>
