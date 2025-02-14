@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace MouseSteeringWheel.Services
 {
-    public class MessageBoxService : IMessageBoxService
+    public class MessageBoxService
     {
         public void ShowMessage(string message, string title)
         {

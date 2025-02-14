@@ -5,11 +5,11 @@ namespace MouseSteeringWheel.Services
 {
     public class vJoyService
     {
-        private readonly IMessageBoxService _messageBoxService;
+        private readonly MessageBoxService _messageBoxService;
         public vJoy _joyStick;
         public uint _vJoyDeviceId;
 
-        public vJoyService(IMessageBoxService messageBoxService)
+        public vJoyService(MessageBoxService messageBoxService)
         {
             _messageBoxService = messageBoxService;
             //Todo: 将此数值加入到设置中，然后读取
