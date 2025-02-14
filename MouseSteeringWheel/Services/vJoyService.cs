@@ -14,6 +14,12 @@ namespace MouseSteeringWheel.Services
             _messageBoxService = messageBoxService;
             //Todo: 将此数值加入到设置中，然后读取
             _vJoyDeviceId = 1;
+
+            // 初始化vJoy
+            if (!InitializevJoy())
+            {
+                Console.WriteLine("Initialize Failed!");
+            }
         }
 
         // 初始化vJoy并返回是否成功
@@ -120,7 +126,7 @@ namespace MouseSteeringWheel.Services
         // 获取vJoy设备的摇杆X轴状态
         public double GetJoystickX()
         {
-            vJoy.JoystickState state = new vJoy.JoystickState();
+            vJoy.JoystickState state = new vJoy.JoystickState() { bDevice = (byte)_vJoyDeviceId };
             return state.AxisX;
         }
 

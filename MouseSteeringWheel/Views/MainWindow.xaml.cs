@@ -1,5 +1,4 @@
 ﻿using MouseSteeringWheel.Services;
-using MouseSteeringWheel.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,19 +11,15 @@ namespace MouseSteeringWheel.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly MainWindowViewModel _viewModel;
-        private double _centerX;
-        private double _radius;
+        private readonly vJoyService _vJoyService;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            // 初始化 ViewModel 并绑定到 DataContext
+            // 初始化vJoyService
             var messageBoxService = new MessageBoxService();
-            var vJoyService = new vJoyService(messageBoxService);
-            _viewModel = new MainWindowViewModel(vJoyService);
-            this.DataContext = _viewModel;
+            _vJoyService = new vJoyService(messageBoxService);
 
             // 设置窗口大小和位置
             InitializeWindow();
@@ -50,18 +45,13 @@ namespace MouseSteeringWheel.Views
             // 设置窗口位置（屏幕底部居中）
             this.Left = (screenWidth - this.Width) / 2;
             this.Top = screenHeight - this.Height;
-
-            // 设置圆环的半径和中心点
-            _radius = this.Width / 2;  // 半径为窗口宽度的一半
-            _centerX = this.Width / 2; // 中心点X坐标
-            Console.WriteLine($"{_radius},{_centerX}");
         }
 
         // 更新摇杆位置
         private void UpdateJoystickPosition()
         {
             // 获取摇杆的 X 轴值
-            double joystickX = _viewModel.GetJoystickX();
+            double joystickX = _vJoyService.GetJoystickX();
             Console.WriteLine(joystickX.ToString());
 
             // 设置摇杆的最大值范围
@@ -70,7 +60,8 @@ namespace MouseSteeringWheel.Views
             Console.WriteLine(angle);
 
             // 创建 RotateTransform 来旋转摇杆指示器
-            if (JoystickPosition.RenderTransform is RotateTransform rotateTransform)
+            RotateTransform rotateTransform = JoystickPosition.RenderTransform as RotateTransform;
+            if (rotateTransform != null)
             {
                 rotateTransform.Angle = angle; // 设置旋转角度
             }
