@@ -51,16 +51,19 @@ namespace MouseSteeringWheel.Views
         private void UpdateJoystickPosition()
         {
             // 获取摇杆的 X 轴值
-            double joystickX = _vJoyService.GetJoystickX();
-            Console.WriteLine(joystickX.ToString());
+            int joystickX = _vJoyService.GetJoystickX();
+            Console.WriteLine($"X: {joystickX}");
+
+            // Test旋转测试TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
+            _vJoyService.SetJoystickX(joystickX + 100);
 
             // 设置摇杆的最大值范围
             double maxRangeX = 32767; // 最大的 X 值
-            double angle = (joystickX / maxRangeX) * 90; // 将X值映射到-90度到+90度范围
-            Console.WriteLine(angle);
+            double angle = (joystickX / maxRangeX) * 180; // 将X值映射到0度到180度范围
+            Console.WriteLine($"Angel: {angle}");
 
-            // 创建 RotateTransform 来旋转摇杆指示器
-            RotateTransform rotateTransform = JoystickPosition.RenderTransform as RotateTransform;
+            // 旋转摇杆指示器
+            RotateTransform rotateTransform = Indicator;
             if (rotateTransform != null)
             {
                 rotateTransform.Angle = angle; // 设置旋转角度

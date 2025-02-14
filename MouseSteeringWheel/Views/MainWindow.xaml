@@ -14,12 +14,12 @@
               Data="M 0,0 A 150,150 0 0 1 300,0" Canvas.Left="-150.75" Canvas.Top="0" Opacity="0.5"/>
 
         <!-- 摇杆指示器（圆珠） -->
-        <Ellipse Name="JoystickPosition" Width="20" Height="20" Fill="Orange" Canvas.Left="-10" Canvas.Top="-160.75">
+        <Ellipse Name="JoystickPosition" Width="20" Height="20" Fill="Orange" Canvas.Left="-160.75" Canvas.Top="-10">
             <Ellipse.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform CenterX="10" CenterY="160" Angle="0"/>
+                    <RotateTransform x:Name="Indicator" CenterX="160" CenterY="10" Angle="0"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Ellipse.RenderTransform>

@@ -1,5 +1,6 @@
 ﻿using System;
 using vJoyInterfaceWrap;
+using static vJoyInterfaceWrap.vJoy;
 
 namespace MouseSteeringWheel.Services
 {
@@ -7,6 +8,8 @@ namespace MouseSteeringWheel.Services
     {
         private readonly MessageBoxService _messageBoxService;
         public vJoy _joyStick;
+        private vJoy.JoystickState iReport;
+        private VjdStat status;
         public uint _vJoyDeviceId;
 
         public vJoyService(MessageBoxService messageBoxService)
@@ -34,6 +37,11 @@ namespace MouseSteeringWheel.Services
             if (!AcquireVJoyDevice(_vJoyDeviceId)) return false;
             if (!CheckVJoyDeviceProperties(_vJoyDeviceId)) return false;
 
+            // 重置X数值，使方向盘居中
+            SetJoystickX(16383);
+
+            iReport = new vJoy.JoystickState() { bDevice = (byte)_vJoyDeviceId };
+
             // 设备初始化成功
             Console.WriteLine("Vendor: {0}\nProduct :{1}\nVersion Number:{2}\n",
                 _joyStick.GetvJoyManufacturerString(),
@@ -41,6 +49,8 @@ namespace MouseSteeringWheel.Services
                 _joyStick.GetvJoySerialNumberString());
             return true;
         }
+
+        #region Check vJoy Status
 
         // 检测驱动是否成功初始化
         public bool CheckvJoyDriverEnabled()
@@ -69,7 +79,7 @@ namespace MouseSteeringWheel.Services
         // 检测 vJoy 设备状态
         public bool CheckDeviceStatus(uint id)
         {
-            VjdStat status = _joyStick.GetVJDStatus(id);
+            status = _joyStick.GetVJDStatus(id);
 
             switch (status)
             {
@@ -96,8 +106,7 @@ namespace MouseSteeringWheel.Services
         // 检测是否占有 vJoy 设备，如果未占有则获取设备
         public bool AcquireVJoyDevice(uint id)
         {
-            //	Write access to vJoy Device - Basic
-            VjdStat status;
+            //	Write access to vJoy Device - Basic            
             status = _joyStick.GetVJDStatus(id);
             // Acquire the target
             if ((status == VjdStat.VJD_STAT_OWN) ||
@@ -121,14 +130,33 @@ namespace MouseSteeringWheel.Services
             return true;
         }
 
+        #endregion
 
 
         // 获取vJoy设备的摇杆X轴状态
-        public double GetJoystickX()
+        public int GetJoystickX()
         {
-            vJoy.JoystickState state = new vJoy.JoystickState() { bDevice = (byte)_vJoyDeviceId };
-            return state.AxisX;
+            //获取vJoy的所有位置信息
+            _joyStick.GetPosition(_vJoyDeviceId, ref iReport);
+            //返回X轴坐标
+            return iReport.AxisX;
         }
 
+
+        // 设置vJoy设备的摇杆X轴状态
+        public void SetJoystickX(int val)
+        {
+            _joyStick.SetAxis(val, _vJoyDeviceId, HID_USAGES.HID_USAGE_X);
+        }
+
+        // 解除占用
+        public void Relinquish(uint id)
+        {
+            status = _joyStick.GetVJDStatus(id);
+            if (status == VjdStat.VJD_STAT_OWN)
+            {
+                _joyStick.RelinquishVJD(id);
+            }
+        }
     }
 }
