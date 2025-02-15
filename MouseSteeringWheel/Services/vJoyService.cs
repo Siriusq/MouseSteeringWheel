@@ -1,6 +1,5 @@
 ﻿using System;
 using vJoyInterfaceWrap;
-using static vJoyInterfaceWrap.vJoy;
 
 namespace MouseSteeringWheel.Services
 {
