@@ -12,6 +12,7 @@ namespace MouseSteeringWheel.Views
     public partial class MainWindow : Window
     {
         private readonly vJoyService _vJoyService;
+        private readonly MouseInputService _mouseInputService;
         private int _lastJoystickX;
 
         public MainWindow()
@@ -22,8 +23,14 @@ namespace MouseSteeringWheel.Views
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
 
+            // 创建 MouseInputService，并传入 vJoyService
+            _mouseInputService = new MouseInputService(_vJoyService);
+
             // 设置窗口大小和位置
             InitializeWindow();
+
+            // 使用 CompositionTarget.Rendering 进行全屏鼠标移动监听
+            CompositionTarget.Rendering += _mouseInputService.OnMouseMove;
 
             // 监听Rendering事件，确保每一帧更新UI
             CompositionTarget.Rendering += UpdateJoystickPosition;
@@ -52,7 +59,7 @@ namespace MouseSteeringWheel.Views
             int joystickX = _vJoyService.GetJoystickX();
 
             // Test旋转测试TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
-            _vJoyService.SetJoystickX(joystickX + 10);
+            //_vJoyService.SetJoystickX(joystickX + 10);
 
             // 使用Dispatcher确保UI更新在主线程上执行
             Dispatcher.Invoke(() =>
