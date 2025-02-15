@@ -133,6 +133,7 @@ namespace MouseSteeringWheel.Services
         #endregion
 
 
+        #region 鼠标移动相关
         // 获取vJoy设备的摇杆X轴状态
         public int GetJoystickX()
         {
@@ -148,6 +149,38 @@ namespace MouseSteeringWheel.Services
         {
             _joyStick.SetAxis(val, _vJoyDeviceId, HID_USAGES.HID_USAGE_X);
         }
+
+        #endregion
+
+        #region 按键相关
+        // 映射键盘按键到vJoy按键
+        public void MapKeyToButton(int key)
+        {
+            switch (key)
+            {
+                case 2: // 小键盘 2
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 1); // 按下 vJoy 按钮 1
+                    break;
+                case 4: // 小键盘 4
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 2); // 按下 vJoy 按钮 2
+                    break;
+                case 6: // 小键盘 6
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 3); // 按下 vJoy 按钮 3
+                    break;
+                case 8: // 小键盘 8
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 4); // 按下 vJoy 按钮 4
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine(key);
+        }
+
+        #endregion
+
+
+
+        #region 解除占用
 
         // 解除占用
         public void Relinquish(uint id)
@@ -189,5 +222,7 @@ namespace MouseSteeringWheel.Services
         {
             Dispose(false);
         }
+
+        #endregion
     }
 }

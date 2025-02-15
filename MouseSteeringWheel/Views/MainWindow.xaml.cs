@@ -58,9 +58,6 @@ namespace MouseSteeringWheel.Views
             // 获取当前摇杆的 X 值
             int joystickX = _vJoyService.GetJoystickX();
 
-            // Test旋转测试TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
-            //_vJoyService.SetJoystickX(joystickX + 10);
-
             // 使用Dispatcher确保UI更新在主线程上执行
             Dispatcher.Invoke(() =>
             {
