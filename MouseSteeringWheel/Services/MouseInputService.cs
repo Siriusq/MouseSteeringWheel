@@ -39,7 +39,9 @@ namespace MouseSteeringWheel.Services
         private void UpdateJoystickX(double deltaX)
         {
             // 将鼠标移动的X值转为vJoy设备的X轴范围，假设最大范围是32767
-            int newJoystickX = _vJoyService.GetJoystickX() + (int)(deltaX * 10); // 除以10来调整灵敏度
+            int newJoystickX = _vJoyService.GetJoystickX() + (int)(deltaX * 12); // 除以10来调整灵敏度
+            if (newJoystickX < 0) newJoystickX = 0;
+            if (newJoystickX > 32767) newJoystickX = 32767;
             _vJoyService.SetJoystickX(newJoystickX);
         }
     }

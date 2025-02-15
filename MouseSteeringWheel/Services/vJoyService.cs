@@ -3,13 +3,14 @@ using vJoyInterfaceWrap;
 
 namespace MouseSteeringWheel.Services
 {
-    public class vJoyService
+    public class vJoyService : IDisposable
     {
         private readonly MessageBoxService _messageBoxService;
         public vJoy _joyStick;
         private vJoy.JoystickState iReport;
         private VjdStat status;
         public uint _vJoyDeviceId;
+        private bool _disposed = false;
 
         public vJoyService(MessageBoxService messageBoxService)
         {
@@ -156,6 +157,37 @@ namespace MouseSteeringWheel.Services
             {
                 _joyStick.RelinquishVJD(id);
             }
+        }
+
+        // 实现 IDisposable 接口
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        // 释放资源
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    // 如果占用，则释放托管资源
+                    if (_joyStick.GetVJDStatus(_vJoyDeviceId) == VjdStat.VJD_STAT_OWN)
+                    {
+                        _joyStick.RelinquishVJD(_vJoyDeviceId); // 释放设备
+                    }
+                }
+                // 释放非托管资源
+                _disposed = true;
+                Console.WriteLine("Device Relinquished!");
+            }
+        }
+
+        ~vJoyService()
+        {
+            Dispose(false);
         }
     }
 }
