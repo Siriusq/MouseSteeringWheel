@@ -158,16 +158,28 @@ namespace MouseSteeringWheel.Services
         {
             switch (key)
             {
-                case 2: // 小键盘 2
+                case 2: // 小键盘 2 A
                     _joyStick.SetBtn(true, _vJoyDeviceId, 1); // 按下 vJoy 按钮 1
                     break;
-                case 4: // 小键盘 4
+                case 4: // 小键盘 4 X
                     _joyStick.SetBtn(true, _vJoyDeviceId, 2); // 按下 vJoy 按钮 2
                     break;
-                case 6: // 小键盘 6
+                case 6: // 小键盘 6 B 
                     _joyStick.SetBtn(true, _vJoyDeviceId, 3); // 按下 vJoy 按钮 3
                     break;
-                case 8: // 小键盘 8
+                case 8: // 小键盘 8 Y
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 4); // 按下 vJoy 按钮 4
+                    break;
+                case 7: // 小键盘 7 LT
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 1); // 按下 vJoy 按钮 1
+                    break;
+                case 9: // 小键盘 9 RT
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 2); // 按下 vJoy 按钮 2
+                    break;
+                case 1: // 小键盘 1 LB 
+                    _joyStick.SetBtn(true, _vJoyDeviceId, 3); // 按下 vJoy 按钮 3
+                    break;
+                case 3: // 小键盘 3 RB
                     _joyStick.SetBtn(true, _vJoyDeviceId, 4); // 按下 vJoy 按钮 4
                     break;
                 default:
