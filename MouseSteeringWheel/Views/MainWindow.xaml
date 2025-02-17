@@ -9,13 +9,10 @@
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Topmost="True" ResizeMode="NoResize">
     <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <!--#region 方向盘-->
         <!-- 方向盘圆弧 -->
         <Path Name="JoystickArc" Stroke="DarkGray" StrokeThickness="3"
               Data="M 0,0 A 150,150 0 0 1 300,0" Canvas.Left="-150.75" Canvas.Top="0" Opacity="0.5"/>
-
-        <!--油门-->
-        <TextBlock x:Name="AcceleratorNum" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" FontFamily="Bahnschrift" Canvas.Left="-91" Canvas.Top="-19">000</TextBlock>
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Canvas.Left="-120" Canvas.Top="-19">T</TextBlock>
 
         <!-- 摇杆-方向盘指示器 -->
         <Rectangle Name="JoystickPosition" Width="20" Height="10" Fill="Orange" Panel.ZIndex="1" Canvas.Left="-160.75" Canvas.Top="-5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -30,7 +27,127 @@
         </Rectangle>
 
         <!-- 方向盘中点指示 -->
-        <Rectangle Width="2" Height="20" Fill="DarkGray" StrokeThickness="3"
+        <Rectangle Width="2" Height="20" Fill="DarkGray"
                    Canvas.Left="-1" Canvas.Top="-150" Opacity="0.5"/>
+        <!--#endregion-->
+
+        <!--#region 油门-->
+        <!-- 文字 -->
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="DarkGray" FontSize="8" FontFamily="Bahnschrift" Canvas.Left="-171" Canvas.Top="-135" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            THROTTLE
+        </TextBlock>
+
+        <GroupItem Opacity="0.5" Canvas.Left="-171" Canvas.Top="-150" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel>
+                <!-- 指示条 -->
+                <Rectangle Width="3" Height="150" Fill="DarkGray"/>
+                <!-- 百分比横杠 -->
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-1,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-30,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-60,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-90,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-120,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-150,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-180,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-210,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-240,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-270,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-300,0,0"/>
+                <!--百分比文字-->
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-6,0,0" VerticalAlignment="Center" Height="5.6" HorizontalAlignment="Left">00</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-30,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">10</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-60,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">20</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-90,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">30</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-120,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">40</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-150,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">50</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-180,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">60</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-210,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">70</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-240,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">80</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-270,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">90</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="-10,-300,0,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Left">100</TextBlock>
+
+            </StackPanel>
+        </GroupItem>
+
+        <!-- 指示器 -->
+        <Rectangle Width="15" Height="6" Fill="CornflowerBlue" Canvas.Left="-175" Canvas.Top="-3" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform x:Name="ThrottleIndicator" Y="-0"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <!--#endregion-->
+
+        <!--#region 刹车-->
+        <!-- 文字 -->
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="DarkGray" FontSize="8" FontFamily="Bahnschrift" Canvas.Left="135" Canvas.Top="-143" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+    BREAK
+        </TextBlock>
+
+        <GroupItem Opacity="0.5" Canvas.Left="161" Canvas.Top="-150" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel>
+                <!-- 指示条 -->
+                <Rectangle Width="3" Height="150" Fill="DarkGray"/>
+                <!-- 百分比横杠 -->
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-1,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-30,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-60,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-90,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-120,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-150,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-180,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-210,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-240,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-270,0,0"/>
+                <Rectangle Width="7" Height="1" Fill="DarkGray" Margin="0,-300,0,0"/>
+                <!--百分比文字-->
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-6,-10,0" VerticalAlignment="Center" Height="5.6" HorizontalAlignment="Right">100</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-30,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">90</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-60,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">80</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-90,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">70</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-120,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">60</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-150,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">50</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-180,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">40</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-210,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">30</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-240,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">20</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-270,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">10</TextBlock>
+                <TextBlock FontSize="6" Foreground="DarkGray" FontFamily="Bahnschrift Condensed" Margin="0,-300,-10,0" VerticalAlignment="Center" Height="6.5" HorizontalAlignment="Right">00</TextBlock>
+
+            </StackPanel>
+        </GroupItem>
+
+        <!-- 指示器 -->
+        <Rectangle Width="15" Height="6" Fill="OrangeRed" Canvas.Left="157" Canvas.Top="-153" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform x:Name="BreakIndicator" Y="0"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <!--#endregion-->
+
     </Canvas>
 </Window>
