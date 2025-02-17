@@ -51,6 +51,9 @@ namespace MouseSteeringWheel.Views
             // 设置窗口位置（屏幕底部居中）
             this.Left = (screenWidth - this.Width) / 2;
             this.Top = screenHeight - this.Height;
+
+            _lastJoystickX = 16383;
+            _lastJoystickY = 16383;
         }
 
         // 更新指示器位置
@@ -106,6 +109,15 @@ namespace MouseSteeringWheel.Views
                     _lastJoystickY = joystickY;
                 }
             });
+        }
+
+        // 关闭时重置摇杆位置
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CompositionTarget.Rendering -= _mouseInputService.OnMouseMove;
+            CompositionTarget.Rendering -= UpdateJoystickPosition;
+            Console.WriteLine("Released");
+            _vJoyService.ResetJoystickPos();
         }
     }
 }

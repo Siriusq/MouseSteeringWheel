@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="0" Width="0"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Topmost="True" ResizeMode="NoResize">
+        Topmost="True" ResizeMode="NoResize"
+        Closing="Window_Closing">
     <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom">
         <!--#region 方向盘-->
         <!-- 方向盘圆弧 -->

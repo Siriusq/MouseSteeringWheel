@@ -169,6 +169,14 @@ namespace MouseSteeringWheel.Services
             _joyStick.SetAxis(val, _vJoyDeviceId, HID_USAGES.HID_USAGE_Y);
         }
 
+        // 重置摇杆位置
+        public void ResetJoystickPos()
+        {
+            CheckDeviceStatus(_vJoyDeviceId);
+            SetJoystickX(16383);
+            SetJoystickY(16383);
+        }
+
         #endregion
 
         #region 按键相关
@@ -213,16 +221,6 @@ namespace MouseSteeringWheel.Services
 
         #region 解除占用
 
-        // 解除占用
-        public void Relinquish(uint id)
-        {
-            status = _joyStick.GetVJDStatus(id);
-            if (status == VjdStat.VJD_STAT_OWN)
-            {
-                _joyStick.RelinquishVJD(id);
-            }
-        }
-
         // 实现 IDisposable 接口
         public void Dispose()
         {
@@ -241,11 +239,12 @@ namespace MouseSteeringWheel.Services
                     if (_joyStick.GetVJDStatus(_vJoyDeviceId) == VjdStat.VJD_STAT_OWN)
                     {
                         _joyStick.RelinquishVJD(_vJoyDeviceId); // 释放设备
+                        Console.WriteLine("Device Relinquished!");
                     }
                 }
                 // 释放非托管资源
                 _disposed = true;
-                Console.WriteLine("Device Relinquished!");
+
             }
         }
 
