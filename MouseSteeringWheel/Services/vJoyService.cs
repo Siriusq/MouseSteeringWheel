@@ -40,6 +40,9 @@ namespace MouseSteeringWheel.Services
             // 重置X数值，使方向盘居中
             SetJoystickX(16383);
 
+            // 重置Y数值，使刹车油门归零
+            SetJoystickY(16383);
+
             iReport = new vJoy.JoystickState() { bDevice = (byte)_vJoyDeviceId };
 
             // 设备初始化成功
@@ -148,6 +151,22 @@ namespace MouseSteeringWheel.Services
         public void SetJoystickX(int val)
         {
             _joyStick.SetAxis(val, _vJoyDeviceId, HID_USAGES.HID_USAGE_X);
+        }
+
+        // 获取vJoy设备的摇杆Y轴状态
+        public int GetJoystickY()
+        {
+            //获取vJoy的所有位置信息
+            _joyStick.GetPosition(_vJoyDeviceId, ref iReport);
+            //返回X轴坐标
+            return iReport.AxisY;
+        }
+
+
+        // 设置vJoy设备的摇杆Y轴状态
+        public void SetJoystickY(int val)
+        {
+            _joyStick.SetAxis(val, _vJoyDeviceId, HID_USAGES.HID_USAGE_Y);
         }
 
         #endregion

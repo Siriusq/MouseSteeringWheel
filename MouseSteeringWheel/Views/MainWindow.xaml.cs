@@ -14,6 +14,7 @@ namespace MouseSteeringWheel.Views
         private readonly vJoyService _vJoyService;
         private readonly MouseInputService _mouseInputService;
         private int _lastJoystickX;
+        private int _lastJoystickY;
 
         public MainWindow()
         {
@@ -52,11 +53,12 @@ namespace MouseSteeringWheel.Views
             this.Top = screenHeight - this.Height;
         }
 
-        // 更新摇杆位置
+        // 更新指示器位置
         private void UpdateJoystickPosition(object sender, EventArgs e)
         {
             // 获取当前摇杆的 X 值
             int joystickX = _vJoyService.GetJoystickX();
+            int joystickY = _vJoyService.GetJoystickY();
 
             // 使用Dispatcher确保UI更新在主线程上执行
             Dispatcher.Invoke(() =>
@@ -77,6 +79,31 @@ namespace MouseSteeringWheel.Views
 
                     // 更新记录的摇杆X值
                     _lastJoystickX = joystickX;
+                }
+
+                if (joystickY != _lastJoystickY)
+                {
+                    // 设置油门
+                    if (joystickY < 16383)
+                    {
+                        double throttleVal = (joystickY - 16383) * 150 / 16383;
+                        ThrottleIndicator.Y = throttleVal;
+                    }
+                    // 设置刹车
+                    else if (joystickY > 16383)
+                    {
+                        double breakVal = (joystickY - 16383) * 150 / 16383;
+                        BreakIndicator.Y = breakVal;
+                    }
+                    // 归零
+                    else
+                    {
+                        ThrottleIndicator.Y = 0;
+                        BreakIndicator.Y = 0;
+                    }
+
+                    // 更新记录的摇杆Y值
+                    _lastJoystickY = joystickY;
                 }
             });
         }

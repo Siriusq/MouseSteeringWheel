@@ -39,10 +39,10 @@ namespace MouseSteeringWheel.Services
             int x = deltaX * sensitivityX;
             int y = deltaY * sensitivityY;
             // 根据鼠标移动更新vJoy的XY值
-            UpdateJoystickX(x, y);
+            UpdateJoystickXY(x, y);
         }
 
-        private void UpdateJoystickX(int dx, int dy)
+        private void UpdateJoystickXY(int dx, int dy)
         {
             // 将鼠标移动的XY值转为vJoy设备的XY轴范围，假设最大范围是32767
             int newJoystickX = 16383 + dx;
@@ -67,6 +67,7 @@ namespace MouseSteeringWheel.Services
 
             // 更新摇杆XY位置
             _vJoyService.SetJoystickX(newJoystickX);
+            _vJoyService.SetJoystickY(newJoystickY);
             Console.WriteLine($"{newJoystickX} {newJoystickY}");
         }
     }
