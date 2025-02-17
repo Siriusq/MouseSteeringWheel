@@ -9,20 +9,28 @@
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Topmost="True" ResizeMode="NoResize">
     <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-        <!-- 完整圆弧 -->
+        <!-- 方向盘圆弧 -->
         <Path Name="JoystickArc" Stroke="DarkGray" StrokeThickness="3"
               Data="M 0,0 A 150,150 0 0 1 300,0" Canvas.Left="-150.75" Canvas.Top="0" Opacity="0.5"/>
 
-        <!-- 摇杆指示器（圆珠） -->
-        <Ellipse Name="JoystickPosition" Width="20" Height="20" Fill="Orange" Canvas.Left="-160.75" Canvas.Top="-10">
-            <Ellipse.RenderTransform>
+        <!--油门-->
+        <TextBlock x:Name="AcceleratorNum" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" FontFamily="Bahnschrift" Canvas.Left="-91" Canvas.Top="-19">000</TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Canvas.Left="-120" Canvas.Top="-19">T</TextBlock>
+
+        <!-- 摇杆-方向盘指示器 -->
+        <Rectangle Name="JoystickPosition" Width="20" Height="10" Fill="Orange" Panel.ZIndex="1" Canvas.Left="-160.75" Canvas.Top="-5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform x:Name="Indicator" CenterX="160" CenterY="10" Angle="0"/>
+                    <RotateTransform x:Name="Indicator" CenterX="150.75" CenterY="0" Angle="90"/>
                     <TranslateTransform/>
                 </TransformGroup>
-            </Ellipse.RenderTransform>
-        </Ellipse>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- 方向盘中点指示 -->
+        <Rectangle Width="2" Height="20" Fill="DarkGray" StrokeThickness="3"
+                   Canvas.Left="-1" Canvas.Top="-150" Opacity="0.5"/>
     </Canvas>
 </Window>
