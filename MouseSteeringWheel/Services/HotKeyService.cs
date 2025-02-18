@@ -1,4 +1,6 @@
-﻿using System;
+﻿// 注册全局快捷键，阻断其他程序对已注册快捷键的响应，在快捷键按下时设置vJoy相关按钮状态为按下
+
+using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -15,7 +17,7 @@ namespace MouseSteeringWheel.Services
             _vJoyService = vJoyService;
             _window = window;
 
-            BindHotKeyToButton(ModifierKeys.None, Key.N, 2);
+            BindHotKeyToButton(ModifierKeys.None, Key.N, 1);
         }
 
         private void BindHotKeyToButton(ModifierKeys fsModifiers, Key key, int buttonId)

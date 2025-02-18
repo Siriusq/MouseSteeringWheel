@@ -96,8 +96,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\HotKeyService.cs" />
+    <Compile Include="Services\KeyboardHookService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\MouseInputService.cs" />
+    <Compile Include="Services\NativeInterop.cs" />
     <Compile Include="Services\vJoyService.cs" />
     <Compile Include="Views\ErrorMessageWindow.xaml.cs">
       <DependentUpon>ErrorMessageWindow.xaml</DependentUpon>

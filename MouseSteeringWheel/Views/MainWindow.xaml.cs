@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using static MouseSteeringWheel.Services.HotKeyService;
 
@@ -18,6 +19,7 @@ namespace MouseSteeringWheel.Views
         private int _lastJoystickX;
         private int _lastJoystickY;
         private HotKeyService _hotKeyService;
+        private readonly KeyboardHookService _keyboardHook;
 
         public MainWindow()
         {
@@ -29,6 +31,10 @@ namespace MouseSteeringWheel.Views
 
             // 创建 MouseInputService，并传入 vJoyService
             _mouseInputService = new MouseInputService(_vJoyService);
+
+            // 创建底层键盘勾子
+            _keyboardHook = new KeyboardHookService(_vJoyService);
+            Closed += (s, e) => _keyboardHook.Dispose();
 
             // 设置窗口大小和位置
             InitializeWindow();
@@ -114,7 +120,7 @@ namespace MouseSteeringWheel.Views
             });
         }
 
-        // 重写窗口初始化函数 主窗口启动后注册快捷键
+        // 重写窗口初始化函数 主窗口启动后注册全局快捷键 以阻断其他程序响应
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
