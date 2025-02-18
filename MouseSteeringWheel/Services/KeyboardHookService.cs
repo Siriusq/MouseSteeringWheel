@@ -17,8 +17,8 @@ namespace MouseSteeringWheel.Services
         private IntPtr _hookId = IntPtr.Zero;
         private NativeInterop.LowLevelKeyboardProc _proc;
 
-        public event Action<Key> KeyDown;
-        public event Action<Key> KeyUp;
+        public event Action<Key, ModifierKeys> KeyDown;
+        public event Action<Key, ModifierKeys> KeyUp;
 
         public KeyboardHookService(vJoyService _vJoyService)
         {
@@ -30,18 +30,18 @@ namespace MouseSteeringWheel.Services
             this.KeyUp += OnGlobalKeyUp;
         }
 
-        private void OnGlobalKeyDown(Key key)
+        private void OnGlobalKeyDown(Key key, ModifierKeys modifierKeys)
         {
-            if (key == Key.N)
+            if (key == Key.N && modifierKeys == ModifierKeys.Control)
             {
                 Application.Current.Dispatcher.Invoke(() =>
-                    Console.WriteLine("N键已按下（通过服务触发）"));
+                    Console.WriteLine("Ctrl + N键已按下（通过服务触发）"));
             }
         }
 
-        private void OnGlobalKeyUp(Key key)
+        private void OnGlobalKeyUp(Key key, ModifierKeys modifierKeys)
         {
-            if (key == Key.N)
+            if (key == Key.N && modifierKeys == ModifierKeys.None)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                     _vJoyService.ResetButtonStatus());
@@ -66,14 +66,15 @@ namespace MouseSteeringWheel.Services
             {
                 var kbStruct = Marshal.PtrToStructure<NativeInterop.KBDLLHOOKSTRUCT>(lParam);
                 var key = KeyInterop.KeyFromVirtualKey(kbStruct.vkCode);
+                var modifierKey = Keyboard.Modifiers;
 
                 if (wParam == (IntPtr)NativeInterop.WM_KEYDOWN)
                 {
-                    KeyDown?.Invoke(key);
+                    KeyDown?.Invoke(key, modifierKey);
                 }
                 else if (wParam == (IntPtr)NativeInterop.WM_KEYUP)
                 {
-                    KeyUp?.Invoke(key);
+                    KeyUp?.Invoke(key, modifierKey);
                 }
             }
             return NativeInterop.CallNextHookEx(_hookId, nCode, wParam, lParam);
