@@ -1,8 +1,10 @@
 ﻿using MouseSteeringWheel.Services;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static MouseSteeringWheel.Services.HotKeyService;
 
 namespace MouseSteeringWheel.Views
 {
@@ -15,6 +17,7 @@ namespace MouseSteeringWheel.Views
         private readonly MouseInputService _mouseInputService;
         private int _lastJoystickX;
         private int _lastJoystickY;
+        private HotKeyService _hotKeyService;
 
         public MainWindow()
         {
@@ -109,6 +112,15 @@ namespace MouseSteeringWheel.Views
                     _lastJoystickY = joystickY;
                 }
             });
+        }
+
+        // 重写窗口初始化函数 主窗口启动后注册快捷键
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            // 创建 HotKeyService，并传入 vJoyService 和 窗体自身
+            _hotKeyService = new HotKeyService(_vJoyService, this);
         }
 
         // 关闭时重置摇杆位置

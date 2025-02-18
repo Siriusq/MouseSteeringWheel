@@ -68,7 +68,6 @@ namespace MouseSteeringWheel.Services
             // 更新摇杆XY位置
             _vJoyService.SetJoystickX(newJoystickX);
             _vJoyService.SetJoystickY(newJoystickY);
-            Console.WriteLine($"{newJoystickX} {newJoystickY}");
         }
     }
 }
