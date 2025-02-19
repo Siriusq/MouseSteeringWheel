@@ -37,10 +37,14 @@ namespace MouseSteeringWheel.Services
 
         private void OnGlobalKeyDown(Key key, ModifierKeys modifierKeys)
         {
-            if (key == Key.N && modifierKeys == ModifierKeys.Control)
+            for (int i = 0; i < 21; i++)
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                    Console.WriteLine("Ctrl + N键已按下（通过服务触发）"));
+                if (key == keysArray[i] && modifierKeys == modifierKeysArray[i])
+                {
+                    Console.WriteLine(i + 1);
+                    Application.Current.Dispatcher.Invoke(() =>
+                        _vJoyService.MapKeyToButton(i + 1));
+                }
             }
         }
 

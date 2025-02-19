@@ -1,11 +1,12 @@
 ﻿using MouseSteeringWheel.Services;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
-using static MouseSteeringWheel.Services.HotKeyService;
 
 namespace MouseSteeringWheel.Views
 {
@@ -18,8 +19,11 @@ namespace MouseSteeringWheel.Views
         private readonly MouseInputService _mouseInputService;
         private int _lastJoystickX;
         private int _lastJoystickY;
-        private HotKeyService _hotKeyService;
         private readonly KeyboardHookService _keyboardHook;
+        private readonly HotkeyService _hotkeyService = new HotkeyService();
+        private int _nHotkeyId;
+        private int _nHotkeyId1;
+        private int[] _hotKeyIds = new int[21];
 
         public MainWindow()
         {
@@ -37,6 +41,9 @@ namespace MouseSteeringWheel.Views
             // 创建底层键盘勾子
             _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys);
             Closed += (s, e) => _keyboardHook.Dispose();
+
+            Loaded += OnWindowLoaded;
+            Closed += OnWindowClosed;
 
             // 设置窗口大小和位置
             InitializeWindow();
@@ -122,13 +129,34 @@ namespace MouseSteeringWheel.Views
             });
         }
 
-        // 重写窗口初始化函数 主窗口启动后注册全局快捷键 以阻断其他程序响应
-        protected override void OnSourceInitialized(EventArgs e)
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            base.OnSourceInitialized(e);
+            // 初始化热键服务
+            var windowHandle = new WindowInteropHelper(this).Handle;
+            _hotkeyService.Initialize(windowHandle);
 
-            // 创建 HotKeyService，并传入 vJoyService 和 窗体自身
-            _hotKeyService = new HotKeyService(_vJoyService, this, keys, modifierKeys);
+            // 注册Ctrl + Alt + N热键
+            _nHotkeyId = _hotkeyService.RegisterHotkey(
+                modifiers: NativeInterop.MOD_NONE,
+                keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad1),
+                callback: () => Dispatcher.Invoke(() =>
+                    _vJoyService.MapKeyToButton(1))
+            );
+            _nHotkeyId1 = _hotkeyService.RegisterHotkey(
+                modifiers: NativeInterop.MOD_NONE,
+                keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad2),
+                callback: () => Dispatcher.Invoke(() =>
+                    _vJoyService.MapKeyToButton(2))
+            );
+        }
+
+        private void OnWindowClosed(object sender, EventArgs e)
+        {
+            foreach (int _hotKeys in _hotKeyIds)
+            {
+                _hotkeyService.UnregisterHotkey(_hotKeys);
+            }
+            _hotkeyService.Dispose();
         }
 
         // 读取设置选项
