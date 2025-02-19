@@ -25,6 +25,8 @@ namespace MouseSteeringWheel.Views
         {
             InitializeComponent();
 
+            ReadSettings();
+
             // 初始化vJoyService
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
@@ -33,7 +35,7 @@ namespace MouseSteeringWheel.Views
             _mouseInputService = new MouseInputService(_vJoyService);
 
             // 创建底层键盘勾子
-            _keyboardHook = new KeyboardHookService(_vJoyService);
+            _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys);
             Closed += (s, e) => _keyboardHook.Dispose();
 
             // 设置窗口大小和位置
@@ -126,7 +128,21 @@ namespace MouseSteeringWheel.Views
             base.OnSourceInitialized(e);
 
             // 创建 HotKeyService，并传入 vJoyService 和 窗体自身
-            _hotKeyService = new HotKeyService(_vJoyService, this);
+            _hotKeyService = new HotKeyService(_vJoyService, this, keys, modifierKeys);
+        }
+
+        // 读取设置选项
+        private Key[] keys;
+        private ModifierKeys[] modifierKeys;
+        private void ReadSettings()
+        {
+            keys = new Key[] { Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad5,
+                Key.NumPad7, Key.NumPad4,Key.NumPad9,Key.NumPad6,
+            Key.Home,Key.End,Key.Delete,Key.PageDown,Key.PageUp,Key.Insert,
+            Key.Up,Key.Down,Key.Left,Key.Right,
+            Key.Divide,Key.Multiply,Key.Subtract,
+            };
+            modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
         }
 
         // 关闭时重置摇杆位置

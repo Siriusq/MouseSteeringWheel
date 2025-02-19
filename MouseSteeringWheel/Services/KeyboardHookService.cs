@@ -20,13 +20,18 @@ namespace MouseSteeringWheel.Services
         public event Action<Key, ModifierKeys> KeyDown;
         public event Action<Key, ModifierKeys> KeyUp;
 
-        public KeyboardHookService(vJoyService _vJoyService)
+        private Key[] keysArray;
+        private ModifierKeys[] modifierKeysArray;
+
+        public KeyboardHookService(vJoyService _vJoyService, Key[] keys, ModifierKeys[] modifierKey)
         {
             this._vJoyService = _vJoyService;
+            this.keysArray = keys;
+            this.modifierKeysArray = modifierKey;
             _proc = HookCallback;
             InstallHook();
 
-            this.KeyDown += OnGlobalKeyDown;
+            //this.KeyDown += OnGlobalKeyDown;
             this.KeyUp += OnGlobalKeyUp;
         }
 
@@ -41,10 +46,14 @@ namespace MouseSteeringWheel.Services
 
         private void OnGlobalKeyUp(Key key, ModifierKeys modifierKeys)
         {
-            if (key == Key.N && modifierKeys == ModifierKeys.None)
+            for (int i = 0; i < 21; i++)
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                    _vJoyService.ResetButtonStatus());
+                if (key == keysArray[i] && modifierKeys == modifierKeysArray[i])
+                {
+                    Console.WriteLine(i + 1);
+                    Application.Current.Dispatcher.Invoke(() =>
+                        _vJoyService.ResetButtonStatus(i + 1));
+                }
             }
         }
 

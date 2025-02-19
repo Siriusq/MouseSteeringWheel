@@ -12,20 +12,38 @@ namespace MouseSteeringWheel.Services
     {
         private readonly vJoyService _vJoyService;
         private readonly Window _window;
-        public HotKeyService(vJoyService vJoyService, Window window)
+        public HotKeyService(vJoyService vJoyService, Window window, Key[] keys, ModifierKeys[] modifierKeys)
         {
             _vJoyService = vJoyService;
             _window = window;
 
-            BindHotKeyToButton(ModifierKeys.None, Key.N, 1);
+            InitHooks();
+
+            for (int i = 0; i < 21; i++)
+            {
+                BindHotKeyToButton(modifierKeys[i], keys[i], i + 1);
+            }
         }
 
         private void BindHotKeyToButton(ModifierKeys fsModifiers, Key key, int buttonId)
         {
-            Regist(_window, fsModifiers, key, () =>
+            Regist(_window, fsModifiers, key, buttonId, () =>
             {
+                Console.WriteLine($"{buttonId} Registed");
                 _vJoyService.MapKeyToButton(buttonId);
             });
+        }
+
+        // 初始化
+        static IntPtr hwnd;
+        private void InitHooks()
+        {
+            //获取窗口的句柄
+            hwnd = new WindowInteropHelper(_window).Handle;
+            //使用窗口句柄创建一个 HwndSource 对象
+            var _hwndSource = HwndSource.FromHwnd(hwnd);
+            //将消息处理委托 WndProc 添加到窗口的消息处理链中，窗口收到消息后会先传递给 WndProc 方法进行处理
+            _hwndSource.AddHook(WndProc);
         }
 
         [DllImport("user32.dll")]
@@ -37,6 +55,12 @@ namespace MouseSteeringWheel.Services
 
         const int WM_HOTKEY = 0x312;
         public delegate void HotKeyCallBackHanlder();
+
+        //TODO:修改下面的两个为数组！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        // 目前全绑定成了最后一个事件，因为这俩只有一个存储位置
+        public static int[] hotKeyIds = new int[] { 9000, 9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009, 9010, 9011, 9012, 9013, 9014, 9015, 9016, 9017, 9018, 9019, 9020, 9021 };
+        public static HotKeyCallBackHanlder[] hotKeyCallBackHanlders = new HotKeyCallBackHanlder[22];
+
         public const int HOTKEY_ID = 9000;
         //Commands that need to be executed by the hot key
         public static HotKeyCallBackHanlder hotKeyCallBackHanlder = null;
@@ -48,24 +72,17 @@ namespace MouseSteeringWheel.Services
         /// <param name="fsModifiers">Modifier Keys like Control, Alt and Shift</param>
         /// <param name="key">Key like ABCDEFG</param>
         /// <param name="callBack">callback function</param>
-        public static void Regist(Window window, ModifierKeys fsModifiers, Key key, HotKeyCallBackHanlder callBack)
+        public static void Regist(Window window, ModifierKeys fsModifiers, Key key, int idx, HotKeyCallBackHanlder callBack)
         {
-            //获取窗口的句柄
-            var hwnd = new WindowInteropHelper(window).Handle;
-            //使用窗口句柄创建一个 HwndSource 对象
-            var _hwndSource = HwndSource.FromHwnd(hwnd);
-            //将消息处理委托 WndProc 添加到窗口的消息处理链中，窗口收到消息后会先传递给 WndProc 方法进行处理
-            _hwndSource.AddHook(WndProc);
-
             //将传入的Key转化为虚拟键码vk
             var vk = KeyInterop.VirtualKeyFromKey(key);
 
             //如果注册失败则弹窗报错
-            if (!RegisterHotKey(hwnd, HOTKEY_ID, fsModifiers, (uint)vk))
+            if (!RegisterHotKey(hwnd, hotKeyIds[idx], fsModifiers, (uint)vk))
                 MessageBox.Show("Failed to register global hotkey!");
 
             //将回调函数赋值给了 hotKeyCallBackHanlder 变量。这个回调函数就是在注册时由主窗口传入的 callBack 参数
-            hotKeyCallBackHanlder = callBack;
+            hotKeyCallBackHanlders[idx] = callBack;
         }
 
         /// <summary> 
@@ -74,9 +91,14 @@ namespace MouseSteeringWheel.Services
         static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             //当收到 WM_HOTKEY 消息并且热键 ID 匹配时，会调用 hotKeyCallBackHanlder()，即执行了预先设置的回调函数。
-            if (msg == WM_HOTKEY && wParam.ToInt32() == HOTKEY_ID)
+            if (msg == WM_HOTKEY)
             {
-                hotKeyCallBackHanlder();
+                for (int i = 0; i < 22; i++)
+                {
+                    if (wParam.ToInt32() == hotKeyIds[i])
+                        hotKeyCallBackHanlders[i]();
+                }
+
             }
             return IntPtr.Zero;
         }
