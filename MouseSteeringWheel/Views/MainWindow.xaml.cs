@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,7 +23,6 @@ namespace MouseSteeringWheel.Views
         private readonly KeyboardHookService _keyboardHook;
         private readonly HotkeyService _hotkeyService = new HotkeyService();
         private int _nHotkeyId;
-        private int _nHotkeyId1;
         private int[] _hotKeyIds = new int[21];
 
         public MainWindow()
@@ -135,26 +135,27 @@ namespace MouseSteeringWheel.Views
             var windowHandle = new WindowInteropHelper(this).Handle;
             _hotkeyService.Initialize(windowHandle);
 
-            // 注册Ctrl + Alt + N热键
-            _nHotkeyId = _hotkeyService.RegisterHotkey(
-                modifiers: NativeInterop.MOD_NONE,
-                keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad1),
-                callback: () => Dispatcher.Invoke(() =>
-                    _vJoyService.MapKeyToButton(1))
-            );
-            _nHotkeyId1 = _hotkeyService.RegisterHotkey(
-                modifiers: NativeInterop.MOD_NONE,
-                keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad2),
-                callback: () => Dispatcher.Invoke(() =>
-                    _vJoyService.MapKeyToButton(2))
-            );
+            // 注册热键
+            // 使用立即计算的局部变量解决闭包变量捕获问题
+            for (int index = 0; index < keys.Length; index++)
+            {
+                int buttonId = index + 1; // 按钮ID从1开始
+                Key currentKey = keys[index];
+
+                _hotKeyIds[index] = _hotkeyService.RegisterHotkey(
+                    modifiers: NativeInterop.MOD_NONE,
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(currentKey),
+                    callback: () => Dispatcher.Invoke(() =>
+                        _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
+                );
+            }
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
-            foreach (int _hotKeys in _hotKeyIds)
+            foreach (var id in _hotKeyIds.Where(id => id != 0))
             {
-                _hotkeyService.UnregisterHotkey(_hotKeys);
+                _hotkeyService.UnregisterHotkey(id);
             }
             _hotkeyService.Dispose();
         }
