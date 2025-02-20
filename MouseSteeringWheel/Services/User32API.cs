@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace MouseSteeringWheel.Services
 {
-    public static class NativeInterop
+    public static class User32API
     {
         // 通用常量
         public const int WH_MOUSE_LL = 14;

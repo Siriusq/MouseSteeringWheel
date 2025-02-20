@@ -6,7 +6,7 @@ using System.Windows.Interop;
 
 namespace MouseSteeringWheel.Services
 {
-    public class HotkeyService : IDisposable
+    public class HotkeyProcessor : IDisposable
     {
         private readonly Dictionary<int, Action> _hotkeyActions = new Dictionary<int, Action>();
         private HwndSource _hwndSource;
@@ -22,7 +22,7 @@ namespace MouseSteeringWheel.Services
         public int RegisterHotkey(uint modifiers, uint keyCode, Action callback)
         {
             var id = ++_hotkeyIdCounter;
-            if (NativeInterop.RegisterHotKey(_hwndSource.Handle, id, modifiers, keyCode))
+            if (User32API.RegisterHotKey(_hwndSource.Handle, id, modifiers, keyCode))
             {
                 _hotkeyActions[id] = callback;
                 return id;
@@ -34,14 +34,14 @@ namespace MouseSteeringWheel.Services
         {
             if (_hotkeyActions.ContainsKey(hotkeyId))
             {
-                NativeInterop.UnregisterHotKey(_hwndSource.Handle, hotkeyId);
+                User32API.UnregisterHotKey(_hwndSource.Handle, hotkeyId);
                 _hotkeyActions.Remove(hotkeyId);
             }
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (msg == NativeInterop.WM_HOTKEY)
+            if (msg == User32API.WM_HOTKEY)
             {
                 var hotkeyId = wParam.ToInt32();
                 if (_hotkeyActions.TryGetValue(hotkeyId, out var action))
@@ -57,7 +57,7 @@ namespace MouseSteeringWheel.Services
         {
             foreach (var id in _hotkeyActions.Keys)
             {
-                NativeInterop.UnregisterHotKey(_hwndSource.Handle, id);
+                User32API.UnregisterHotKey(_hwndSource.Handle, id);
             }
             _hwndSource?.RemoveHook(WndProc);
         }

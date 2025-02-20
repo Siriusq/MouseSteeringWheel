@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MouseSteeringWheel.Services
 {
@@ -15,8 +10,8 @@ namespace MouseSteeringWheel.Services
         public static Size GetPrimaryScreenPhysicalSize()
         {
             return new Size(
-                NativeInterop.GetSystemMetrics(NativeInterop.SM_CXSCREEN),
-                NativeInterop.GetSystemMetrics(NativeInterop.SM_CYSCREEN)
+                User32API.GetSystemMetrics(User32API.SM_CXSCREEN),
+                User32API.GetSystemMetrics(User32API.SM_CYSCREEN)
             );
         }
 
@@ -28,8 +23,8 @@ namespace MouseSteeringWheel.Services
             return new Rect(
                 0,
                 0,
-                NativeInterop.GetSystemMetrics(NativeInterop.SM_CXVIRTUALSCREEN),
-                NativeInterop.GetSystemMetrics(NativeInterop.SM_CYVIRTUALSCREEN)
+                User32API.GetSystemMetrics(User32API.SM_CXVIRTUALSCREEN),
+                User32API.GetSystemMetrics(User32API.SM_CYVIRTUALSCREEN)
             );
         }
 
@@ -39,7 +34,7 @@ namespace MouseSteeringWheel.Services
         public static double GetScalingFactor()
         {
             var logicalWidth = SystemParameters.PrimaryScreenWidth;
-            var physicalWidth = NativeInterop.GetSystemMetrics(NativeInterop.SM_CXSCREEN);
+            var physicalWidth = User32API.GetSystemMetrics(User32API.SM_CXSCREEN);
             return physicalWidth / logicalWidth;
         }
     }

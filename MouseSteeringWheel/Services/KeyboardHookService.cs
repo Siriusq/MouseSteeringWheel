@@ -1,11 +1,7 @@
 ﻿// 处理键位抬起时，vJoy无法自动复原对应按钮状态的问题
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +11,7 @@ namespace MouseSteeringWheel.Services
     {
         private readonly vJoyService _vJoyService;
         private IntPtr _hookId = IntPtr.Zero;
-        private NativeInterop.LowLevelKeyboardProc _proc;
+        private User32API.LowLevelKeyboardProc _proc;
 
         public event Action<Key, ModifierKeys> KeyDown;
         public event Action<Key, ModifierKeys> KeyUp;
@@ -65,10 +61,10 @@ namespace MouseSteeringWheel.Services
         {
             using (var curModule = System.Diagnostics.Process.GetCurrentProcess().MainModule)
             {
-                _hookId = NativeInterop.SetWindowsHookEx(
-                    NativeInterop.WH_KEYBOARD_LL,
+                _hookId = User32API.SetWindowsHookEx(
+                    User32API.WH_KEYBOARD_LL,
                     _proc,
-                    NativeInterop.GetModuleHandle(curModule.ModuleName),
+                    User32API.GetModuleHandle(curModule.ModuleName),
                     0);
             }
         }
@@ -77,25 +73,25 @@ namespace MouseSteeringWheel.Services
         {
             if (nCode >= 0)
             {
-                var kbStruct = Marshal.PtrToStructure<NativeInterop.KBDLLHOOKSTRUCT>(lParam);
+                var kbStruct = Marshal.PtrToStructure<User32API.KBDLLHOOKSTRUCT>(lParam);
                 var key = KeyInterop.KeyFromVirtualKey(kbStruct.vkCode);
                 var modifierKey = Keyboard.Modifiers;
 
-                if (wParam == (IntPtr)NativeInterop.WM_KEYDOWN)
+                if (wParam == (IntPtr)User32API.WM_KEYDOWN)
                 {
                     KeyDown?.Invoke(key, modifierKey);
                 }
-                else if (wParam == (IntPtr)NativeInterop.WM_KEYUP)
+                else if (wParam == (IntPtr)User32API.WM_KEYUP)
                 {
                     KeyUp?.Invoke(key, modifierKey);
                 }
             }
-            return NativeInterop.CallNextHookEx(_hookId, nCode, wParam, lParam);
+            return User32API.CallNextHookEx(_hookId, nCode, wParam, lParam);
         }
 
         public void Dispose()
         {
-            NativeInterop.UnhookWindowsHookEx(_hookId);
+            User32API.UnhookWindowsHookEx(_hookId);
         }
     }
 }

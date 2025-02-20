@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -21,8 +20,7 @@ namespace MouseSteeringWheel.Views
         private int _lastJoystickX;
         private int _lastJoystickY;
         private readonly KeyboardHookService _keyboardHook;
-        private readonly HotkeyService _hotkeyService = new HotkeyService();
-        private int _nHotkeyId;
+        private readonly HotkeyProcessor _hotkeyProcessor = new HotkeyProcessor();
         private int[] _hotKeyIds = new int[21];
         private readonly MouseHookService _mouseService;
         private readonly MouseProcessor _processor;
@@ -52,9 +50,6 @@ namespace MouseSteeringWheel.Views
 
             // 设置窗口大小和位置
             InitializeWindow();
-
-            // 使用 CompositionTarget.Rendering 进行全屏鼠标移动监听
-            //CompositionTarget.Rendering += _mouseInputService.OnMouseMove;
 
             // 监听Rendering事件，确保每一帧更新UI
             CompositionTarget.Rendering += UpdateJoystickPosition;
@@ -138,7 +133,7 @@ namespace MouseSteeringWheel.Views
         {
             // 初始化热键服务
             var windowHandle = new WindowInteropHelper(this).Handle;
-            _hotkeyService.Initialize(windowHandle);
+            _hotkeyProcessor.Initialize(windowHandle);
 
             // 注册热键
             // 使用立即计算的局部变量解决闭包变量捕获问题
@@ -147,8 +142,8 @@ namespace MouseSteeringWheel.Views
                 int buttonId = index + 1; // 按钮ID从1开始
                 Key currentKey = keys[index];
 
-                _hotKeyIds[index] = _hotkeyService.RegisterHotkey(
-                    modifiers: NativeInterop.MOD_NONE,
+                _hotKeyIds[index] = _hotkeyProcessor.RegisterHotkey(
+                    modifiers: User32API.MOD_NONE,
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(currentKey),
                     callback: () => Dispatcher.Invoke(() =>
                         _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
@@ -160,9 +155,9 @@ namespace MouseSteeringWheel.Views
         {
             foreach (var id in _hotKeyIds.Where(id => id != 0))
             {
-                _hotkeyService.UnregisterHotkey(id);
+                _hotkeyProcessor.UnregisterHotkey(id);
             }
-            _hotkeyService.Dispose();
+            _hotkeyProcessor.Dispose();
         }
 
         // 读取设置选项

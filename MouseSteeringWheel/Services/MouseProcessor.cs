@@ -19,8 +19,6 @@ namespace MouseSteeringWheel.Helper
         {
             _vJoyService = vJoyService;
             _hookService = hookService;
-            // 获取物理屏幕尺寸
-            var physicalSize = DisplayService.GetPrimaryScreenPhysicalSize();
             _hookService.MouseAction += OnMouseAction;
         }
 
@@ -45,8 +43,6 @@ namespace MouseSteeringWheel.Helper
 
         private void UpdateJoystickXY(int dx, int dy)
         {
-            //dx -= _originX;
-            //dy -= _originY;
             dx *= _sensitivityX;
             dy *= _sensitivityY;
             // 将鼠标移动的XY值转为vJoy设备的XY轴范围，假设最大范围是32767

@@ -38,21 +38,14 @@ namespace MouseSteeringWheel.Services
 
     public class MouseHookService : IDisposable
     {
-        private readonly Point _screenCenter;
         private IntPtr _hookId = IntPtr.Zero;
-        private NativeInterop.LowLevelMouseProc _proc;
+        private User32API.LowLevelMouseProc _proc;
         private readonly Point _physicalScreenCenter;
         private readonly double _scalingFactor;
-
-        public Point ScreenCenter => _screenCenter;
 
         public event EventHandler<MouseHookEventArgs> MouseAction;
         public MouseHookService()
         {
-            _screenCenter = new Point(
-                SystemParameters.PrimaryScreenWidth / 2,
-                SystemParameters.PrimaryScreenHeight / 2);
-
             // 获取物理分辨率
             var physicalSize = DisplayService.GetPrimaryScreenPhysicalSize();
             _physicalScreenCenter = new Point(
@@ -71,10 +64,10 @@ namespace MouseSteeringWheel.Services
         {
             using (var processModule = System.Diagnostics.Process.GetCurrentProcess().MainModule)
             {
-                _hookId = NativeInterop.SetWindowsHookEx(
-                    NativeInterop.WH_MOUSE_LL,
+                _hookId = User32API.SetWindowsHookEx(
+                    User32API.WH_MOUSE_LL,
                     _proc,
-                    NativeInterop.GetModuleHandle(processModule.ModuleName),
+                    User32API.GetModuleHandle(processModule.ModuleName),
                     0);
             }
 
@@ -86,7 +79,7 @@ namespace MouseSteeringWheel.Services
         {
             if (nCode >= 0)
             {
-                var hookStruct = Marshal.PtrToStructure<NativeInterop.MSLLHOOKSTRUCT>(lParam);
+                var hookStruct = Marshal.PtrToStructure<User32API.MSLLHOOKSTRUCT>(lParam);
                 var eventType = ParseEventType(wParam);
 
                 // 转换为物理坐标
@@ -119,25 +112,25 @@ namespace MouseSteeringWheel.Services
                     DispatcherPriority.Normal,
                     new Action(() => MouseAction?.Invoke(this, args)));
             }
-            return NativeInterop.CallNextHookEx(_hookId, nCode, wParam, lParam);
+            return User32API.CallNextHookEx(_hookId, nCode, wParam, lParam);
         }
 
         private MouseEventType ParseEventType(IntPtr wParam)
         {
             switch ((int)wParam)
             {
-                case NativeInterop.WM_LBUTTONDOWN: return MouseEventType.LeftButtonDown;
-                case NativeInterop.WM_LBUTTONUP: return MouseEventType.LeftButtonUp;
-                case NativeInterop.WM_RBUTTONDOWN: return MouseEventType.RightButtonDown;
-                case NativeInterop.WM_RBUTTONUP: return MouseEventType.RightButtonUp;
-                case NativeInterop.WM_MOUSEWHEEL: return MouseEventType.Wheel;
+                case User32API.WM_LBUTTONDOWN: return MouseEventType.LeftButtonDown;
+                case User32API.WM_LBUTTONUP: return MouseEventType.LeftButtonUp;
+                case User32API.WM_RBUTTONDOWN: return MouseEventType.RightButtonDown;
+                case User32API.WM_RBUTTONUP: return MouseEventType.RightButtonUp;
+                case User32API.WM_MOUSEWHEEL: return MouseEventType.Wheel;
                 default: return MouseEventType.Move;
             }
         }
 
         public void Dispose()
         {
-            NativeInterop.UnhookWindowsHookEx(_hookId);
+            User32API.UnhookWindowsHookEx(_hookId);
             GC.SuppressFinalize(this);
         }
     }
