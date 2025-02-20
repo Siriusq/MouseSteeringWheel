@@ -42,7 +42,7 @@ namespace MouseSteeringWheel.Views
             _hotkeyProcessor = new HotkeyProcessor(_stateService);
 
             // 创建底层键盘勾子
-            _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys);
+            _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys, _stateService);
             Closed += (s, e) => _keyboardHook.Dispose();
 
             Loaded += OnWindowLoaded;
@@ -137,6 +137,7 @@ namespace MouseSteeringWheel.Views
             });
         }
 
+        // 注册快捷键
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             // 初始化热键服务
@@ -165,7 +166,7 @@ namespace MouseSteeringWheel.Views
                     modifiers: User32API.MOD_NONE,
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad8),
                     callback: () => Dispatcher.Invoke(() =>
-                        TogglePauseState())
+                        _stateService.TogglePauseState())
                 );
 
             _settingHotKey = _hotkeyProcessor.RegisterHotkey(
@@ -176,19 +177,6 @@ namespace MouseSteeringWheel.Views
                         Console.WriteLine("Open Settings"))
                 );
         }
-
-        private void TogglePauseState()
-        {
-            _stateService.TogglePauseState();
-            Console.WriteLine($"程序状态已切换为：{(_stateService.IsPaused ? "暂停" : "运行")}");
-
-            // 更新UI状态
-            //Dispatcher.Invoke(() =>
-            //{
-            //    PauseStatusIndicator.Content = _stateService.IsPaused ? "⏸ 暂停中" : "▶ 运行中";
-            //});
-        }
-
 
         private void OnWindowClosed(object sender, EventArgs e)
         {

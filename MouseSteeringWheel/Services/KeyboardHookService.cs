@@ -9,6 +9,7 @@ namespace MouseSteeringWheel.Services
 {
     public class KeyboardHookService : IDisposable
     {
+        private readonly ApplicationStateService _stateService;
         private readonly vJoyService _vJoyService;
         private IntPtr _hookId = IntPtr.Zero;
         private User32API.LowLevelKeyboardProc _proc;
@@ -19,8 +20,9 @@ namespace MouseSteeringWheel.Services
         private Key[] keysArray;
         private ModifierKeys[] modifierKeysArray;
 
-        public KeyboardHookService(vJoyService _vJoyService, Key[] keys, ModifierKeys[] modifierKey)
+        public KeyboardHookService(vJoyService _vJoyService, Key[] keys, ModifierKeys[] modifierKey, ApplicationStateService stateService)
         {
+            this._stateService = stateService;
             this._vJoyService = _vJoyService;
             this.keysArray = keys;
             this.modifierKeysArray = modifierKey;
@@ -29,6 +31,7 @@ namespace MouseSteeringWheel.Services
 
             //this.KeyDown += OnGlobalKeyDown;
             this.KeyUp += OnGlobalKeyUp;
+
         }
 
         private void OnGlobalKeyDown(Key key, ModifierKeys modifierKeys)
@@ -71,7 +74,7 @@ namespace MouseSteeringWheel.Services
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode >= 0)
+            if (nCode >= 0 && !_stateService.IsPaused)
             {
                 var kbStruct = Marshal.PtrToStructure<User32API.KBDLLHOOKSTRUCT>(lParam);
                 var key = KeyInterop.KeyFromVirtualKey(kbStruct.vkCode);
