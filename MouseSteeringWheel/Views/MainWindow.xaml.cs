@@ -105,16 +105,18 @@ namespace MouseSteeringWheel.Views
                 if (joystickY != _lastJoystickY)
                 {
                     // 设置油门
-                    if (joystickY < 16383)
+                    if (joystickY > 16383)
                     {
-                        double throttleVal = (joystickY - 16383) * 150 / 16383;
+                        double throttleVal = (16383 - joystickY) * 150 / 16383;
                         ThrottleIndicator.Y = throttleVal;
+                        BreakIndicator.Y = 0;
                     }
                     // 设置刹车
-                    else if (joystickY > 16383)
+                    else if (joystickY < 16383)
                     {
-                        double breakVal = (joystickY - 16383) * 150 / 16383;
+                        double breakVal = (16383 - joystickY) * 150 / 16383;
                         BreakIndicator.Y = breakVal;
+                        ThrottleIndicator.Y = 0;
                     }
                     // 归零
                     else
