@@ -93,6 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\ApplicationStateService.cs" />
     <Compile Include="Services\MouseProcessor.cs" />
     <Compile Include="Services\DisplayService.cs" />
     <Compile Include="Services\HotkeyProcessor.cs" />

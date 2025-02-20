@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Controls;
 
 namespace MouseSteeringWheel.Views
 {
@@ -16,14 +17,17 @@ namespace MouseSteeringWheel.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly ApplicationStateService _stateService = new ApplicationStateService();
         private readonly vJoyService _vJoyService;
         private int _lastJoystickX;
         private int _lastJoystickY;
         private readonly KeyboardHookService _keyboardHook;
-        private readonly HotkeyProcessor _hotkeyProcessor = new HotkeyProcessor();
-        private int[] _hotKeyIds = new int[21];
+        private readonly HotkeyProcessor _hotkeyProcessor;
+        private int[] _vJoyBtnHotKeyIds = new int[21];
+        private int _settingHotKey;
+        private int _pauseHotKey;
         private readonly MouseHookService _mouseService;
-        private readonly MouseProcessor _processor;
+        private readonly MouseProcessor _mouseProcessor;
 
         public MainWindow()
         {
@@ -35,6 +39,8 @@ namespace MouseSteeringWheel.Views
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
 
+            _hotkeyProcessor = new HotkeyProcessor(_stateService);
+
             // 创建底层键盘勾子
             _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys);
             Closed += (s, e) => _keyboardHook.Dispose();
@@ -43,8 +49,8 @@ namespace MouseSteeringWheel.Views
             Closed += OnWindowClosed;
 
             // 鼠标勾子
-            _mouseService = new MouseHookService();
-            _processor = new MouseProcessor(_mouseService, _vJoyService);
+            _mouseService = new MouseHookService(_stateService);
+            _mouseProcessor = new MouseProcessor(_mouseService, _vJoyService);
 
             Closed += (s, e) => _mouseService.Dispose();
 
@@ -144,21 +150,54 @@ namespace MouseSteeringWheel.Views
                 int buttonId = index + 1; // 按钮ID从1开始
                 Key currentKey = keys[index];
 
-                _hotKeyIds[index] = _hotkeyProcessor.RegisterHotkey(
+                _vJoyBtnHotKeyIds[index] = _hotkeyProcessor.RegisterHotkeyWithPauseCheck(
+                    id: buttonId,
                     modifiers: User32API.MOD_NONE,
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(currentKey),
                     callback: () => Dispatcher.Invoke(() =>
                         _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
                 );
             }
+
+            // 特殊热键：暂停摇杆响应和打开设置
+            _pauseHotKey = _hotkeyProcessor.RegisterHotkey(
+                    id: 98,
+                    modifiers: User32API.MOD_NONE,
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad8),
+                    callback: () => Dispatcher.Invoke(() =>
+                        TogglePauseState())
+                );
+
+            _settingHotKey = _hotkeyProcessor.RegisterHotkey(
+                    id: 99,
+                    modifiers: User32API.MOD_NONE,
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.Add),
+                    callback: () => Dispatcher.Invoke(() =>
+                        Console.WriteLine("Open Settings"))
+                );
         }
+
+        private void TogglePauseState()
+        {
+            _stateService.TogglePauseState();
+            Console.WriteLine($"程序状态已切换为：{(_stateService.IsPaused ? "暂停" : "运行")}");
+
+            // 更新UI状态
+            //Dispatcher.Invoke(() =>
+            //{
+            //    PauseStatusIndicator.Content = _stateService.IsPaused ? "⏸ 暂停中" : "▶ 运行中";
+            //});
+        }
+
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
-            foreach (var id in _hotKeyIds.Where(id => id != 0))
+            foreach (var id in _vJoyBtnHotKeyIds.Where(id => id != 0))
             {
                 _hotkeyProcessor.UnregisterHotkey(id);
             }
+            _hotkeyProcessor.UnregisterHotkey(_settingHotKey);
+            _hotkeyProcessor.UnregisterHotkey(_pauseHotKey);
             _hotkeyProcessor.Dispose();
         }
 

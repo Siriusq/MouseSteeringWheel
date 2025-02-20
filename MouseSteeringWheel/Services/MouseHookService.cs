@@ -42,10 +42,13 @@ namespace MouseSteeringWheel.Services
         private User32API.LowLevelMouseProc _proc;
         private readonly Point _physicalScreenCenter;
         private readonly double _scalingFactor;
+        private readonly ApplicationStateService _stateService;
 
         public event EventHandler<MouseHookEventArgs> MouseAction;
-        public MouseHookService()
+        public MouseHookService(ApplicationStateService stateService)
         {
+            _stateService = stateService;
+
             // 获取物理分辨率
             var physicalSize = DisplayService.GetPrimaryScreenPhysicalSize();
             _physicalScreenCenter = new Point(
@@ -77,7 +80,7 @@ namespace MouseSteeringWheel.Services
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode >= 0)
+            if (nCode >= 0 && !_stateService.IsPaused)
             {
                 var hookStruct = Marshal.PtrToStructure<User32API.MSLLHOOKSTRUCT>(lParam);
                 var eventType = ParseEventType(wParam);

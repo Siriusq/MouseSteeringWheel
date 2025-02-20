@@ -10,7 +10,12 @@ namespace MouseSteeringWheel.Services
     {
         private readonly Dictionary<int, Action> _hotkeyActions = new Dictionary<int, Action>();
         private HwndSource _hwndSource;
-        private int _hotkeyIdCounter = 0x0000;
+        private readonly ApplicationStateService _stateService;
+
+        public HotkeyProcessor(ApplicationStateService stateService)
+        {
+            _stateService = stateService;
+        }
 
         public void Initialize(IntPtr windowHandle)
         {
@@ -19,15 +24,30 @@ namespace MouseSteeringWheel.Services
             _hwndSource = hwndSource;
         }
 
-        public int RegisterHotkey(uint modifiers, uint keyCode, Action callback)
+        public int RegisterHotkey(int id, uint modifiers, uint keyCode, Action callback)
         {
-            var id = ++_hotkeyIdCounter;
             if (User32API.RegisterHotKey(_hwndSource.Handle, id, modifiers, keyCode))
             {
                 _hotkeyActions[id] = callback;
                 return id;
             }
             throw new InvalidOperationException("热键注册失败");
+        }
+
+        // vJoy按键对应快捷键注册，支持暂停功能
+        public int RegisterHotkeyWithPauseCheck(
+            int id,
+            uint modifiers,
+            uint keyCode,
+            Action callback)
+        {
+            return RegisterHotkey(id, modifiers, keyCode, () =>
+            {
+                if (!_stateService.IsPaused)
+                {
+                    callback?.Invoke();
+                }
+            });
         }
 
         public void UnregisterHotkey(int hotkeyId)
