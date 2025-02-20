@@ -1,4 +1,5 @@
 ﻿using MouseSteeringWheel.Services;
+using MouseSteeringWheel.Helper;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -17,13 +18,14 @@ namespace MouseSteeringWheel.Views
     public partial class MainWindow : Window
     {
         private readonly vJoyService _vJoyService;
-        private readonly MouseInputService _mouseInputService;
         private int _lastJoystickX;
         private int _lastJoystickY;
         private readonly KeyboardHookService _keyboardHook;
         private readonly HotkeyService _hotkeyService = new HotkeyService();
         private int _nHotkeyId;
         private int[] _hotKeyIds = new int[21];
+        private readonly MouseHookService _mouseService;
+        private readonly MouseProcessor _processor;
 
         public MainWindow()
         {
@@ -35,9 +37,6 @@ namespace MouseSteeringWheel.Views
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
 
-            // 创建 MouseInputService，并传入 vJoyService
-            _mouseInputService = new MouseInputService(_vJoyService);
-
             // 创建底层键盘勾子
             _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys);
             Closed += (s, e) => _keyboardHook.Dispose();
@@ -45,11 +44,17 @@ namespace MouseSteeringWheel.Views
             Loaded += OnWindowLoaded;
             Closed += OnWindowClosed;
 
+            // 鼠标勾子
+            _mouseService = new MouseHookService();
+            _processor = new MouseProcessor(_mouseService, _vJoyService);
+
+            Closed += (s, e) => _mouseService.Dispose();
+
             // 设置窗口大小和位置
             InitializeWindow();
 
             // 使用 CompositionTarget.Rendering 进行全屏鼠标移动监听
-            CompositionTarget.Rendering += _mouseInputService.OnMouseMove;
+            //CompositionTarget.Rendering += _mouseInputService.OnMouseMove;
 
             // 监听Rendering事件，确保每一帧更新UI
             CompositionTarget.Rendering += UpdateJoystickPosition;
@@ -177,7 +182,6 @@ namespace MouseSteeringWheel.Views
         // 关闭时重置摇杆位置
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            CompositionTarget.Rendering -= _mouseInputService.OnMouseMove;
             CompositionTarget.Rendering -= UpdateJoystickPosition;
             Console.WriteLine("Released");
             _vJoyService.ResetJoystickPos();

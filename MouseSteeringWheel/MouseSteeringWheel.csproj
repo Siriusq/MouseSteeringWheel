@@ -59,8 +59,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -95,10 +93,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helper\MouseProcessor.cs" />
+    <Compile Include="Services\DisplayService.cs" />
     <Compile Include="Services\HotKeyService.cs" />
     <Compile Include="Services\KeyboardHookService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
-    <Compile Include="Services\MouseInputService.cs" />
+    <Compile Include="Services\MouseHookService.cs" />
     <Compile Include="Services\NativeInterop.cs" />
     <Compile Include="Services\vJoyService.cs" />
     <Compile Include="Views\ErrorMessageWindow.xaml.cs">
