@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:MouseSteeringWheel.Views"
              mc:Ignorable="d" 
              >
-    <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5">
+    <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" RenderTransformOrigin="0.5,0.5">
+        <Canvas.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform x:Name="UIPosition" Y="0"/>
+            </TransformGroup>
+        </Canvas.RenderTransform>
         <!--限位圆环-->
         <Ellipse
             Width="103"
