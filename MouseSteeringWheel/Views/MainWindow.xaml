@@ -8,7 +8,7 @@
         Title="MainWindow" Height="0" Width="0"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Topmost="True" ResizeMode="NoResize"
-        Closing="Window_Closing">
+        >
     <!-- 用于切换的 UI 内容区域 -->
     <ContentControl Name="UIContainer"/>
 </Window>

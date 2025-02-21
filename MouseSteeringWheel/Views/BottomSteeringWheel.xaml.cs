@@ -20,6 +20,8 @@ namespace MouseSteeringWheel.Views
             InitializeComponent();
 
             this._vJoyService = vJoyService;
+            _lastJoystickX = 16383;
+            _lastJoystickY = 16383;
         }
 
         // 更新指示器位置
@@ -40,11 +42,7 @@ namespace MouseSteeringWheel.Views
                     double angle = (joystickX / maxRangeX) * 180;
 
                     // 旋转摇杆指示器
-                    RotateTransform rotateTransform = Indicator;
-                    if (rotateTransform != null)
-                    {
-                        rotateTransform.Angle = angle;// 设置旋转角度
-                    }
+                    Indicator.Angle = angle;// 设置旋转角度
 
                     // 更新记录的摇杆X值
                     _lastJoystickX = joystickX;

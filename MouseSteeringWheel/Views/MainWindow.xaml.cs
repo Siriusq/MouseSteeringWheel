@@ -27,6 +27,8 @@ namespace MouseSteeringWheel.Views
         private readonly MouseHookService _mouseService;
         private readonly MouseProcessor _mouseProcessor;
         private BottomSteeringWheel _bottomSteeringWheel;
+        private BottomJoystick _bottomJoystick;
+        private int uiId;
 
         public MainWindow()
         {
@@ -50,17 +52,25 @@ namespace MouseSteeringWheel.Views
 
             Loaded += OnWindowLoaded;
             Closed += OnWindowClosed;
-            Closed += (s, e) => _mouseService.Dispose();
 
             // UI切换
-            _bottomSteeringWheel = new BottomSteeringWheel(_vJoyService);
-            UIContainer.Content = _bottomSteeringWheel;
+            if (uiId == 1)
+            {
+                _bottomSteeringWheel = new BottomSteeringWheel(_vJoyService);
+                UIContainer.Content = _bottomSteeringWheel;
+                // 监听Rendering事件，确保每一帧更新UI
+                CompositionTarget.Rendering += BottomSteeringWheelOnRendering;
+            }
+            else
+            {
+                _bottomJoystick = new BottomJoystick(_vJoyService);
+                UIContainer.Content = _bottomJoystick;
+                // 监听Rendering事件，确保每一帧更新UI
+                CompositionTarget.Rendering += BottomJoystickOnRendering;
+            }
 
             // 设置窗口大小和位置
             InitializeWindow();
-
-            // 监听Rendering事件，确保每一帧更新UI
-            CompositionTarget.Rendering += OnRendering;
         }
 
         // 初始化窗口大小和位置
@@ -80,10 +90,16 @@ namespace MouseSteeringWheel.Views
         }
 
         // 渲染事件的回调方法
-        private void OnRendering(object sender, EventArgs e)
+        private void BottomSteeringWheelOnRendering(object sender, EventArgs e)
         {
             // 调用 CircleUI 的 UpdateJoystickPosition 方法
             _bottomSteeringWheel.UpdateJoystickPosition(sender, e);
+        }
+
+        private void BottomJoystickOnRendering(object sender, EventArgs e)
+        {
+            // 调用 CircleUI 的 UpdateJoystickPosition 方法
+            _bottomJoystick.UpdateJoystickPosition(sender, e);
         }
 
         // 注册快捷键
@@ -136,6 +152,10 @@ namespace MouseSteeringWheel.Views
             _hotkeyProcessor.UnregisterHotkey(_settingHotKey);
             _hotkeyProcessor.UnregisterHotkey(_pauseHotKey);
             _hotkeyProcessor.Dispose();
+            _mouseService.Dispose();
+            CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
+            // 关闭时重置摇杆位置
+            _vJoyService.ResetJoystickPos();
         }
 
         // 读取设置选项
@@ -150,14 +170,7 @@ namespace MouseSteeringWheel.Views
             Key.Divide,Key.Multiply,Key.Subtract,
             };
             modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
-        }
-
-        // 关闭时重置摇杆位置
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            CompositionTarget.Rendering -= OnRendering;
-            Console.WriteLine("Released");
-            _vJoyService.ResetJoystickPos();
+            uiId = 2;
         }
     }
 }
