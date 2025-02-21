@@ -81,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\BottomSteeringWheel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ErrorMessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,9 @@
     <Compile Include="Services\MouseHookService.cs" />
     <Compile Include="Services\User32API.cs" />
     <Compile Include="Services\vJoyService.cs" />
+    <Compile Include="Views\BottomSteeringWheel.xaml.cs">
+      <DependentUpon>BottomSteeringWheel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ErrorMessageWindow.xaml.cs">
       <DependentUpon>ErrorMessageWindow.xaml</DependentUpon>
     </Compile>

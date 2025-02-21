@@ -19,8 +19,6 @@ namespace MouseSteeringWheel.Views
     {
         private readonly ApplicationStateService _stateService = new ApplicationStateService();
         private readonly vJoyService _vJoyService;
-        private int _lastJoystickX;
-        private int _lastJoystickY;
         private readonly KeyboardHookService _keyboardHook;
         private readonly HotkeyProcessor _hotkeyProcessor;
         private int[] _vJoyBtnHotKeyIds = new int[21];
@@ -28,37 +26,41 @@ namespace MouseSteeringWheel.Views
         private int _pauseHotKey;
         private readonly MouseHookService _mouseService;
         private readonly MouseProcessor _mouseProcessor;
+        private BottomSteeringWheel _bottomSteeringWheel;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // 读取设置
             ReadSettings();
 
-            // 初始化vJoyService
+            // 初始化
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
 
+            // 键盘勾子
             _hotkeyProcessor = new HotkeyProcessor(_stateService);
-
-            // 创建底层键盘勾子
             _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys, _stateService);
             Closed += (s, e) => _keyboardHook.Dispose();
-
-            Loaded += OnWindowLoaded;
-            Closed += OnWindowClosed;
 
             // 鼠标勾子
             _mouseService = new MouseHookService(_stateService);
             _mouseProcessor = new MouseProcessor(_mouseService, _vJoyService);
 
+            Loaded += OnWindowLoaded;
+            Closed += OnWindowClosed;
             Closed += (s, e) => _mouseService.Dispose();
+
+            // UI切换
+            _bottomSteeringWheel = new BottomSteeringWheel(_vJoyService);
+            UIContainer.Content = _bottomSteeringWheel;
 
             // 设置窗口大小和位置
             InitializeWindow();
 
             // 监听Rendering事件，确保每一帧更新UI
-            CompositionTarget.Rendering += UpdateJoystickPosition;
+            CompositionTarget.Rendering += OnRendering;
         }
 
         // 初始化窗口大小和位置
@@ -68,73 +70,20 @@ namespace MouseSteeringWheel.Views
             var screenWidth = SystemParameters.PrimaryScreenWidth;
             var screenHeight = SystemParameters.PrimaryScreenHeight;
 
-            // 计算窗口大小（屏幕大小的五分之一）
-            this.Width = screenWidth / 5;
-            this.Height = screenHeight / 5;
+            // 设置窗口大小
+            this.Width = screenWidth;
+            this.Height = screenHeight;
 
             // 设置窗口位置（屏幕底部居中）
             this.Left = (screenWidth - this.Width) / 2;
             this.Top = screenHeight - this.Height;
-
-            _lastJoystickX = 16383;
-            _lastJoystickY = 16383;
         }
 
-        // 更新指示器位置
-        private void UpdateJoystickPosition(object sender, EventArgs e)
+        // 渲染事件的回调方法
+        private void OnRendering(object sender, EventArgs e)
         {
-            // 获取当前摇杆的 X 值
-            int joystickX = _vJoyService.GetJoystickX();
-            int joystickY = _vJoyService.GetJoystickY();
-
-            // 使用Dispatcher确保UI更新在主线程上执行
-            Dispatcher.Invoke(() =>
-            {
-                // 如果摇杆的 X 值变化了，更新UI
-                if (joystickX != _lastJoystickX)
-                {
-                    // 设置摇杆的最大值范围
-                    double maxRangeX = 32767;
-                    double angle = (joystickX / maxRangeX) * 180;
-
-                    // 旋转摇杆指示器
-                    RotateTransform rotateTransform = Indicator;
-                    if (rotateTransform != null)
-                    {
-                        rotateTransform.Angle = angle;// 设置旋转角度
-                    }
-
-                    // 更新记录的摇杆X值
-                    _lastJoystickX = joystickX;
-                }
-
-                if (joystickY != _lastJoystickY)
-                {
-                    // 设置油门
-                    if (joystickY > 16383)
-                    {
-                        double throttleVal = (16383 - joystickY) * 150 / 16383;
-                        ThrottleIndicator.Y = throttleVal;
-                        BreakIndicator.Y = 0;
-                    }
-                    // 设置刹车
-                    else if (joystickY < 16383)
-                    {
-                        double breakVal = (16383 - joystickY) * 150 / 16383;
-                        BreakIndicator.Y = breakVal;
-                        ThrottleIndicator.Y = 0;
-                    }
-                    // 归零
-                    else
-                    {
-                        ThrottleIndicator.Y = 0;
-                        BreakIndicator.Y = 0;
-                    }
-
-                    // 更新记录的摇杆Y值
-                    _lastJoystickY = joystickY;
-                }
-            });
+            // 调用 CircleUI 的 UpdateJoystickPosition 方法
+            _bottomSteeringWheel.UpdateJoystickPosition(sender, e);
         }
 
         // 注册快捷键
@@ -206,7 +155,7 @@ namespace MouseSteeringWheel.Views
         // 关闭时重置摇杆位置
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            CompositionTarget.Rendering -= UpdateJoystickPosition;
+            CompositionTarget.Rendering -= OnRendering;
             Console.WriteLine("Released");
             _vJoyService.ResetJoystickPos();
         }
