@@ -31,6 +31,7 @@ namespace MouseSteeringWheel.Views
         private int uiId;
         private int _bottomJoystickYPos; // 摇杆UI到屏幕底部的距离
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -173,7 +174,7 @@ namespace MouseSteeringWheel.Views
             };
             modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
             uiId = 2;
-            _bottomJoystickYPos = 100;
+            _bottomJoystickYPos = 526;
         }
     }
 }
