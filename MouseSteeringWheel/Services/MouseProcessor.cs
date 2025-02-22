@@ -12,10 +12,12 @@ namespace MouseSteeringWheel.Helper
         private int _sensitivityX = 30;
         private int _sensitivityY = 30;
         // 非线性映射
-        private float _nonlinearCoefficient = 5.0f;
+        // 1为正常线性，大于1时越靠内越慢
+        private float _nonlinearCoefficientX = 3.0f;
+        private float _nonlinearCoefficientY = 1.0f;
         // 设置死区百分比
-        private double _deadZoneXPercentage = 0.01;
-        private double _deadZoneYPercentage = 0.01;
+        private double _deadZonePercentageX = 0.01;
+        private double _deadZonePercentageY = 0.01;
         // 常量
         private const int Center = 16383;
         private const int MaxRange = 32767;
@@ -46,12 +48,7 @@ namespace MouseSteeringWheel.Helper
             }
         }
 
-        // 将鼠标的坐标映射为摇杆位置，dx为鼠标X轴横向坐标，dy为鼠标Y轴竖向坐标，坐标轴圆点为屏幕中心。
-        // dx和dy的范围与屏幕分辨率相关，若屏幕分辨率为2560*1440，则dx的范围是-1280至+1280，dy的范围是-720至+720
-        // 计算出的映射至newJoystickX和newJoystickY的范围都是0至32767
-        // 两个常量：Center = 16383, MaxRange = 32767
-        // _sensitivityX 和 _sensitivityY 为 X和Y轴的灵敏度
-        // _deadZoneXPercentage 和 _deadZoneYPercentage为 X和Y轴的死区占比，范围是0到1，也就是0%到100%
+        // 将鼠标的坐标映射为摇杆位置
         private void UpdateJoystickXY(int dx, int dy)
         {
             // 设置灵敏度
@@ -63,9 +60,6 @@ namespace MouseSteeringWheel.Helper
             double dxNormalized = (double)dx / Center;
             double dyNormalized = (double)dy / Center;
 
-            //// 将鼠标移动的XY值转为vJoy设备的XY轴范围，假设最大范围是32767
-            //int newJoystickX = Center + dx;
-            //int newJoystickY = Center + dy;
             Console.WriteLine($"OVal:{Center + dx}");
 
             // 计算极坐标半径（范围[0,1]）
@@ -73,12 +67,14 @@ namespace MouseSteeringWheel.Helper
             r = Math.Min(r, 1.0); // 强制限制在单位圆内
 
             // 应用非线性变换公式：r' = r^k
-            double rPrime = Math.Pow(r, _nonlinearCoefficient);
-            double scale = r > 0.0001 ? rPrime / r : 0; // 避免除零错误
+            double rPrimeX = Math.Pow(r, _nonlinearCoefficientX);
+            double scaleX = r > 0.0001 ? rPrimeX / r : 0; // 避免除零错误
+            double rPrimeY = Math.Pow(r, _nonlinearCoefficientY);
+            double scaleY = r > 0.0001 ? rPrimeY / r : 0; // 避免除零错误
 
             // 计算调整后的坐标偏移量
-            int adjustedDx = (int)(dxNormalized * scale * Center);
-            int adjustedDy = (int)(dyNormalized * scale * Center);
+            int adjustedDx = (int)(dxNormalized * scaleX * Center);
+            int adjustedDy = (int)(dyNormalized * scaleY * Center);
 
             // ===== 坐标转换 =====
             int newJoystickX = Center + adjustedDx;
@@ -89,8 +85,8 @@ namespace MouseSteeringWheel.Helper
 
             // ===== 死区处理 =====
             // 计算死区边界（矩形死区）
-            int deadZoneX = (int)(Center * _deadZoneXPercentage);
-            int deadZoneY = (int)(Center * _deadZoneYPercentage);
+            int deadZoneX = (int)(Center * _deadZonePercentageX);
+            int deadZoneY = (int)(Center * _deadZonePercentageY);
 
             // X轴死区处理
             if (newJoystickX > (Center - deadZoneX) &&
