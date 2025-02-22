@@ -173,7 +173,7 @@ namespace MouseSteeringWheel.Views
             Key.Divide,Key.Multiply,Key.Subtract,
             };
             modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
-            uiId = 2;
+            uiId = 1;
             _bottomJoystickYPos = 526;
         }
     }

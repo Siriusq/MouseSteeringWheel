@@ -14,6 +14,8 @@ namespace MouseSteeringWheel.Views
         private readonly vJoyService _vJoyService;
         private int _lastJoystickX;
         private int _lastJoystickY;
+        // UI缩放率
+        private double _uiScaleFactor = 2.0;
 
         public BottomSteeringWheel(vJoyService vJoyService)
         {
@@ -22,6 +24,15 @@ namespace MouseSteeringWheel.Views
             this._vJoyService = vJoyService;
             _lastJoystickX = 16383;
             _lastJoystickY = 16383;
+
+            // 设置UI缩放
+            SetUIScale(_uiScaleFactor);
+        }
+
+        public void SetUIScale(double _uiScaleFactor)
+        {
+            UIScale.ScaleX = _uiScaleFactor;
+            UIScale.ScaleY = _uiScaleFactor;
         }
 
         // 更新指示器位置

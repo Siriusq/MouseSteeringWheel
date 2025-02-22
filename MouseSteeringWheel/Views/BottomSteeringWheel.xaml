@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:MouseSteeringWheel.Views"
              mc:Ignorable="d" 
              >
-    <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+    <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Canvas.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="UIScale" ScaleX="1" ScaleY="1"/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Canvas.RenderTransform>
         <!--#region 方向盘-->
         <!-- 方向盘圆弧 -->
         <Path Name="JoystickArc" Stroke="DarkGray" StrokeThickness="3"

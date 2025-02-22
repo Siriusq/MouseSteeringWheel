@@ -9,7 +9,7 @@
     <Canvas Name="JoystickCanvas" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" RenderTransformOrigin="0.5,0.5">
         <Canvas.RenderTransform>
             <TransformGroup>
-                <ScaleTransform/>
+                <ScaleTransform x:Name="UIScale" ScaleX="1" ScaleY="1" CenterY="-60"/>
                 <SkewTransform/>
                 <RotateTransform/>
                 <TranslateTransform x:Name="UIPosition" Y="0"/>
