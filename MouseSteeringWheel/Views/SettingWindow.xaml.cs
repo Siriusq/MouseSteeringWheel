@@ -38,5 +38,10 @@ namespace MouseSteeringWheel.Views
         {
 
         }
+
+        private void Button_Binding_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
