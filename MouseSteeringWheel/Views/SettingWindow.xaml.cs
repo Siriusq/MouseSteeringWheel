@@ -23,5 +23,20 @@ namespace MouseSteeringWheel.Views
         {
             InitializeComponent();
         }
+
+        private void Pause_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Setting_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Reset_Joystick_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

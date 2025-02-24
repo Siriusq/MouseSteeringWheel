@@ -40,18 +40,22 @@
                     <!--vJoy设备ID-->
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="5*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                        <Grid Grid.Column="0">
+                            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
+                            <Label Content="General" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="5,5,0,5">
                             <Label Content="vJoy Device ID" VerticalAlignment="Center"/>
                         </Grid>
-                        <Grid Grid.Column="1" Margin="0,5,10,5">
-                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                        <Grid Grid.Column="3" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
                                 <TextBox 
-                                        x:Name="HotKeyTextBox"                                    
+                                        x:Name="vJoyDeviceID"                                    
                                         Height="30"
                                         Text="01"
                                         VerticalAlignment="Center"
@@ -62,9 +66,6 @@
                                         Background="Transparent" BorderBrush="#00ABADB3"
                                     />
                             </Border>
-                        </Grid>
-                        <Grid Grid.Column="2">
-                            <Label Content="(1 - 16)" VerticalAlignment="Center" Margin="5,5,5,5"/>
                         </Grid>
                     </Grid>
                     <!--语言-->
@@ -79,13 +80,13 @@
                             <Label Content="Language" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,5,5">
-                            <RadioButton GroupName="ready" VerticalAlignment="Center">English</RadioButton>
+                            <RadioButton GroupName="Language" VerticalAlignment="Center">English</RadioButton>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <RadioButton GroupName="ready" VerticalAlignment="Center">简中</RadioButton>
+                            <RadioButton GroupName="Language" VerticalAlignment="Center">简中</RadioButton>
                         </Grid>
                         <Grid Grid.Column="3" Margin="5,5,5,5">
-                            <RadioButton GroupName="ready" VerticalAlignment="Center">繁中</RadioButton>
+                            <RadioButton GroupName="Language" VerticalAlignment="Center">繁中</RadioButton>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -101,32 +102,37 @@
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="5*" />
                             <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="6*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="UI Style" VerticalAlignment="Center"/>
+                            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="-5,-5,-5,-4"/>
+                            <Label Content="UI" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Grid>
-                        <Grid Grid.Column="1" Margin="5,5,5,5">
-                            <RadioButton GroupName="ready" VerticalAlignment="Center">Steering Wheel</RadioButton>
+                        <Grid Grid.Column="1" Margin="10,5,0,5">
+                            <Label Content="Style" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <RadioButton GroupName="ready" VerticalAlignment="Center">Joystick</RadioButton>
+                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center">Steering Wheel</RadioButton>
+                        </Grid>
+                        <Grid Grid.Column="3" Margin="5,5,5,5">
+                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center">Joystick</RadioButton>
                         </Grid>
                     </Grid>
                     <!--UI缩放系数-->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="UI Scale Factor" VerticalAlignment="Center"/>
+                            <Label Content="Scale Factor" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
-                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
                                 <TextBox 
                                     x:Name="UIScaleFactor"                                    
                                     Height="30"
@@ -145,7 +151,7 @@
                             <Label Content="Y-Axis Offset" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="3" Margin="0,5,10,5">
-                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
                                 <TextBox 
                                     x:Name="UIYAxisOffset"                                    
                                     Height="30"
@@ -165,16 +171,109 @@
                 <!--快捷键设置-->
                 <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="2" Margin="0,2,0,2"/>
                 <Grid Grid.Row="2"  Margin="0,2,0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                    <!--UI Y轴偏移-->
+                    <!---->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="9*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="-5,-5,-5,-4"/>
+                            <Label Content="Hotkey" VerticalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="10,5,0,5">
+                            <Label Content="Click then Press Hotkeys" VerticalAlignment="Center"/>
+                        </Grid>
+
+                    </Grid>
+
+                    <!--暂停快捷键-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Pause Joystick" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox
+                                    x:Name="PauseHotKeyTextBox"
+                                    Height="30"
+                                    Text="Shift Alt Ctrl P"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                    IsReadOnly="true"
+                                    PreviewKeyDown="Pause_HotKeyTextBox_PreviewKeyDown" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    <!--暂停快捷键-->
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Open Settings" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox
+                                    x:Name="SettingHotKeyTextBox"
+                                    Height="30"
+                                    Text="Shift Alt Ctrl O"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                    IsReadOnly="true"
+                                    PreviewKeyDown="Setting_HotKeyTextBox_PreviewKeyDown" />
+                            </Border>
+                        </Grid>
+                    </Grid>
 
+                    <!--重置摇杆位置-->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Reset Joystick" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox
+                                    x:Name="ResetJoystickHotKeyTextBox"
+                                    Height="30"
+                                    Text="Shift Alt Ctrl R"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                    IsReadOnly="true"
+                                    PreviewKeyDown="Reset_Joystick_HotKeyTextBox_PreviewKeyDown" />
+                            </Border>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
