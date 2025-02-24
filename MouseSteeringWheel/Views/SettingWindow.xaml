@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MouseSteeringWheel.Views"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SettingWindow" Height="450" Width="600"
+        Title="SettingWindow" Height="450" Width="450"
         Background="#FFF3F3F3">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
@@ -18,8 +18,8 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Margin="0,0,2,0">
@@ -189,8 +189,8 @@
                             <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="-5,-5,-5,-4"/>
                             <Label Content="Hotkey" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Grid>
-                        <Grid Grid.Column="2" Margin="10,5,0,5">
-                            <Label Content="Click then Press Hotkeys" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="2" Margin="3,5,0,5">
+                            <Label Content="Click &amp; Press Keys to Record" VerticalAlignment="Center"/>
                         </Grid>
 
                     </Grid>
@@ -222,7 +222,7 @@
                         </Grid>
                     </Grid>
 
-                    <!--暂停快捷键-->
+                    <!--打开设置快捷键-->
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
@@ -249,7 +249,7 @@
                         </Grid>
                     </Grid>
 
-                    <!--重置摇杆位置-->
+                    <!--重置摇杆位置快捷键-->
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
@@ -280,7 +280,210 @@
 
             <!--右侧主列-->
             <Grid Grid.Column="1" Margin="2,0,0,0">
-
+                <!--左侧主列-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--X轴摇杆-->
+                <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="0" Margin="0,0,0,2"/>
+                <Grid Grid.Row="0"  Margin="0,0,0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--开关-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
+                            <Label Content="X-Axis" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,5,10,5">
+                            <CheckBox Content="Enable" HorizontalAlignment="Center" VerticalAlignment="Center"/>                            
+                        </Grid>
+                    </Grid>
+                    <!--灵敏度-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Sensitivity" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                                    x:Name="XAxisSensitivity"                                    
+                                    Height="30"
+                                    Text="30"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <!--非线性系数-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Nonlinear" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                                    x:Name="XAxisNonlinearFactor"                                    
+                                    Height="30"
+                                    Text="1.0"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <!--死区-->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Deadzone" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                                    x:Name="XAxisDeadzone"                                    
+                                    Height="30"
+                                    Text="0.05"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                
+                <!--Y轴摇杆-->
+                <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="1" Margin="0,2,0,2"/>
+                <Grid Grid.Row="1"  Margin="0,2,0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--开关-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
+                            <Label Content="Y-Axis" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,5,10,5">
+                            <CheckBox Content="Enable" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                    <!--灵敏度-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Sensitivity" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                    x:Name="YAxisSensitivity"                                    
+                    Height="30"
+                    Text="30"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Hidden"                                         
+                    Background="Transparent" BorderBrush="#00ABADB3"
+                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <!--非线性系数-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Nonlinear" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                    x:Name="YAxisNonlinearFactor"                                    
+                    Height="30"
+                    Text="1.0"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Hidden"                                         
+                    Background="Transparent" BorderBrush="#00ABADB3"
+                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <!--死区-->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Deadzone" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
+                                <TextBox 
+                    x:Name="YAxisDeadzone"                                    
+                    Height="30"
+                    Text="0.05"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Hidden"                                         
+                    Background="Transparent" BorderBrush="#00ABADB3"
+                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
 
