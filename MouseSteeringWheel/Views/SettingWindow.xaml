@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:MouseSteeringWheel.Views"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SettingWindow" Height="450" Width="800"
-        Background="#FF1E2227">
+        Title="SettingWindow" Height="450" Width="600"
+        Background="#FFF3F3F3">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <!--其他设置-->
@@ -22,65 +22,166 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Margin="0,0,2,0">
                 <!--左侧主列-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*" />
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="4*" />
                 </Grid.RowDefinitions>
 
                 <!--vJoy设备ID与语言-->
-                <Border BorderThickness="2" BorderBrush="#FF565555" CornerRadius="10">
+                <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="0" Margin="0,0,0,2"/>
+                <Grid Grid.Row="0"  Margin="0,0,0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--vJoy设备ID-->
                     <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <!--vJoy设备ID-->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Margin="10,0,0,0">
-                                <Label Content="vJoy Device ID" Foreground="#FFE8E8E8" VerticalAlignment="Center"/>
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <Border BorderBrush="#FF565555" BorderThickness="1" CornerRadius="5" Height="30" Background="#FF2C313C">
-                                    <TextBox 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="vJoy Device ID" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                                <TextBox 
                                         x:Name="HotKeyTextBox"                                    
                                         Height="30"
-                                        Text="1"
+                                        Text="01"
                                         VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         TextWrapping="NoWrap"
-                                        VerticalScrollBarVisibility="Hidden" 
-                                        Foreground="#FFE6E6E6"
+                                        VerticalScrollBarVisibility="Hidden"                                         
                                         Background="Transparent" BorderBrush="#00ABADB3"
                                     />
-                                </Border>
-
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <Label Content="(1 - 16)" Foreground="#FFE8E8E8" VerticalAlignment="Center"/>
-                            </Grid>
+                            </Border>
                         </Grid>
-                        <!--语言-->
-                        <Grid Grid.Row="1"></Grid>
+                        <Grid Grid.Column="2">
+                            <Label Content="(1 - 16)" VerticalAlignment="Center" Margin="5,5,5,5"/>
+                        </Grid>
                     </Grid>
-                </Border>
+                    <!--语言-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="Language" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,5,5,5">
+                            <RadioButton GroupName="ready" VerticalAlignment="Center">English</RadioButton>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="5,5,5,5">
+                            <RadioButton GroupName="ready" VerticalAlignment="Center">简中</RadioButton>
+                        </Grid>
+                        <Grid Grid.Column="3" Margin="5,5,5,5">
+                            <RadioButton GroupName="ready" VerticalAlignment="Center">繁中</RadioButton>
+                        </Grid>
+                    </Grid>
+                </Grid>
 
-                <Grid Grid.Row="1"></Grid>
-                <Grid Grid.Row="2"></Grid>
+                <!--UI相关-->
+                <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="1" Margin="0,2,0,2"/>
+                <Grid Grid.Row="1" Margin="0,2,0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--UI样式选择-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="UI Style" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,5,5,5">
+                            <RadioButton GroupName="ready" VerticalAlignment="Center">Steering Wheel</RadioButton>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="5,5,5,5">
+                            <RadioButton GroupName="ready" VerticalAlignment="Center">Joystick</RadioButton>
+                        </Grid>
+                    </Grid>
+                    <!--UI缩放系数-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="5,5,0,5">
+                            <Label Content="UI Scale Factor" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                                <TextBox 
+                                    x:Name="UIScaleFactor"                                    
+                                    Height="30"
+                                    Text="01"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                />
+                            </Border>
+                        </Grid>
+                        <!--UI Y轴偏移-->
+                        <Grid Grid.Column="2" Margin="5,5,5,5">
+                            <Label Content="Y-Axis Offset" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="3" Margin="0,5,10,5">
+                            <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="#FFF3F3F3">
+                                <TextBox 
+                                    x:Name="UIYAxisOffset"                                    
+                                    Height="30"
+                                    Text="524"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    TextWrapping="NoWrap"
+                                    VerticalScrollBarVisibility="Hidden"                                         
+                                    Background="Transparent" BorderBrush="#00ABADB3"
+                                />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
 
+                <!--快捷键设置-->
+                <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Row="2" Margin="0,2,0,2"/>
+                <Grid Grid.Row="2"  Margin="0,2,0,2">
 
+                    <!--UI Y轴偏移-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+
+                    </Grid>
+                </Grid>
             </Grid>
 
-            <Grid Grid.Column="1">
-                <!--右侧主列-->
+            <!--右侧主列-->
+            <Grid Grid.Column="1" Margin="2,0,0,0">
+
             </Grid>
         </Grid>
 

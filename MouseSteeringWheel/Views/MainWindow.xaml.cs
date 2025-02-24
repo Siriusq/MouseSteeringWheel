@@ -142,8 +142,16 @@ namespace MouseSteeringWheel.Views
                     modifiers: User32API.MOD_NONE,
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.Add),
                     callback: () => Dispatcher.Invoke(() =>
-                        Console.WriteLine("Open Settings"))
+                        LoadSettingWindow())
                 );
+        }
+
+        private void LoadSettingWindow()
+        {
+            SettingWindow settingWindow = new SettingWindow();
+            //settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingWindow.Owner = this;
+            settingWindow.ShowDialog();
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
