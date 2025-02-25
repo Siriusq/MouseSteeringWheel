@@ -1,7 +1,7 @@
 ﻿using MouseSteeringWheel.Services;
 using System;
 
-namespace MouseSteeringWheel.Helper
+namespace MouseSteeringWheel.Services
 {
     public class MouseProcessor
     {

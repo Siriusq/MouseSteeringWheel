@@ -27,6 +27,8 @@ namespace MouseSteeringWheel.Views
             InitializeComponent();
             //设置语言单选框状态
             SetLanguageRadioButton();
+
+            //Properties.Settings.Default.vJoyDeviceId = 3;
         }
 
         private void Pause_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)

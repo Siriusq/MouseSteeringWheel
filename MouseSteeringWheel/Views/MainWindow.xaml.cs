@@ -1,14 +1,10 @@
 ﻿using MouseSteeringWheel.Services;
-using MouseSteeringWheel.Helper;
 using System;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Controls;
 
 namespace MouseSteeringWheel.Views
 {
@@ -156,6 +152,11 @@ namespace MouseSteeringWheel.Views
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
+            Console.WriteLine(Properties.Settings.Default.vJoyDeviceId);
+            Properties.Settings.Default.vJoyDeviceId = 1;
+            Console.WriteLine(Properties.Settings.Default.vJoyDeviceId);
+            Properties.Settings.Default.Save();
+
             foreach (var id in _vJoyBtnHotKeyIds.Where(id => id != 0))
             {
                 _hotkeyProcessor.UnregisterHotkey(id);

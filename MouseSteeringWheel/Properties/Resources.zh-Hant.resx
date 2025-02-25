@@ -180,4 +180,7 @@
   <data name="XAxisName" xml:space="preserve">
     <value>X 軸</value>
   </data>
+  <data name="YAxisName" xml:space="preserve">
+    <value>Y 軸</value>
+  </data>
 </root>

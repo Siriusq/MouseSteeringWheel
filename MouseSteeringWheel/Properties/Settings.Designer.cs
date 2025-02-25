@@ -13,13 +13,229 @@ namespace MouseSteeringWheel.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int vJoyDeviceId {
+            get {
+                return ((int)(this["vJoyDeviceId"]));
+            }
+            set {
+                this["vJoyDeviceId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        public string language {
+            get {
+                return ((string)(this["language"]));
+            }
+            set {
+                this["language"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int UIStyle {
+            get {
+                return ((int)(this["UIStyle"]));
+            }
+            set {
+                this["UIStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public double UIScaleFactor {
+            get {
+                return ((double)(this["UIScaleFactor"]));
+            }
+            set {
+                this["UIScaleFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("524")]
+        public int UIYAxisOffset {
+            get {
+                return ((int)(this["UIYAxisOffset"]));
+            }
+            set {
+                this["UIYAxisOffset"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NumPad8")]
+        public string PauseJoystickHotkey {
+            get {
+                return ((string)(this["PauseJoystickHotkey"]));
+            }
+            set {
+                this["PauseJoystickHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Add")]
+        public string OpenSettingWindowHoykey {
+            get {
+                return ((string)(this["OpenSettingWindowHoykey"]));
+            }
+            set {
+                this["OpenSettingWindowHoykey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+R")]
+        public string ResetJoystickHotkey {
+            get {
+                return ((string)(this["ResetJoystickHotkey"]));
+            }
+            set {
+                this["ResetJoystickHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ButtonHotkeyDictionaryString {
+            get {
+                return ((string)(this["ButtonHotkeyDictionaryString"]));
+            }
+            set {
+                this["ButtonHotkeyDictionaryString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ButtonHotkeyEnableArray {
+            get {
+                return ((string)(this["ButtonHotkeyEnableArray"]));
+            }
+            set {
+                this["ButtonHotkeyEnableArray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool XAxisEnable {
+            get {
+                return ((bool)(this["XAxisEnable"]));
+            }
+            set {
+                this["XAxisEnable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public double XAxisSensitivity {
+            get {
+                return ((double)(this["XAxisSensitivity"]));
+            }
+            set {
+                this["XAxisSensitivity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double XAxisNonlinear {
+            get {
+                return ((double)(this["XAxisNonlinear"]));
+            }
+            set {
+                this["XAxisNonlinear"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public double XAxisDeadzone {
+            get {
+                return ((double)(this["XAxisDeadzone"]));
+            }
+            set {
+                this["XAxisDeadzone"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool YAxisEnable {
+            get {
+                return ((bool)(this["YAxisEnable"]));
+            }
+            set {
+                this["YAxisEnable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public double YAxisSensitivity {
+            get {
+                return ((double)(this["YAxisSensitivity"]));
+            }
+            set {
+                this["YAxisSensitivity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double YAxisNonlinear {
+            get {
+                return ((double)(this["YAxisNonlinear"]));
+            }
+            set {
+                this["YAxisNonlinear"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public double YAxisDeadzone {
+            get {
+                return ((double)(this["YAxisDeadzone"]));
+            }
+            set {
+                this["YAxisDeadzone"] = value;
             }
         }
     }
