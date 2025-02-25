@@ -118,66 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonKeyBindingName" xml:space="preserve">
-    <value>vJoy 按鈕快捷鍵綁定</value>
+    <value>Button Key Binding</value>
   </data>
   <data name="CancelName" xml:space="preserve">
-    <value>取消</value>
+    <value>Cancel</value>
   </data>
   <data name="DeadzoneName" xml:space="preserve">
-    <value>死區百分比</value>
+    <value>Deadzone</value>
   </data>
   <data name="EnableName" xml:space="preserve">
-    <value>開啟</value>
+    <value>Enable</value>
   </data>
   <data name="GeneralName" xml:space="preserve">
-    <value>通用設定</value>
+    <value>General</value>
   </data>
   <data name="HotkeyHintName" xml:space="preserve">
-    <value>點擊並按下快捷鍵來進行記錄</value>
+    <value>Click &amp;amp; Press Keys to Record</value>
   </data>
   <data name="HotkeyName" xml:space="preserve">
-    <value>快速鍵設定</value>
+    <value>Hotkey</value>
   </data>
   <data name="JoystickName" xml:space="preserve">
-    <value>搖桿</value>
+    <value>Joystick</value>
   </data>
   <data name="LanguageName" xml:space="preserve">
-    <value>顯示語言</value>
+    <value>Language</value>
   </data>
   <data name="NonlinearName" xml:space="preserve">
-    <value>非線性係數</value>
+    <value>Nonlinear</value>
   </data>
   <data name="OpenSettingsName" xml:space="preserve">
-    <value>開啟設定視窗</value>
+    <value>Open Settings</value>
   </data>
   <data name="PauseJoystickName" xml:space="preserve">
-    <value>暫停搖桿映射</value>
+    <value>Pause Joystick</value>
   </data>
   <data name="ResetJoystickName" xml:space="preserve">
-    <value>重置搖桿位置</value>
+    <value>Reset Joystick</value>
   </data>
   <data name="SaveName" xml:space="preserve">
-    <value>儲存</value>
+    <value>Save</value>
   </data>
   <data name="SensitivityName" xml:space="preserve">
-    <value>靈敏度係數</value>
+    <value>Sensitivity</value>
   </data>
   <data name="SteeringWheelName" xml:space="preserve">
-    <value>方向盤模擬</value>
+    <value>Steering Wheel</value>
   </data>
   <data name="UIScaleFactorName" xml:space="preserve">
-    <value>UI 縮放係數</value>
+    <value>Scale Factor</value>
   </data>
   <data name="UIStyleName" xml:space="preserve">
-    <value>風格</value>
+    <value>Style</value>
   </data>
   <data name="UIYAxisOffset" xml:space="preserve">
-    <value>Y 軸偏移距離</value>
+    <value>Y-Axis Offset</value>
   </data>
   <data name="vJoyDeviceIDName" xml:space="preserve">
-    <value>vJoy 設備 ID</value>
+    <value>vJoy Device ID</value>
   </data>
   <data name="XAxisName" xml:space="preserve">
-    <value>X 軸</value>
+    <value>X-Axis</value>
+  </data>
+  <data name="YAxisName" xml:space="preserve">
+    <value>Y-Axis</value>
   </data>
 </root>
