@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MouseSteeringWheel.Views"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SettingWindow" Height="450" Width="450"
+        Title="SettingWindow" Height="500" Width="450"
         Background="#FFF3F3F3">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
@@ -488,14 +488,12 @@
         </Grid>
 
         <!--底部按键绑定-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <!-- 这里2*标识占据所有宽度的七分之二-->
                 <ColumnDefinition Width="*" />
-                <!-- 这里2*标识占据所有宽度的七分之五-->
             </Grid.ColumnDefinitions>
-            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Column="0" Margin="0,2,0,2"/>
+            <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10" Grid.Column="0" Margin="0,2,2,2"/>
 
             <Grid Grid.Column="0" Margin="0,0,2,0">
                 <Grid.RowDefinitions>
@@ -579,6 +577,23 @@
                                 PreviewKeyDown="Button_Binding_HotKeyTextBox_PreviewKeyDown" />
                         </Border>
                     </Grid>
+                </Grid>
+            </Grid>
+            <!--确定和取消按钮-->
+            <Grid Grid.Column="1" Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="2,2,0,2">
+                    <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
+                        <Button Content="Save" BorderBrush="#00707070" Background="#00DDDDDD" IsDefault="True" ClipToBounds="True" BorderThickness="0,0,0,0"></Button>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="1" Margin="2,2,0,2">
+                    <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
+                        <Button Content="Cancel" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0"/>
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>
