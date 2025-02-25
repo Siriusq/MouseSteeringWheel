@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MouseSteeringWheel.Views"
+        xmlns:langs="clr-namespace:MouseSteeringWheel.Properties"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="SettingWindow" Height="500" Width="450"
@@ -47,10 +48,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
-                            <Label Content="General" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                            <Label Content="{x:Static langs:Resources.GeneralName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,0,5">
-                            <Label Content="vJoy Device ID" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.vJoyDeviceIDName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="3" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -77,7 +78,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Language" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.LanguageName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,5,5">
                             <RadioButton GroupName="Language" VerticalAlignment="Center">English</RadioButton>
@@ -111,13 +112,13 @@
                             <Label Content="UI" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="10,5,0,5">
-                            <Label Content="Style" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.UIStyleName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center">Steering Wheel</RadioButton>
+                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center" Content="{x:Static langs:Resources.SteeringWheelName}"/>
                         </Grid>
                         <Grid Grid.Column="3" Margin="5,5,5,5">
-                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center">Joystick</RadioButton>
+                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center" Content="{x:Static langs:Resources.JoystickName}"/>
                         </Grid>
                     </Grid>
                     <!--UI缩放系数-->
@@ -129,7 +130,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Scale Factor" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.UIScaleFactorName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -147,8 +148,8 @@
                             </Border>
                         </Grid>
                         <!--UI Y轴偏移-->
-                        <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <Label Content="Y-Axis Offset" VerticalAlignment="Center"/>
+                        <Grid Grid.Column="2" Margin="2,5,5,5">
+                            <Label Content="{x:Static langs:Resources.UIYAxisOffset}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="3" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -187,10 +188,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
                             <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="-5,-5,-5,-5"/>
-                            <Label Content="Hotkey" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <Label Content="{x:Static langs:Resources.HotkeyName}" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="2" Margin="3,5,0,5">
-                            <Label Content="Click &amp; Press Keys to Record" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.HotkeyHintName}" VerticalAlignment="Center"/>
                         </Grid>
 
                     </Grid>
@@ -202,7 +203,7 @@
                             <ColumnDefinition Width="5*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Pause Joystick" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.PauseJoystickName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -229,7 +230,7 @@
                             <ColumnDefinition Width="5*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Open Settings" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.OpenSettingsName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -256,7 +257,7 @@
                             <ColumnDefinition Width="5*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Reset Joystick" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.ResetJoystickName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -302,10 +303,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
-                            <Label Content="X-Axis" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                            <Label Content="{x:Static langs:Resources.XAxisName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,10,5">
-                            <CheckBox Content="Enable" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <CheckBox Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Grid>
                     <!--灵敏度-->
@@ -315,7 +316,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Sensitivity" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.SensitivityName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -340,7 +341,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Nonlinear" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.NonlinearName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -365,7 +366,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Deadzone" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.DeadzoneName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -402,10 +403,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Border BorderThickness="2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,0,0,0"/>
-                            <Label Content="Y-Axis" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                            <Label Content="{x:Static langs:Resources.YAxisName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,10,5">
-                            <CheckBox Content="Enable" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <CheckBox Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Grid>
                     <!--灵敏度-->
@@ -415,7 +416,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Sensitivity" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.SensitivityName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -440,7 +441,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Nonlinear" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.NonlinearName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -465,7 +466,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="5,5,0,5">
-                            <Label Content="Deadzone" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static langs:Resources.DeadzoneName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="0,5,10,5">
                             <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -511,7 +512,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Border BorderThickness="2,2,2,2" BorderBrush="#FFC2C2C2" CornerRadius="10,0,10,0" Margin="0,2,0,2"/>
-                        <Label Content="Button Key Binding" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
+                        <Label Content="{x:Static langs:Resources.ButtonKeyBindingName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                     </Grid>
                     <Grid Grid.Column="1" Margin="5,5,0,5">
                         <Label Content="ID" VerticalAlignment="Center" Margin="-2,0,0,0" HorizontalAlignment="Right"/>
@@ -559,7 +560,7 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Margin="10,0,10,5">
-                        <CheckBox Content="Enable" VerticalAlignment="Center"/>
+                        <CheckBox Content="{x:Static langs:Resources.EnableName}" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Column="1" Margin="0,0,10,5">
                         <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
@@ -587,12 +588,12 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="2,2,0,2">
                     <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
-                        <Button Content="Save" BorderBrush="#00707070" Background="#00DDDDDD" IsDefault="True" ClipToBounds="True" BorderThickness="0,0,0,0"></Button>
+                        <Button Content="{x:Static langs:Resources.SaveName}" BorderBrush="#00707070" Background="#00DDDDDD" IsDefault="True" ClipToBounds="True" BorderThickness="0,0,0,0"></Button>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1" Margin="2,2,0,2">
                     <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
-                        <Button Content="Cancel" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0"/>
+                        <Button Content="{x:Static langs:Resources.CancelName}" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0"/>
                     </Border>
                 </Grid>
             </Grid>
