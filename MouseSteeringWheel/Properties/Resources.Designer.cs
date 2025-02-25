@@ -22,7 +22,7 @@ namespace MouseSteeringWheel.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MouseSteeringWheel.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MouseSteeringWheel.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,210 @@ namespace MouseSteeringWheel.Properties {
         ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Button Key Binding 的本地化字符串。
+        /// </summary>
+        public static string ButtonKeyBindingName {
+            get {
+                return ResourceManager.GetString("ButtonKeyBindingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Cancel 的本地化字符串。
+        /// </summary>
+        public static string CancelName {
+            get {
+                return ResourceManager.GetString("CancelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deadzone 的本地化字符串。
+        /// </summary>
+        public static string DeadzoneName {
+            get {
+                return ResourceManager.GetString("DeadzoneName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Enable 的本地化字符串。
+        /// </summary>
+        public static string EnableName {
+            get {
+                return ResourceManager.GetString("EnableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 General 的本地化字符串。
+        /// </summary>
+        public static string GeneralName {
+            get {
+                return ResourceManager.GetString("GeneralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Click &amp;amp; Press Keys to Record 的本地化字符串。
+        /// </summary>
+        public static string HotkeyHintName {
+            get {
+                return ResourceManager.GetString("HotkeyHintName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hotkey 的本地化字符串。
+        /// </summary>
+        public static string HotkeyName {
+            get {
+                return ResourceManager.GetString("HotkeyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Joystick 的本地化字符串。
+        /// </summary>
+        public static string JoystickName {
+            get {
+                return ResourceManager.GetString("JoystickName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Language 的本地化字符串。
+        /// </summary>
+        public static string LanguageName {
+            get {
+                return ResourceManager.GetString("LanguageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Nonlinear 的本地化字符串。
+        /// </summary>
+        public static string NonlinearName {
+            get {
+                return ResourceManager.GetString("NonlinearName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Open Settings 的本地化字符串。
+        /// </summary>
+        public static string OpenSettingsName {
+            get {
+                return ResourceManager.GetString("OpenSettingsName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Pause Joystick 的本地化字符串。
+        /// </summary>
+        public static string PauseJoystickName {
+            get {
+                return ResourceManager.GetString("PauseJoystickName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Reset Joystick 的本地化字符串。
+        /// </summary>
+        public static string ResetJoystickName {
+            get {
+                return ResourceManager.GetString("ResetJoystickName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save 的本地化字符串。
+        /// </summary>
+        public static string SaveName {
+            get {
+                return ResourceManager.GetString("SaveName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Sensitivity 的本地化字符串。
+        /// </summary>
+        public static string SensitivityName {
+            get {
+                return ResourceManager.GetString("SensitivityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Steering Wheel 的本地化字符串。
+        /// </summary>
+        public static string SteeringWheelName {
+            get {
+                return ResourceManager.GetString("SteeringWheelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Scale Factor 的本地化字符串。
+        /// </summary>
+        public static string UIScaleFactorName {
+            get {
+                return ResourceManager.GetString("UIScaleFactorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Style 的本地化字符串。
+        /// </summary>
+        public static string UIStyleName {
+            get {
+                return ResourceManager.GetString("UIStyleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Y-Axis Offset 的本地化字符串。
+        /// </summary>
+        public static string UIYAxisOffset {
+            get {
+                return ResourceManager.GetString("UIYAxisOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device ID 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDName {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 X-Axis 的本地化字符串。
+        /// </summary>
+        public static string XAxisName {
+            get {
+                return ResourceManager.GetString("XAxisName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Y-Axis 的本地化字符串。
+        /// </summary>
+        public static string YAxisName {
+            get {
+                return ResourceManager.GetString("YAxisName", resourceCulture);
             }
         }
     }
