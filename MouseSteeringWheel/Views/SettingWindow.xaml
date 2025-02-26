@@ -137,7 +137,7 @@
                                 <TextBox 
                                     x:Name="UIScaleFactor"                                    
                                     Height="30"
-                                    Text="01"
+                                    Text="1.0"
                                     VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"

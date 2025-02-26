@@ -55,8 +55,9 @@ namespace MouseSteeringWheel.Views
         private void SetLanguage(string cultureName) => currLanguage = cultureName;
         #endregion
 
-        #region UI切换
+        #region UI
         private int currUIStyle;
+        private double uiScaleFactor;
         private void SteeringWheelButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 1;
         private void JoystickButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 2;
         #endregion
@@ -100,6 +101,8 @@ namespace MouseSteeringWheel.Views
             }
 
             //UI缩放系数
+            uiScaleFactor = Settings.Default.UIScaleFactor;
+            UIScaleFactor.Text = uiScaleFactor.ToString();
 
         }
 
@@ -109,20 +112,29 @@ namespace MouseSteeringWheel.Views
 
             // 保存通用设置，需重启后生效！！！
             // 保存设备ID
-            int newvJoyDeviceID = int.Parse(vJoyDeviceID.Text);
-            if (newvJoyDeviceID != Settings.Default.vJoyDeviceId)
+            try
             {
-                if (newvJoyDeviceID > 16 || newvJoyDeviceID <= 0)
+                int newvJoyDeviceID = int.Parse(vJoyDeviceID.Text);
+                if (newvJoyDeviceID != Settings.Default.vJoyDeviceId)
                 {
-                    messageBoxService.ShowMessage("vJoy 设备 ID 超出范围", "保存失败");
-                    return;
-                }
-                else
-                {
-                    messageBoxService.ShowMessage("vJoy 设备 ID 已修改，请重启程序以使更改生效", "程序需要重启");
-                    Settings.Default.vJoyDeviceId = newvJoyDeviceID;
+                    if (newvJoyDeviceID > 16 || newvJoyDeviceID <= 0)
+                    {
+                        messageBoxService.ShowMessage("vJoy 设备 ID 超出范围", "保存失败");
+                        return;
+                    }
+                    else
+                    {
+                        messageBoxService.ShowMessage("vJoy 设备 ID 已修改，请重启程序以使更改生效", "程序需要重启");
+                        Settings.Default.vJoyDeviceId = newvJoyDeviceID;
+                    }
                 }
             }
+            catch
+            {
+                messageBoxService.ShowMessage("vJoy 设备 ID 数值无效", "vJoy 设备 ID 数值无效");
+                return;
+            }
+
 
             //保存语言
             if (Settings.Default.language != currLanguage)
@@ -137,6 +149,26 @@ namespace MouseSteeringWheel.Views
                     mainWindow.SwitchUIStyle(currUIStyle);
                 }
                 Settings.Default.UIStyle = currUIStyle;
+            }
+
+            //保存UI缩放系数
+            try
+            {
+                double newUIScaleFactor = double.Parse(UIScaleFactor.Text);
+                if (newUIScaleFactor != Settings.Default.UIScaleFactor)
+                {
+                    Settings.Default.UIScaleFactor = newUIScaleFactor;
+                    if (Owner is MainWindow mainWindow)
+                    {
+                        mainWindow.SetUIScale();
+                    }
+                }
+
+            }
+            catch
+            {
+                messageBoxService.ShowMessage("UI 缩放数值无效", "UI 缩放数值无效");
+                return;
             }
 
 

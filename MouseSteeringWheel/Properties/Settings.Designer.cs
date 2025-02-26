@@ -61,7 +61,7 @@ namespace MouseSteeringWheel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public double UIScaleFactor {
             get {
                 return ((double)(this["UIScaleFactor"]));

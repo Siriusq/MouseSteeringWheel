@@ -86,6 +86,12 @@ namespace MouseSteeringWheel.Views
             }
         }
 
+        public void SetUIScale()
+        {
+            _bottomSteeringWheel?.SetUIScale();
+            _bottomJoystick?.SetUIScale();
+        }
+
         // 初始化窗口大小和位置
         private void InitializeWindow()
         {

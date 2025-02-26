@@ -1,7 +1,7 @@
 ﻿using MouseSteeringWheel.Services;
 using System;
 using System.Windows.Controls;
-using System.Windows.Media;
+using MouseSteeringWheel.Properties;
 
 namespace MouseSteeringWheel.Views
 {
@@ -14,8 +14,6 @@ namespace MouseSteeringWheel.Views
         private readonly vJoyService _vJoyService;
         private int _lastJoystickX;
         private int _lastJoystickY;
-        // UI缩放率
-        private double _uiScaleFactor = 2.0;
 
         public BottomSteeringWheel(vJoyService vJoyService)
         {
@@ -26,13 +24,13 @@ namespace MouseSteeringWheel.Views
             _lastJoystickY = 16383;
 
             // 设置UI缩放
-            SetUIScale(_uiScaleFactor);
+            SetUIScale();
         }
 
-        public void SetUIScale(double _uiScaleFactor)
+        public void SetUIScale()
         {
-            UIScale.ScaleX = _uiScaleFactor;
-            UIScale.ScaleY = _uiScaleFactor;
+            UIScale.ScaleX = Settings.Default.UIScaleFactor;
+            UIScale.ScaleY = Settings.Default.UIScaleFactor;
         }
 
         // 更新指示器位置
