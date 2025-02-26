@@ -306,7 +306,7 @@
                             <Label Content="{x:Static langs:Resources.XAxisName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,10,5">
-                            <CheckBox Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <CheckBox Name="XAxisEnableButton" Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Grid>
                     <!--灵敏度-->
@@ -406,7 +406,7 @@
                             <Label Content="{x:Static langs:Resources.YAxisName}" VerticalAlignment="Center" Margin="5,5,5,5" FontWeight="Bold"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,10,5">
-                            <CheckBox Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <CheckBox Name="YAxisEnableButton" Content="{x:Static langs:Resources.EnableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Grid>
                     <!--灵敏度-->
@@ -560,7 +560,7 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Margin="10,0,10,5">
-                        <CheckBox Content="{x:Static langs:Resources.EnableName}" VerticalAlignment="Center"/>
+                        <CheckBox Name="vJoyButtonEnable" Content="{x:Static langs:Resources.EnableName}" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Column="1" Margin="0,0,10,5">
                         <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">

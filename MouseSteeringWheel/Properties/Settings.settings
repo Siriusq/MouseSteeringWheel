@@ -35,10 +35,10 @@
     <Setting Name="XAxisEnable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="XAxisSensitivity" Type="System.Double" Scope="User">
+    <Setting Name="XAxisSensitivity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="XAxisNonlinear" Type="System.Double" Scope="User">
+    <Setting Name="XAxisNonlinear" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="XAxisDeadzone" Type="System.Double" Scope="User">
@@ -47,10 +47,10 @@
     <Setting Name="YAxisEnable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="YAxisSensitivity" Type="System.Double" Scope="User">
+    <Setting Name="YAxisSensitivity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
-    <Setting Name="YAxisNonlinear" Type="System.Double" Scope="User">
+    <Setting Name="YAxisNonlinear" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="YAxisDeadzone" Type="System.Double" Scope="User">

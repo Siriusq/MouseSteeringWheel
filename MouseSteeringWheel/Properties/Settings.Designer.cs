@@ -158,9 +158,9 @@ namespace MouseSteeringWheel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public double XAxisSensitivity {
+        public int XAxisSensitivity {
             get {
-                return ((double)(this["XAxisSensitivity"]));
+                return ((int)(this["XAxisSensitivity"]));
             }
             set {
                 this["XAxisSensitivity"] = value;
@@ -170,9 +170,9 @@ namespace MouseSteeringWheel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double XAxisNonlinear {
+        public float XAxisNonlinear {
             get {
-                return ((double)(this["XAxisNonlinear"]));
+                return ((float)(this["XAxisNonlinear"]));
             }
             set {
                 this["XAxisNonlinear"] = value;
@@ -206,9 +206,9 @@ namespace MouseSteeringWheel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public double YAxisSensitivity {
+        public int YAxisSensitivity {
             get {
-                return ((double)(this["YAxisSensitivity"]));
+                return ((int)(this["YAxisSensitivity"]));
             }
             set {
                 this["YAxisSensitivity"] = value;
@@ -218,9 +218,9 @@ namespace MouseSteeringWheel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double YAxisNonlinear {
+        public float YAxisNonlinear {
             get {
-                return ((double)(this["YAxisNonlinear"]));
+                return ((float)(this["YAxisNonlinear"]));
             }
             set {
                 this["YAxisNonlinear"] = value;

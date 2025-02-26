@@ -48,19 +48,26 @@ namespace MouseSteeringWheel.Views
         }
 
         #region 语言切换
-        private string currLanguage;
+        private string _currLanguage;
         private void EnglishRadioButtonChecked(object sender, RoutedEventArgs e) => SetLanguage("en-US");
         private void ChineseSimplifiedRadioButtonChecked(object sender, RoutedEventArgs e) => SetLanguage("zh-CN");
         private void ChineseTraditionalRadioButtonChecked(object sender, RoutedEventArgs e) => SetLanguage("zh-Hant");
-        private void SetLanguage(string cultureName) => currLanguage = cultureName;
+        private void SetLanguage(string cultureName) => _currLanguage = cultureName;
         #endregion
 
         #region UI
-        private int currUIStyle;
-        private double uiScaleFactor;
-        private int uiYAxisOffset;
-        private void SteeringWheelButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 1;
-        private void JoystickButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 2;
+        private int _currUIStyle;
+        private double _uiScaleFactor;
+        private int _uiYAxisOffset;
+        private void SteeringWheelButtonChecked(object sender, RoutedEventArgs e) => _currUIStyle = 1;
+        private void JoystickButtonChecked(object sender, RoutedEventArgs e) => _currUIStyle = 2;
+        #endregion
+
+        #region X轴
+
+        #endregion
+
+        #region Y轴
         #endregion
 
         //读取设置并恢复对应UI显示文本
@@ -70,8 +77,8 @@ namespace MouseSteeringWheel.Views
             //vJoy设备ID
             vJoyDeviceID.Text = Settings.Default.vJoyDeviceId.ToString();
             //语言设置
-            currLanguage = Settings.Default.language;
-            switch (currLanguage)
+            _currLanguage = Settings.Default.language;
+            switch (_currLanguage)
             {
                 case "en-US":
                     EnglishRadioButton.IsChecked = true;
@@ -86,12 +93,12 @@ namespace MouseSteeringWheel.Views
                     EnglishRadioButton.IsChecked = true;
                     break;
             }
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(currLanguage);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(_currLanguage);
 
             //UI设置
             //UI样式
-            currUIStyle = Settings.Default.UIStyle;
-            switch (currUIStyle)
+            _currUIStyle = Settings.Default.UIStyle;
+            switch (_currUIStyle)
             {
                 case 1:
                     SteeringWheelButton.IsChecked = true;
@@ -102,13 +109,25 @@ namespace MouseSteeringWheel.Views
             }
 
             //UI缩放系数
-            uiScaleFactor = Settings.Default.UIScaleFactor;
-            UIScaleFactor.Text = uiScaleFactor.ToString();
+            _uiScaleFactor = Settings.Default.UIScaleFactor;
+            UIScaleFactor.Text = _uiScaleFactor.ToString();
 
             // UI Y 轴偏移像素
-            uiYAxisOffset = Settings.Default.UIYAxisOffset;
-            UIYAxisOffset.Text = uiYAxisOffset.ToString();
+            _uiYAxisOffset = Settings.Default.UIYAxisOffset;
+            UIYAxisOffset.Text = _uiYAxisOffset.ToString();
 
+
+            // X 轴设置
+            XAxisEnableButton.IsChecked = Settings.Default.XAxisEnable;
+            XAxisSensitivity.Text = Settings.Default.XAxisSensitivity.ToString();
+            XAxisNonlinearFactor.Text = Settings.Default.XAxisNonlinear.ToString();
+            XAxisDeadzone.Text = Settings.Default.XAxisDeadzone.ToString();
+
+            // Y 轴设置
+            YAxisEnableButton.IsChecked = Settings.Default.YAxisEnable;
+            YAxisSensitivity.Text = Settings.Default.YAxisSensitivity.ToString();
+            YAxisNonlinearFactor.Text = Settings.Default.YAxisNonlinear.ToString();
+            YAxisDeadzone.Text = Settings.Default.YAxisDeadzone.ToString();
         }
 
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
@@ -140,22 +159,21 @@ namespace MouseSteeringWheel.Views
                 return;
             }
 
-
             //保存语言
-            if (Settings.Default.language != currLanguage)
-                Settings.Default.language = currLanguage;
+            if (Settings.Default.language != _currLanguage)
+                Settings.Default.language = _currLanguage;
+
 
             //保存UI设置
             //保存UI样式
-            if (currUIStyle != Settings.Default.UIStyle)
+            if (_currUIStyle != Settings.Default.UIStyle)
             {
                 if (Owner is MainWindow mainWindow)
                 {
-                    mainWindow.SwitchUIStyle(currUIStyle);
+                    mainWindow.SwitchUIStyle(_currUIStyle);
                 }
-                Settings.Default.UIStyle = currUIStyle;
+                Settings.Default.UIStyle = _currUIStyle;
             }
-
             //保存UI缩放系数
             try
             {
@@ -191,6 +209,29 @@ namespace MouseSteeringWheel.Views
             catch
             {
                 messageBoxService.ShowMessage("UI Y轴偏移像素数值无效", "UI Y轴偏移像素数值无效");
+                return;
+            }
+
+
+            // 保存XY轴设置
+            try
+            {
+                Settings.Default.XAxisEnable = (bool)XAxisEnableButton.IsChecked;
+                Settings.Default.XAxisSensitivity = int.Parse(XAxisSensitivity.Text);
+                Settings.Default.XAxisNonlinear = float.Parse(XAxisNonlinearFactor.Text);
+                Settings.Default.XAxisDeadzone = double.Parse(XAxisDeadzone.Text);
+                Settings.Default.YAxisEnable = (bool)YAxisEnableButton.IsChecked;
+                Settings.Default.YAxisSensitivity = int.Parse(YAxisSensitivity.Text);
+                Settings.Default.YAxisNonlinear = float.Parse(YAxisNonlinearFactor.Text);
+                Settings.Default.YAxisDeadzone = double.Parse(YAxisDeadzone.Text);
+                if (Owner is MainWindow mainWindow)
+                {
+                    mainWindow.UpdateXYAxisParameters();
+                }
+            }
+            catch
+            {
+                messageBoxService.ShowMessage("XY轴数值无效", "XY轴数值无效");
                 return;
             }
 

@@ -62,6 +62,7 @@ namespace MouseSteeringWheel.Views
 
         }
 
+        #region 设置参数传递
         // UI 切换
         public void SwitchUIStyle(int uiId)
         {
@@ -96,6 +97,14 @@ namespace MouseSteeringWheel.Views
         {
             _bottomJoystick?.SetYAxisOffset();
         }
+
+        // XY轴对应参数
+        public void UpdateXYAxisParameters()
+        {
+            _mouseProcessor.UpdateParameters();
+        }
+
+        #endregion
 
         // 初始化窗口大小和位置
         private void InitializeWindow()
