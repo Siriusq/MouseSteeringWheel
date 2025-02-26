@@ -35,15 +35,15 @@ namespace MouseSteeringWheel.Services
             {
                 case MouseEventType.Move:
                     UpdateJoystickXY((int)e.RelativeOffset.X, (int)e.RelativeOffset.Y);
-                    Console.WriteLine($"相对坐标: X={e.RelativeOffset.X}, Y={e.RelativeOffset.Y}");
+                    //Console.WriteLine($"相对坐标: X={e.RelativeOffset.X}, Y={e.RelativeOffset.Y}");
                     break;
 
                 case MouseEventType.LeftButtonDown:
-                    Console.WriteLine("左键按下");
+                    //Console.WriteLine("左键按下");
                     break;
 
                 case MouseEventType.LeftButtonUp:
-                    Console.WriteLine("左键抬起");
+                    //Console.WriteLine("左键抬起");
                     break;
             }
         }
@@ -60,7 +60,7 @@ namespace MouseSteeringWheel.Services
             double dxNormalized = (double)dx / Center;
             double dyNormalized = (double)dy / Center;
 
-            Console.WriteLine($"OVal:{Center + dx}");
+            //Console.WriteLine($"OVal:{Center + dx}");
 
             // 计算极坐标半径（范围[0,1]）
             double r = Math.Sqrt(dxNormalized * dxNormalized + dyNormalized * dyNormalized);
@@ -80,8 +80,8 @@ namespace MouseSteeringWheel.Services
             int newJoystickX = Center + adjustedDx;
             int newJoystickY = Center + adjustedDy;
 
-            Console.WriteLine($"NVal:{newJoystickX}");
-            Console.WriteLine($"diff:{newJoystickX - dx - Center}");
+            //Console.WriteLine($"NVal:{newJoystickX}");
+            //Console.WriteLine($"diff:{newJoystickX - dx - Center}");
 
             // ===== 死区处理 =====
             // 计算死区边界（矩形死区）

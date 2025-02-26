@@ -58,7 +58,7 @@
                                 <TextBox 
                                         x:Name="vJoyDeviceID"                                    
                                         Height="30"
-                                        Text="01"
+                                        Text="1"
                                         VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
@@ -81,13 +81,13 @@
                             <Label Content="{x:Static langs:Resources.LanguageName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1" Margin="5,5,5,5">
-                            <RadioButton GroupName="Language" Name="EnglishRadioButton" VerticalAlignment="Center" Checked="English_RadioButton_Checked">English</RadioButton>
+                            <RadioButton GroupName="Language" Name="EnglishRadioButton" VerticalAlignment="Center" Checked="EnglishRadioButtonChecked">English</RadioButton>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <RadioButton GroupName="Language" Name="ChineseSimplifiedButton" VerticalAlignment="Center" Checked="Chinese_Simplified_RadioButton_Checked">简中</RadioButton>
+                            <RadioButton GroupName="Language" Name="ChineseSimplifiedButton" VerticalAlignment="Center" Checked="ChineseSimplifiedRadioButtonChecked">简中</RadioButton>
                         </Grid>
                         <Grid Grid.Column="3" Margin="5,5,5,5">
-                            <RadioButton GroupName="Language" Name="ChineseTraditionalButton" VerticalAlignment="Center" Checked="Chinese_Traditional_RadioButton_Checked">繁中</RadioButton>
+                            <RadioButton GroupName="Language" Name="ChineseTraditionalButton" VerticalAlignment="Center" Checked="ChineseTraditionalRadioButtonChecked">繁中</RadioButton>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -115,10 +115,10 @@
                             <Label Content="{x:Static langs:Resources.UIStyleName}" VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="2" Margin="5,5,5,5">
-                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center" Content="{x:Static langs:Resources.SteeringWheelName}"/>
+                            <RadioButton GroupName="UIStyle" Name="SteeringWheelButton" Checked="SteeringWheelButtonChecked" VerticalAlignment="Center" Content="{x:Static langs:Resources.SteeringWheelName}"/>
                         </Grid>
                         <Grid Grid.Column="3" Margin="5,5,5,5">
-                            <RadioButton GroupName="UIStyle" VerticalAlignment="Center" Content="{x:Static langs:Resources.JoystickName}"/>
+                            <RadioButton GroupName="UIStyle" Name="JoystickButton" Checked="JoystickButtonChecked" VerticalAlignment="Center" Content="{x:Static langs:Resources.JoystickName}"/>
                         </Grid>
                     </Grid>
                     <!--UI缩放系数-->
@@ -588,7 +588,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="2,2,0,2">
                     <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
-                        <Button Content="{x:Static langs:Resources.SaveName}" BorderBrush="#00707070" Background="#00DDDDDD" IsDefault="True" ClipToBounds="True" BorderThickness="0,0,0,0"></Button>
+                        <Button Content="{x:Static langs:Resources.SaveName}" Click="SaveButtonClicked" BorderBrush="#00707070" Background="#00DDDDDD" IsDefault="True" ClipToBounds="True" BorderThickness="0,0,0,0"></Button>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1" Margin="2,2,0,2">

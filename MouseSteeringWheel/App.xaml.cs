@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MouseSteeringWheel.Properties;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 
 namespace MouseSteeringWheel
@@ -13,5 +10,13 @@ namespace MouseSteeringWheel
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            //语言设置
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.language);
+
+        }
+
     }
 }

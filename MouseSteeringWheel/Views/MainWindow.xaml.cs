@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using MouseSteeringWheel.Properties;
 
 namespace MouseSteeringWheel.Views
 {
@@ -14,6 +15,7 @@ namespace MouseSteeringWheel.Views
     public partial class MainWindow : Window
     {
         private readonly ApplicationStateService _stateService = new ApplicationStateService();
+        private SettingWindow settingWindow;
         private readonly vJoyService _vJoyService;
         private readonly KeyboardHookService _keyboardHook;
         private readonly HotkeyProcessor _hotkeyProcessor;
@@ -52,10 +54,23 @@ namespace MouseSteeringWheel.Views
             Closed += OnWindowClosed;
 
             // UI切换
+            SwitchUIStyle(Settings.Default.UIStyle);
+
+            // 设置窗口大小和位置
+            InitializeWindow();
+
+
+        }
+
+        // UI 切换
+        public void SwitchUIStyle(int uiId)
+        {
             if (uiId == 1)
             {
                 _bottomSteeringWheel = new BottomSteeringWheel(_vJoyService);
                 UIContainer.Content = _bottomSteeringWheel;
+                // 移除另一个UI
+                CompositionTarget.Rendering -= BottomJoystickOnRendering;
                 // 监听Rendering事件，确保每一帧更新UI
                 CompositionTarget.Rendering += BottomSteeringWheelOnRendering;
             }
@@ -64,12 +79,11 @@ namespace MouseSteeringWheel.Views
                 _bottomJoystick = new BottomJoystick(_vJoyService);
                 _bottomJoystick.UIPosition.Y = -_bottomJoystickYPos;
                 UIContainer.Content = _bottomJoystick;
+                // 移除另一个UI
+                CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
                 // 监听Rendering事件，确保每一帧更新UI
                 CompositionTarget.Rendering += BottomJoystickOnRendering;
             }
-
-            // 设置窗口大小和位置
-            InitializeWindow();
         }
 
         // 初始化窗口大小和位置
@@ -140,23 +154,20 @@ namespace MouseSteeringWheel.Views
                     callback: () => Dispatcher.Invoke(() =>
                         LoadSettingWindow())
                 );
+
+            // 设置窗口
+            settingWindow = new SettingWindow();
+            settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingWindow.Owner = this;
         }
 
         private void LoadSettingWindow()
         {
-            SettingWindow settingWindow = new SettingWindow();
-            //settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            settingWindow.Owner = this;
             settingWindow.ShowDialog();
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
-            Console.WriteLine(Properties.Settings.Default.vJoyDeviceId);
-            Properties.Settings.Default.vJoyDeviceId = 1;
-            Console.WriteLine(Properties.Settings.Default.vJoyDeviceId);
-            Properties.Settings.Default.Save();
-
             foreach (var id in _vJoyBtnHotKeyIds.Where(id => id != 0))
             {
                 _hotkeyProcessor.UnregisterHotkey(id);
@@ -166,8 +177,11 @@ namespace MouseSteeringWheel.Views
             _hotkeyProcessor.Dispose();
             _mouseService.Dispose();
             CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
+            CompositionTarget.Rendering -= BottomJoystickOnRendering;
             // 关闭时重置摇杆位置
             _vJoyService.ResetJoystickPos();
+            //保存更改到Settings.settings并关闭窗口
+            //Settings.Default.Save();
         }
 
         // 读取设置选项

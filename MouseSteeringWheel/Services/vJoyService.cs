@@ -1,5 +1,6 @@
 ﻿using System;
 using vJoyInterfaceWrap;
+using MouseSteeringWheel.Properties;
 
 namespace MouseSteeringWheel.Services
 {
@@ -16,7 +17,7 @@ namespace MouseSteeringWheel.Services
         {
             _messageBoxService = messageBoxService;
             //Todo: 将此数值加入到设置中，然后读取
-            _vJoyDeviceId = 1;
+            _vJoyDeviceId = (uint)Settings.Default.vJoyDeviceId;
 
             // 初始化vJoy
             if (!InitializevJoy())
