@@ -34,6 +34,12 @@ namespace MouseSteeringWheel.Views
             UIScale.ScaleY = Settings.Default.UIScaleFactor;
         }
 
+        // 设置Y轴偏移
+        public void SetYAxisOffset()
+        {
+            UIPosition.Y = -Settings.Default.UIYAxisOffset + 61.5;
+        }
+
         // 更新指示器位置
         public void UpdateJoystickPosition(object sender, EventArgs e)
         {

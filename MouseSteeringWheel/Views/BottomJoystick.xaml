@@ -29,7 +29,7 @@
             Height="2"
             Fill="DarkGray"
             Canvas.Left="-1"
-            Canvas.Top="-61">
+            Canvas.Top="-61.5">
         </Ellipse>
         <!--指示器-->
         <Ellipse

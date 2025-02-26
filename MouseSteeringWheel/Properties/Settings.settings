@@ -15,7 +15,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="UIYAxisOffset" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">524</Value>
+      <Value Profile="(Default)">576</Value>
     </Setting>
     <Setting Name="PauseJoystickHotkey" Type="System.String" Scope="User">
       <Value Profile="(Default)">NumPad8</Value>

@@ -73,7 +73,7 @@ namespace MouseSteeringWheel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("524")]
+        [global::System.Configuration.DefaultSettingValueAttribute("576")]
         public int UIYAxisOffset {
             get {
                 return ((int)(this["UIYAxisOffset"]));

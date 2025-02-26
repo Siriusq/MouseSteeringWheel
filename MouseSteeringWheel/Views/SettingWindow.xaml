@@ -156,7 +156,7 @@
                                 <TextBox 
                                     x:Name="UIYAxisOffset"                                    
                                     Height="30"
-                                    Text="524"
+                                    Text="576"
                                     VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"

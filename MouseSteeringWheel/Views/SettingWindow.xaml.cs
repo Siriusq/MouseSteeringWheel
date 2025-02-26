@@ -58,6 +58,7 @@ namespace MouseSteeringWheel.Views
         #region UI
         private int currUIStyle;
         private double uiScaleFactor;
+        private int uiYAxisOffset;
         private void SteeringWheelButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 1;
         private void JoystickButtonChecked(object sender, RoutedEventArgs e) => currUIStyle = 2;
         #endregion
@@ -103,6 +104,10 @@ namespace MouseSteeringWheel.Views
             //UI缩放系数
             uiScaleFactor = Settings.Default.UIScaleFactor;
             UIScaleFactor.Text = uiScaleFactor.ToString();
+
+            // UI Y 轴偏移像素
+            uiYAxisOffset = Settings.Default.UIYAxisOffset;
+            UIYAxisOffset.Text = uiYAxisOffset.ToString();
 
         }
 
@@ -163,11 +168,29 @@ namespace MouseSteeringWheel.Views
                         mainWindow.SetUIScale();
                     }
                 }
-
             }
             catch
             {
                 messageBoxService.ShowMessage("UI 缩放数值无效", "UI 缩放数值无效");
+                return;
+            }
+
+            // 保存 UI Y轴偏移像素
+            try
+            {
+                int newUIYAxisOffset = int.Parse(UIYAxisOffset.Text);
+                if (newUIYAxisOffset != Settings.Default.UIYAxisOffset)
+                {
+                    Settings.Default.UIYAxisOffset = newUIYAxisOffset;
+                    if (Owner is MainWindow mainWindow)
+                    {
+                        mainWindow.SetUIYAxisOffset();
+                    }
+                }
+            }
+            catch
+            {
+                messageBoxService.ShowMessage("UI Y轴偏移像素数值无效", "UI Y轴偏移像素数值无效");
                 return;
             }
 

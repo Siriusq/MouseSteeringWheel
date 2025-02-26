@@ -92,6 +92,11 @@ namespace MouseSteeringWheel.Views
             _bottomJoystick?.SetUIScale();
         }
 
+        public void SetUIYAxisOffset()
+        {
+            _bottomJoystick?.SetYAxisOffset();
+        }
+
         // 初始化窗口大小和位置
         private void InitializeWindow()
         {
