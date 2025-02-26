@@ -18,9 +18,13 @@ namespace MouseSteeringWheel.Views
             InitializeComponent();
             //读取设置并设置UI状态
             ReadSettings();
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.language);
+        }
 
-            //Properties.Settings.Default.vJoyDeviceId = 3;
+        // 点击关闭和取消按钮时隐藏设置窗口
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
 
         private void Pause_HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -82,8 +86,6 @@ namespace MouseSteeringWheel.Views
             }
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(currLanguage);
 
-            Console.WriteLine($"currLanguage: {currLanguage}, SettingLanguage:{Settings.Default.language}");
-
             //UI设置
             //UI样式
             currUIStyle = Settings.Default.UIStyle;
@@ -96,6 +98,9 @@ namespace MouseSteeringWheel.Views
                     JoystickButton.IsChecked = true;
                     break;
             }
+
+            //UI缩放系数
+
         }
 
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
@@ -119,10 +124,9 @@ namespace MouseSteeringWheel.Views
                 }
             }
 
-            //保存语言            
-            Settings.Default.language = currLanguage;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(currLanguage);
-            Console.WriteLine($"currLanguage: {currLanguage}, SettingLanguage:{Settings.Default.language}");
+            //保存语言
+            if (Settings.Default.language != currLanguage)
+                Settings.Default.language = currLanguage;
 
             //保存UI设置
             //保存UI样式
@@ -134,6 +138,7 @@ namespace MouseSteeringWheel.Views
                 }
                 Settings.Default.UIStyle = currUIStyle;
             }
+
 
             //保存更改到Settings.settings并关闭窗口
             Settings.Default.Save();

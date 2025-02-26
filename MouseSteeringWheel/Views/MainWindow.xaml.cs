@@ -155,7 +155,7 @@ namespace MouseSteeringWheel.Views
                         LoadSettingWindow())
                 );
 
-            // 设置窗口
+            // 设置窗口初始化
             settingWindow = new SettingWindow();
             settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             settingWindow.Owner = this;
@@ -163,7 +163,9 @@ namespace MouseSteeringWheel.Views
 
         private void LoadSettingWindow()
         {
-            settingWindow.ShowDialog();
+            //检测窗口状态，然后决定是否显示设置窗口
+            if (!settingWindow.IsVisible)
+                settingWindow.ShowDialog();
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
