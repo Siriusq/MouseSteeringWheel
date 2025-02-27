@@ -66,7 +66,7 @@ namespace MouseSteeringWheel.Views
                 //判断ID是否合法
                 try
                 {
-                    _currKeyID = int.Parse(vJoyButtonID.Text);
+                    _currKeyID = int.Parse(vJoyButtonIDTextBox.Text);
                     if (_currKeyID <= 0 || _currKeyID > 128)
                     {
                         _messageBoxService.ShowMessage("vJoy 按键 ID 超出范围", "vJoy 按键 ID 超出范围");
@@ -151,6 +151,23 @@ namespace MouseSteeringWheel.Views
 
             }
             e.Handled = true;
+        }
+
+        // ID 加减按钮处理
+        private void AddIDButtonClick(object sender, RoutedEventArgs e)
+        {
+            int currID = int.Parse(vJoyButtonIDTextBox.Text);
+            if (currID == 128) return;
+            currID++;
+            vJoyButtonIDTextBox.Text = currID.ToString();
+        }
+
+        private void SubtractIDButtonClick(object sender, RoutedEventArgs e)
+        {
+            int currID = int.Parse(vJoyButtonIDTextBox.Text);
+            if (currID == 1) return;
+            currID--;
+            vJoyButtonIDTextBox.Text = currID.ToString();
         }
 
         #endregion
@@ -260,6 +277,15 @@ namespace MouseSteeringWheel.Views
             {
                 Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
             }
+
+            // 将快捷键还原至对应文本框
+            PauseHotKeyTextBox.Text = $"{_modifierKeyArray[129]} + {_hotKeyArray[129]}";
+            SettingHotKeyTextBox.Text = $"{_modifierKeyArray[130]} + {_hotKeyArray[130]}";
+            ResetJoystickHotKeyTextBox.Text = $"{_modifierKeyArray[131]} + {_hotKeyArray[131]}";
+            ButtonHotKeyTextBox.Text = $"{_modifierKeyArray[1]} + {_hotKeyArray[1]}";
+            vJoyButtonIDTextBox.Text = "1";
+
+            //TODO:实现ID加减按钮功能，ID字符框变化时清空快捷键预览框
         }
 
         // 保存设置

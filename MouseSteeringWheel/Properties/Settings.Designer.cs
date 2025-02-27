@@ -238,5 +238,17 @@ namespace MouseSteeringWheel.Properties {
                 this["YAxisDeadzone"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LastButtonID {
+            get {
+                return ((int)(this["LastButtonID"]));
+            }
+            set {
+                this["LastButtonID"] = value;
+            }
+        }
     }
 }

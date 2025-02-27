@@ -522,7 +522,7 @@
                     </Grid>
                     <!--减号-->
                     <Grid Grid.Column="2" Margin="5,5,0,5">
-                        <Button BorderBrush="Transparent" Background="#00DDDDDD" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+                        <Button Click="SubtractIDButtonClick" BorderBrush="Transparent" Background="#00DDDDDD" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
                             <Label Content="-" VerticalAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
                                 <Label.RenderTransform>
                                     <TransformGroup>
@@ -536,7 +536,7 @@
                     <Grid Grid.Column="3" Margin="0,5,0,5">
                         <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
                             <TextBox 
-                                x:Name="vJoyButtonID"                                    
+                                x:Name="vJoyButtonIDTextBox"                                    
                                 Height="30"
                                 Text="22"
                                 VerticalAlignment="Center"
@@ -550,7 +550,7 @@
                     </Grid>
                     <!--加号-->
                     <Grid Grid.Column="4" Margin="0,5,10,5">
-                        <Button BorderBrush="Transparent" Background="#00DDDDDD" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+                        <Button Click="AddIDButtonClick" BorderBrush="Transparent" Background="#00DDDDDD" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
                             <Label Content="+" VerticalAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
                             </Label>
                         </Button>
