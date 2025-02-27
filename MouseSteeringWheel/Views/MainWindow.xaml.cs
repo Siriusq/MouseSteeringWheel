@@ -67,7 +67,7 @@ namespace MouseSteeringWheel.Views
             else
             {
                 _bottomJoystick = new BottomJoystick(_vJoyService);
-                _bottomJoystick.UIPosition.Y = -Settings.Default.UIYAxisOffset;
+                SetUIYAxisOffset();
                 UIContainer.Content = _bottomJoystick;
                 // 移除另一个UI
                 CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
