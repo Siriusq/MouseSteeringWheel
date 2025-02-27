@@ -545,6 +545,7 @@
                                 TextWrapping="NoWrap"
                                 VerticalScrollBarVisibility="Hidden"                                         
                                 Background="Transparent" BorderBrush="#00ABADB3"
+                                TextChanged="vJoyButtonIDTextBoxTextChanged"
                             />
                         </Border>
                     </Grid>
@@ -597,7 +598,7 @@
                 </Grid>
                 <Grid Grid.Row="1" Margin="2,2,0,2">
                     <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
-                        <Button Content="{x:Static langs:Resources.CancelName}" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0"/>
+                        <Button Content="{x:Static langs:Resources.CancelName}" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0" IsDefault="True"/>
                     </Border>
                 </Grid>
             </Grid>

@@ -156,18 +156,53 @@ namespace MouseSteeringWheel.Views
         // ID 加减按钮处理
         private void AddIDButtonClick(object sender, RoutedEventArgs e)
         {
-            int currID = int.Parse(vJoyButtonIDTextBox.Text);
-            if (currID == 128) return;
-            currID++;
-            vJoyButtonIDTextBox.Text = currID.ToString();
+            try
+            {
+                int currID = int.Parse(vJoyButtonIDTextBox.Text);
+                if (currID >= 128) return;
+                currID++;
+                vJoyButtonIDTextBox.Text = currID.ToString();
+            }
+            catch
+            {
+                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+            }
         }
 
         private void SubtractIDButtonClick(object sender, RoutedEventArgs e)
         {
-            int currID = int.Parse(vJoyButtonIDTextBox.Text);
-            if (currID == 1) return;
-            currID--;
-            vJoyButtonIDTextBox.Text = currID.ToString();
+            try
+            {
+                int currID = int.Parse(vJoyButtonIDTextBox.Text);
+                if (currID <= 1) return;
+                currID--;
+                vJoyButtonIDTextBox.Text = currID.ToString();
+            }
+            catch
+            {
+                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+            }
+        }
+
+        private void vJoyButtonIDTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                int currID = int.Parse(vJoyButtonIDTextBox.Text);
+                if (currID <= 0 || currID > 128)
+                {
+                    _messageBoxService.ShowMessage("ID 值超出范围", "ID 值超出范围");
+                    vJoyButtonIDTextBox.Text = "1";
+                    return;
+                }
+                TextBox buttonHotKeyTextBox = ButtonHotKeyTextBox;
+                if (buttonHotKeyTextBox != null)
+                    buttonHotKeyTextBox.Text = $"{_modifierKeyArray[currID]} + {_hotKeyArray[currID]}";
+            }
+            catch
+            {
+                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+            }
         }
 
         #endregion
@@ -284,8 +319,6 @@ namespace MouseSteeringWheel.Views
             ResetJoystickHotKeyTextBox.Text = $"{_modifierKeyArray[131]} + {_hotKeyArray[131]}";
             ButtonHotKeyTextBox.Text = $"{_modifierKeyArray[1]} + {_hotKeyArray[1]}";
             vJoyButtonIDTextBox.Text = "1";
-
-            //TODO:实现ID加减按钮功能，ID字符框变化时清空快捷键预览框
         }
 
         // 保存设置
@@ -410,5 +443,7 @@ namespace MouseSteeringWheel.Views
             Settings.Default.Save();
             this.Hide();
         }
+
+
     }
 }
