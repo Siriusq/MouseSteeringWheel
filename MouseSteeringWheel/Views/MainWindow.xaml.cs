@@ -179,13 +179,32 @@ namespace MouseSteeringWheel.Views
                     callback: () => Dispatcher.Invoke(() =>
                         LoadSettingWindow())
                 );
+
+            // 特殊热键：摇杆位置重置
+            _hotkeyProcessor.RegisterHotkey(
+                    id: 131,
+                    modifiers: modifierKeyArray[131],
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[131]),
+                    callback: () => Dispatcher.Invoke(() =>
+                        ResetJoystickPos())
+                );
         }
 
+        //显示设置窗口
         private void LoadSettingWindow()
         {
             //检测窗口状态，然后决定是否显示设置窗口
             if (!settingWindow.IsVisible)
                 settingWindow.ShowDialog();
+        }
+
+        //摇杆位置重置
+        private void ResetJoystickPos()
+        {
+            _vJoyService.SetJoystickX(16383);
+            _vJoyService.SetJoystickY(16383);
+            //将光标居中
+            _mouseProcessor.ResetMousePos();
         }
 
         private void OnWindowClosed(object sender, EventArgs e)

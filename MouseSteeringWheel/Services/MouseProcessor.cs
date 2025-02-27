@@ -1,4 +1,5 @@
 ﻿using MouseSteeringWheel.Properties;
+using MouseSteeringWheel.Services;
 using System;
 
 namespace MouseSteeringWheel.Services
@@ -142,6 +143,16 @@ namespace MouseSteeringWheel.Services
                 _vJoyService.SetJoystickX(newJoystickX);
             else
                 _vJoyService.SetJoystickX(Center);
+        }
+
+        // 重置鼠标位置
+        public void ResetMousePos()
+        {
+            // 获取物理分辨率
+            var physicalSize = DisplayService.GetPrimaryScreenPhysicalSize();
+            int centerX = (int)(physicalSize.Width / 2);
+            int centerY = (int)(physicalSize.Height / 2);
+            User32API.SetCursorPos(centerX, centerY);
         }
     }
 }

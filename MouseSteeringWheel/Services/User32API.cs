@@ -49,6 +49,9 @@ namespace MouseSteeringWheel.Services
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out POINT lpPoint);
 
+        [DllImport("user32.dll")]
+        public static extern bool SetCursorPos(int x, int y);
+
         // 委托
         public delegate IntPtr LowLevelMouseProc(
             int nCode,
