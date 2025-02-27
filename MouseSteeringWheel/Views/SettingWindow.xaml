@@ -218,7 +218,8 @@
                                     VerticalScrollBarVisibility="Hidden"                                         
                                     Background="Transparent" BorderBrush="#00ABADB3"
                                     IsReadOnly="true"
-                                    PreviewKeyDown="Pause_HotKeyTextBox_PreviewKeyDown" />
+                                    PreviewKeyDown="HotKeyTextBoxPreviewKeyDown"
+                                    PreviewKeyUp="HotKeyTextBoxPreviewKeyUp"/>
                             </Border>
                         </Grid>
                     </Grid>
@@ -245,7 +246,8 @@
                                     VerticalScrollBarVisibility="Hidden"                                         
                                     Background="Transparent" BorderBrush="#00ABADB3"
                                     IsReadOnly="true"
-                                    PreviewKeyDown="Setting_HotKeyTextBox_PreviewKeyDown" />
+                                    PreviewKeyDown="HotKeyTextBoxPreviewKeyDown"
+                                    PreviewKeyUp="HotKeyTextBoxPreviewKeyUp"/>
                             </Border>
                         </Grid>
                     </Grid>
@@ -272,7 +274,8 @@
                                     VerticalScrollBarVisibility="Hidden"                                         
                                     Background="Transparent" BorderBrush="#00ABADB3"
                                     IsReadOnly="true"
-                                    PreviewKeyDown="Reset_Joystick_HotKeyTextBox_PreviewKeyDown" />
+                                    PreviewKeyDown="HotKeyTextBoxPreviewKeyDown"
+                                    PreviewKeyUp="HotKeyTextBoxPreviewKeyUp"/>
                             </Border>
                         </Grid>
                     </Grid>
@@ -565,7 +568,7 @@
                     <Grid Grid.Column="1" Margin="0,0,10,5">
                         <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="5" Height="30" Background="White">
                             <TextBox
-                                x:Name="ButtonBindingHotKeyTextBox"
+                                x:Name="ButtonHotKeyTextBox"
                                 Height="30"
                                 Text="Shift Alt Ctrl R"
                                 VerticalAlignment="Center"
@@ -575,7 +578,8 @@
                                 VerticalScrollBarVisibility="Hidden"                                         
                                 Background="Transparent" BorderBrush="#00ABADB3"
                                 IsReadOnly="true"
-                                PreviewKeyDown="Button_Binding_HotKeyTextBox_PreviewKeyDown" />
+                                PreviewKeyDown="HotKeyTextBoxPreviewKeyDown"
+                                PreviewKeyUp="HotKeyTextBoxPreviewKeyUp"/>
                         </Border>
                     </Grid>
                 </Grid>
