@@ -61,6 +61,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Button Hotkey 的本地化字符串。
+        /// </summary>
+        public static string ButtonHotkeyName {
+            get {
+                return ResourceManager.GetString("ButtonHotkeyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Button Key Binding 的本地化字符串。
         /// </summary>
         public static string ButtonKeyBindingName {

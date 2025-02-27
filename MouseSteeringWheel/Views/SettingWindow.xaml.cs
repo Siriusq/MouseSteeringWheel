@@ -50,7 +50,6 @@ namespace MouseSteeringWheel.Views
 
         #region 快捷键
         private readonly HashSet<Key> _pressedKeys = new HashSet<Key>();
-        private string _lastKeyCombination;
         private int _currKeyID = 0;
         private Key _currHotKey;
         private ModifierKeys _currHotKeyModifiers;
