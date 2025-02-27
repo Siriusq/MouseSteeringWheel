@@ -48,7 +48,7 @@ namespace MouseSteeringWheel.Views
         private void JoystickButtonChecked(object sender, RoutedEventArgs e) => _currUIStyle = 2;
         #endregion
 
-        #region 快捷键
+        #region 快捷键处理
         private readonly HashSet<Key> _pressedKeys = new HashSet<Key>();
         private int _currKeyID = 0;
         private Key _currHotKey;
@@ -131,6 +131,7 @@ namespace MouseSteeringWheel.Views
             VolumeDown, VolumeMute, VolumeUp
         };
 
+        // 快捷键预存储
         private void HotKeyTextBoxPreviewKeyUp(object sender, KeyEventArgs e)
         {
             //判断Key是否合法
@@ -153,6 +154,7 @@ namespace MouseSteeringWheel.Views
         }
 
         #endregion
+
 
 
         //读取设置并恢复对应UI显示文本
@@ -213,8 +215,54 @@ namespace MouseSteeringWheel.Views
             YAxisSensitivity.Text = Settings.Default.YAxisSensitivity.ToString();
             YAxisNonlinearFactor.Text = Settings.Default.YAxisNonlinear.ToString();
             YAxisDeadzone.Text = Settings.Default.YAxisDeadzone.ToString();
+
+
+            // 快捷键数组 <->字符串转换
+            // 读取热键数组
+            string hotKeyStr = Settings.Default.HotKeyArrayString;
+            if (!string.IsNullOrEmpty(hotKeyStr))
+            {
+                string[] parts = hotKeyStr.Split(';');
+                for (int i = 0; i < Math.Min(_hotKeyArray.Length, parts.Length); i++)
+                {
+                    if (Enum.TryParse(parts[i], out Key parsedKey))
+                    {
+                        _hotKeyArray[i] = parsedKey;
+                    }
+                    else
+                    {
+                        // 处理解析失败（例如设为默认值）
+                        _hotKeyArray[i] = Key.None;
+                    }
+                }
+            }
+
+            // 读取修饰键数组（类似逻辑）
+            string modifierKeyStr = Settings.Default.ModifierKeyArrayString;
+            if (!string.IsNullOrEmpty(modifierKeyStr))
+            {
+                string[] parts = modifierKeyStr.Split(';');
+                for (int i = 0; i < Math.Min(_modifierKeyArray.Length, parts.Length); i++)
+                {
+                    if (Enum.TryParse(parts[i], out ModifierKeys parsedModifier))
+                    {
+                        _modifierKeyArray[i] = parsedModifier;
+                    }
+                    else
+                    {
+                        _modifierKeyArray[i] = ModifierKeys.None;
+                    }
+                }
+            }
+
+            // 输出快捷键数组
+            for (int i = 1; i < 132; i++)
+            {
+                Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
+            }
         }
 
+        // 保存设置
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
         {
             // 保存通用设置，需重启后生效！！！
@@ -318,10 +366,18 @@ namespace MouseSteeringWheel.Views
                 return;
             }
 
+
+            // 输出快捷键数组
             for (int i = 1; i < 132; i++)
             {
                 Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
             }
+
+
+            // 保存快捷键设置
+            // 将数组转换为以分号分隔的字符串
+            Settings.Default.HotKeyArrayString = string.Join(";", _hotKeyArray.Select(k => k.ToString()));
+            Settings.Default.ModifierKeyArrayString = string.Join(";", _modifierKeyArray.Select(m => m.ToString()));
 
 
             //保存更改到Settings.settings并关闭窗口

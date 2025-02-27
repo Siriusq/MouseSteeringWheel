@@ -122,24 +122,24 @@ namespace MouseSteeringWheel.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ButtonHotkeyDictionaryString {
+        public string ModifierKeyArrayString {
             get {
-                return ((string)(this["ButtonHotkeyDictionaryString"]));
+                return ((string)(this["ModifierKeyArrayString"]));
             }
             set {
-                this["ButtonHotkeyDictionaryString"] = value;
+                this["ModifierKeyArrayString"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ButtonHotkeyEnableArray {
+        public string HotKeyArrayString {
             get {
-                return ((string)(this["ButtonHotkeyEnableArray"]));
+                return ((string)(this["HotKeyArrayString"]));
             }
             set {
-                this["ButtonHotkeyEnableArray"] = value;
+                this["HotKeyArrayString"] = value;
             }
         }
         

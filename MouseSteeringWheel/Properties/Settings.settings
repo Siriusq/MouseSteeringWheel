@@ -26,10 +26,10 @@
     <Setting Name="ResetJoystickHotkey" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+R</Value>
     </Setting>
-    <Setting Name="ButtonHotkeyDictionaryString" Type="System.String" Scope="User">
+    <Setting Name="ModifierKeyArrayString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ButtonHotkeyEnableArray" Type="System.String" Scope="User">
+    <Setting Name="HotKeyArrayString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="XAxisEnable" Type="System.Boolean" Scope="User">
