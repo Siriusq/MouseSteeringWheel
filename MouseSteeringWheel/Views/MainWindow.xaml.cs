@@ -1,11 +1,10 @@
-﻿using MouseSteeringWheel.Services;
+﻿using MouseSteeringWheel.Properties;
+using MouseSteeringWheel.Services;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using MouseSteeringWheel.Properties;
 
 namespace MouseSteeringWheel.Views
 {
@@ -17,18 +16,12 @@ namespace MouseSteeringWheel.Views
         private readonly ApplicationStateService _stateService = new ApplicationStateService();
         private SettingWindow settingWindow;
         private readonly vJoyService _vJoyService;
-        private readonly KeyboardHookService _keyboardHook;
+        private KeyboardHookService _keyboardHook;
         private readonly HotkeyProcessor _hotkeyProcessor;
-        private int[] _vJoyBtnHotKeyIds = new int[21];
-        private int _settingHotKey;
-        private int _pauseHotKey;
         private readonly MouseHookService _mouseService;
         private readonly MouseProcessor _mouseProcessor;
         private BottomSteeringWheel _bottomSteeringWheel;
         private BottomJoystick _bottomJoystick;
-        private int uiId;
-        private int _bottomJoystickYPos; // 摇杆UI到屏幕底部的距离
-
 
         public MainWindow()
         {
@@ -41,12 +34,10 @@ namespace MouseSteeringWheel.Views
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
 
-            // 键盘勾子
+            // 键盘
             _hotkeyProcessor = new HotkeyProcessor(_stateService);
-            _keyboardHook = new KeyboardHookService(_vJoyService, keys, modifierKeys, _stateService);
-            Closed += (s, e) => _keyboardHook.Dispose();
 
-            // 鼠标勾子
+            // 鼠标
             _mouseService = new MouseHookService(_stateService);
             _mouseProcessor = new MouseProcessor(_mouseService, _vJoyService);
 
@@ -58,8 +49,6 @@ namespace MouseSteeringWheel.Views
 
             // 设置窗口大小和位置
             InitializeWindow();
-
-
         }
 
         #region 设置参数传递
@@ -78,7 +67,7 @@ namespace MouseSteeringWheel.Views
             else
             {
                 _bottomJoystick = new BottomJoystick(_vJoyService);
-                _bottomJoystick.UIPosition.Y = -_bottomJoystickYPos;
+                _bottomJoystick.UIPosition.Y = -Settings.Default.UIYAxisOffset;
                 UIContainer.Content = _bottomJoystick;
                 // 移除另一个UI
                 CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
@@ -139,46 +128,57 @@ namespace MouseSteeringWheel.Views
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             // 初始化热键服务
-            var windowHandle = new WindowInteropHelper(this).Handle;
-            _hotkeyProcessor.Initialize(windowHandle);
+            WindowInteropHelper windowInteropHelper = new WindowInteropHelper(this);
+            _hotkeyProcessor.Initialize(windowInteropHelper.Handle);
 
-            // 注册热键
+            // 设置窗口初始化
+            settingWindow = new SettingWindow();
+            settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingWindow.Owner = this;
+            settingWindow.RegistAllHotKey();
+        }
+
+        // 初始化时注册全部快捷键
+        public void RegistAllHotKey(Key[] hotKeyArray, ModifierKeys[] modifierKeyArray)
+        {
+            //键盘勾子，用于在快捷键抬起时重置vJoy对应按钮状态
+            _keyboardHook = new KeyboardHookService(_vJoyService, hotKeyArray, modifierKeyArray, _stateService);
+
+            // 注册 vJoy Button 对应热键
             // 使用立即计算的局部变量解决闭包变量捕获问题
-            for (int index = 0; index < keys.Length; index++)
+            for (int index = 1; index <= 128; index++)
             {
-                int buttonId = index + 1; // 按钮ID从1开始
-                Key currentKey = keys[index];
+                int buttonId = index;
+                Key currentKey = hotKeyArray[index];
+                if (currentKey == Key.None) continue;
+                ModifierKeys currentModifiers = modifierKeyArray[index];
 
-                _vJoyBtnHotKeyIds[index] = _hotkeyProcessor.RegisterHotkeyWithPauseCheck(
+                _hotkeyProcessor.RegisterHotkeyWithPauseCheck(
                     id: buttonId,
-                    modifiers: User32API.MOD_NONE,
+                    modifiers: currentModifiers,
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(currentKey),
                     callback: () => Dispatcher.Invoke(() =>
                         _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
                 );
             }
 
-            // 特殊热键：暂停摇杆响应和打开设置
-            _pauseHotKey = _hotkeyProcessor.RegisterHotkey(
-                    id: 98,
-                    modifiers: User32API.MOD_NONE,
-                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.NumPad8),
+            // 特殊热键：暂停摇杆响应
+            _hotkeyProcessor.RegisterHotkey(
+                    id: 129,
+                    modifiers: modifierKeyArray[129],
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[129]),
                     callback: () => Dispatcher.Invoke(() =>
                         _stateService.TogglePauseState())
                 );
 
-            _settingHotKey = _hotkeyProcessor.RegisterHotkey(
-                    id: 99,
-                    modifiers: User32API.MOD_NONE,
-                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(Key.Add),
+            // 特殊热键：打开设置
+            _hotkeyProcessor.RegisterHotkey(
+                    id: 130,
+                    modifiers: modifierKeyArray[130],
+                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[130]),
                     callback: () => Dispatcher.Invoke(() =>
                         LoadSettingWindow())
                 );
-
-            // 设置窗口初始化
-            settingWindow = new SettingWindow();
-            settingWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            settingWindow.Owner = this;
         }
 
         private void LoadSettingWindow()
@@ -190,14 +190,14 @@ namespace MouseSteeringWheel.Views
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
-            foreach (var id in _vJoyBtnHotKeyIds.Where(id => id != 0))
+            for (int i = 1; i < 132; i++)
             {
-                _hotkeyProcessor.UnregisterHotkey(id);
+                _hotkeyProcessor.UnregisterHotkey(i);
             }
-            _hotkeyProcessor.UnregisterHotkey(_settingHotKey);
-            _hotkeyProcessor.UnregisterHotkey(_pauseHotKey);
+
             _hotkeyProcessor.Dispose();
             _mouseService.Dispose();
+            _keyboardHook.Dispose();
             CompositionTarget.Rendering -= BottomSteeringWheelOnRendering;
             CompositionTarget.Rendering -= BottomJoystickOnRendering;
             // 关闭时重置摇杆位置
@@ -218,8 +218,6 @@ namespace MouseSteeringWheel.Views
             Key.Divide,Key.Multiply,Key.Subtract,
             };
             modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
-            uiId = 1;
-            _bottomJoystickYPos = 526;
         }
     }
 }

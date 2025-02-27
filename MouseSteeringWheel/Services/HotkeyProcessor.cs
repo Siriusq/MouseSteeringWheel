@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace MouseSteeringWheel.Services
@@ -24,7 +25,7 @@ namespace MouseSteeringWheel.Services
             _hwndSource = hwndSource;
         }
 
-        public int RegisterHotkey(int id, uint modifiers, uint keyCode, Action callback)
+        public int RegisterHotkey(int id, ModifierKeys modifiers, uint keyCode, Action callback)
         {
             if (User32API.RegisterHotKey(_hwndSource.Handle, id, modifiers, keyCode))
             {
@@ -37,7 +38,7 @@ namespace MouseSteeringWheel.Services
         // vJoy按键对应快捷键注册，支持暂停功能
         public int RegisterHotkeyWithPauseCheck(
             int id,
-            uint modifiers,
+            ModifierKeys modifiers,
             uint keyCode,
             Action callback)
         {

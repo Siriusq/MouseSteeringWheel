@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MouseSteeringWheel.Services
 {
@@ -85,7 +86,7 @@ namespace MouseSteeringWheel.Services
         public static extern bool RegisterHotKey(
             IntPtr hWnd,
             int id,
-            uint fsModifiers,
+            ModifierKeys fsModifiers,
             uint vk);
 
         // 注销热键API

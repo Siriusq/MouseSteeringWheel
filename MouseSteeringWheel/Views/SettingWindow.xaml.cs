@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace MouseSteeringWheel.Views
 {
@@ -23,6 +24,15 @@ namespace MouseSteeringWheel.Views
             //读取设置并设置UI状态
             ReadSettings();
             _messageBoxService = new MessageBoxService();
+        }
+
+        // 初始化注册全部快捷键
+        public void RegistAllHotKey()
+        {
+            if (Owner is MainWindow mainWindow)
+            {
+                mainWindow.RegistAllHotKey(_hotKeyArray, _modifierKeyArray);
+            }
         }
 
         // 点击关闭和取消按钮时隐藏设置窗口
@@ -437,6 +447,9 @@ namespace MouseSteeringWheel.Views
             // 将数组转换为以分号分隔的字符串
             Settings.Default.HotKeyArrayString = string.Join(";", _hotKeyArray.Select(k => k.ToString()));
             Settings.Default.ModifierKeyArrayString = string.Join(";", _modifierKeyArray.Select(m => m.ToString()));
+
+            Console.WriteLine(Settings.Default.HotKeyArrayString);
+            Console.WriteLine(Settings.Default.ModifierKeyArrayString);
 
 
             //保存更改到Settings.settings并关闭窗口

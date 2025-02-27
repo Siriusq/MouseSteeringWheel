@@ -49,13 +49,12 @@ namespace MouseSteeringWheel.Services
 
         private void OnGlobalKeyUp(Key key, ModifierKeys modifierKeys)
         {
-            for (int i = 0; i < 21; i++)
+            for (int i = 1; i <= 128; i++)
             {
                 if (key == keysArray[i] && modifierKeys == modifierKeysArray[i])
                 {
-                    Console.WriteLine(i + 1);
                     Application.Current.Dispatcher.Invoke(() =>
-                        _vJoyService.ResetButtonStatus(i + 1));
+                        _vJoyService.ResetButtonStatus(i));
                 }
             }
         }
