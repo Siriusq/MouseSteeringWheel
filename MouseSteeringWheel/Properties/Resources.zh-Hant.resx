@@ -243,4 +243,31 @@
   <data name="vJoyYAxisNotDetectedTitle" xml:space="preserve">
     <value>未偵測到 Y 軸</value>
   </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>語言變更將在儲存設定並重新啟動後生效</value>
+  </data>
+  <data name="vJoyDeviceIDTooltip" xml:space="preserve">
+    <value>設定要使用的 vJoy 設備編號，範圍為 0 至 16，請確認已在 vJoy 中 啟用對應的設備。此項變更將在重新啟動後生效。</value>
+  </data>
+  <data name="UIScaleFactorTooltip" xml:space="preserve">
+    <value>控制UI縮放比例，數值大於1時代表放大，小於1時代表縮小。</value>
+  </data>
+  <data name="UIYAxisOffsetTooltip" xml:space="preserve">
+    <value>僅當UI樣式為搖桿時生效，控制搖桿UI在螢幕垂直的位置。螢幕底部為零點。</value>
+  </data>
+  <data name="SensitivityTooltip" xml:space="preserve">
+    <value>滑鼠每移動1像素，對應搖桿移動數值的倍數，vJoy 搖桿的移動數值範圍為 0 至 32767。數值必須為正整數。</value>
+  </data>
+  <data name="ResetJoystickTooltip" xml:space="preserve">
+    <value>將滑鼠位置重設為螢幕中心，將搖桿位置重設為正中央。</value>
+  </data>
+  <data name="NonlinearTooltip" xml:space="preserve">
+    <value>數值為1時代表線性移動。數值小於1時，外圈控制更加精準。數值大於1時，內圈控制更加精準。</value>
+  </data>
+  <data name="DeadzoneTooltip" xml:space="preserve">
+    <value>搖桿死區的百分比，範圍為0-100</value>
+  </data>
+  <data name="vJoyButtonIDTooltip" xml:space="preserve">
+    <value>對應 vJoy 按鈕的快速鍵，vJoy 支援的按鈕最大數量為 128 個，請確認已在 vJoy 中開啟了對應的按鈕數量。</value>
+  </data>
 </root>

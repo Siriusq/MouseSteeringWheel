@@ -97,6 +97,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The percentage of the joystick dead zone, ranging from 0-100 的本地化字符串。
+        /// </summary>
+        public static string DeadzoneTooltip {
+            get {
+                return ResourceManager.GetString("DeadzoneTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Enable 的本地化字符串。
         /// </summary>
         public static string EnableName {
@@ -178,11 +187,29 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Language changes will take effect after saving the settings and restarting. 的本地化字符串。
+        /// </summary>
+        public static string LanguageTooltip {
+            get {
+                return ResourceManager.GetString("LanguageTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Nonlinear 的本地化字符串。
         /// </summary>
         public static string NonlinearName {
             get {
                 return ResourceManager.GetString("NonlinearName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 A value of 1 represents linear movement. A value less than 1 results in more precise control of the outer circle. A value greater than 1 results in more precise control of the inner circle. 的本地化字符串。
+        /// </summary>
+        public static string NonlinearTooltip {
+            get {
+                return ResourceManager.GetString("NonlinearTooltip", resourceCulture);
             }
         }
         
@@ -223,6 +250,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Reset the mouse position to the center of the screen and the joystick position to the center. 的本地化字符串。
+        /// </summary>
+        public static string ResetJoystickTooltip {
+            get {
+                return ResourceManager.GetString("ResetJoystickTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Save 的本地化字符串。
         /// </summary>
         public static string SaveName {
@@ -237,6 +273,15 @@ namespace MouseSteeringWheel.Properties {
         public static string SensitivityName {
             get {
                 return ResourceManager.GetString("SensitivityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 A multiple of the joystick movement value for every 1 pixel of mouse movement. vJoy joystick movement values range from 0 to 32767. values must be positive integers. 的本地化字符串。
+        /// </summary>
+        public static string SensitivityTooltip {
+            get {
+                return ResourceManager.GetString("SensitivityTooltip", resourceCulture);
             }
         }
         
@@ -268,6 +313,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Controls the UI scale, a value greater than 1 means scale up, a value less than 1 means scale down. 的本地化字符串。
+        /// </summary>
+        public static string UIScaleFactorTooltip {
+            get {
+                return ResourceManager.GetString("UIScaleFactorTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Style 的本地化字符串。
         /// </summary>
         public static string UIStyleName {
@@ -282,6 +336,24 @@ namespace MouseSteeringWheel.Properties {
         public static string UIYAxisOffset {
             get {
                 return ResourceManager.GetString("UIYAxisOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Only in effect when the UI style is joystick, which controls the position of the joystick UI in the vertical direction of the screen. The bottom of the screen is the zero point. 的本地化字符串。
+        /// </summary>
+        public static string UIYAxisOffsetTooltip {
+            get {
+                return ResourceManager.GetString("UIYAxisOffsetTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hotkeys that correspond to vJoy buttons. vJoy supports a maximum of 128 buttons, so make sure you have enabled the corresponding number of buttons in vJoy. 的本地化字符串。
+        /// </summary>
+        public static string vJoyButtonIDTooltip {
+            get {
+                return ResourceManager.GetString("vJoyButtonIDTooltip", resourceCulture);
             }
         }
         
@@ -309,6 +381,15 @@ namespace MouseSteeringWheel.Properties {
         public static string vJoyDeviceIDName {
             get {
                 return ResourceManager.GetString("vJoyDeviceIDName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Set the vJoy device ID to be used, in the range of 0 to 16, making sure that the corresponding device is enabled in vJoy. Changes will take effect after a restart. 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDTooltip {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDTooltip", resourceCulture);
             }
         }
         

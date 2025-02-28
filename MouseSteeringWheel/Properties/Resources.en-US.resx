@@ -243,4 +243,31 @@
   <data name="vJoyYAxisNotDetectedTitle" xml:space="preserve">
     <value>vJoy Y Axis Not Detected</value>
   </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>Language changes will take effect after saving the settings and restarting.</value>
+  </data>
+  <data name="vJoyDeviceIDTooltip" xml:space="preserve">
+    <value>Set the vJoy device ID to be used, in the range of 0 to 16, making sure that the corresponding device is enabled in vJoy. Changes will take effect after a restart.</value>
+  </data>
+  <data name="UIScaleFactorTooltip" xml:space="preserve">
+    <value>Controls the UI scale, a value greater than 1 means scale up, a value less than 1 means scale down.</value>
+  </data>
+  <data name="UIYAxisOffsetTooltip" xml:space="preserve">
+    <value>Only in effect when the UI style is joystick, which controls the position of the joystick UI in the vertical direction of the screen. The bottom of the screen is the zero point.</value>
+  </data>
+  <data name="SensitivityTooltip" xml:space="preserve">
+    <value>A multiple of the joystick movement value for every 1 pixel of mouse movement. vJoy joystick movement values range from 0 to 32767. values must be positive integers.</value>
+  </data>
+  <data name="ResetJoystickTooltip" xml:space="preserve">
+    <value>Reset the mouse position to the center of the screen and the joystick position to the center.</value>
+  </data>
+  <data name="NonlinearTooltip" xml:space="preserve">
+    <value>A value of 1 represents linear movement. A value less than 1 results in more precise control of the outer circle. A value greater than 1 results in more precise control of the inner circle.</value>
+  </data>
+  <data name="DeadzoneTooltip" xml:space="preserve">
+    <value>The percentage of the joystick dead zone, ranging from 0-100</value>
+  </data>
+  <data name="vJoyButtonIDTooltip" xml:space="preserve">
+    <value>Hotkeys that correspond to vJoy buttons. vJoy supports a maximum of 128 buttons, so make sure you have enabled the corresponding number of buttons in vJoy.</value>
+  </data>
 </root>
