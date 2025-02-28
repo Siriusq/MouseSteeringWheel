@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("MouseSteeringWheel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("siriusq.top")]
 [assembly: AssemblyProduct("MouseSteeringWheel")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
