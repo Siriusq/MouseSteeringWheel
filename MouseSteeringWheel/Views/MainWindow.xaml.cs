@@ -29,9 +29,6 @@ namespace MouseSteeringWheel.Views
         {
             InitializeComponent();
 
-            // 读取设置
-            ReadSettings();
-
             // 初始化
             var messageBoxService = new MessageBoxService();
             _vJoyService = new vJoyService(messageBoxService);
@@ -281,18 +278,7 @@ namespace MouseSteeringWheel.Views
             //Settings.Default.Save();
         }
 
-        // 读取设置选项
-        private Key[] keys;
-        private ModifierKeys[] modifierKeys;
-        private void ReadSettings()
-        {
-            keys = new Key[] { Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad5,
-                Key.NumPad7, Key.NumPad4,Key.NumPad9,Key.NumPad6,
-            Key.Home,Key.End,Key.Delete,Key.PageDown,Key.PageUp,Key.Insert,
-            Key.Up,Key.Down,Key.Left,Key.Right,
-            Key.Divide,Key.Multiply,Key.Subtract,
-            };
-            modifierKeys = new ModifierKeys[] { ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, ModifierKeys.None, };
-        }
+        // 托盘图标
+
     }
 }
