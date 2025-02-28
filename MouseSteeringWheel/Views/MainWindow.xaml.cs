@@ -165,16 +165,18 @@ namespace MouseSteeringWheel.Views
             }
 
             // 特殊热键：暂停摇杆响应
-            _hotkeyProcessor.RegisterHotkey(
-                    id: 129,
-                    modifiers: modifierKeyArray[129],
-                    keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[129]),
-                    callback: () => Dispatcher.Invoke(() =>
-                        _stateService.TogglePauseState())
-                );
+            if (hotKeyArray[129] != Key.None)
+                _hotkeyProcessor.RegisterHotkey(
+                        id: 129,
+                        modifiers: modifierKeyArray[129],
+                        keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[129]),
+                        callback: () => Dispatcher.Invoke(() =>
+                            _stateService.TogglePauseState())
+                    );
 
             // 特殊热键：打开设置
-            _hotkeyProcessor.RegisterHotkey(
+            if (hotKeyArray[130] != Key.None)
+                _hotkeyProcessor.RegisterHotkey(
                     id: 130,
                     modifiers: modifierKeyArray[130],
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[130]),
@@ -183,7 +185,8 @@ namespace MouseSteeringWheel.Views
                 );
 
             // 特殊热键：摇杆位置重置
-            _hotkeyProcessor.RegisterHotkey(
+            if (hotKeyArray[131] != Key.None)
+                _hotkeyProcessor.RegisterHotkey(
                     id: 131,
                     modifiers: modifierKeyArray[131],
                     keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[131]),

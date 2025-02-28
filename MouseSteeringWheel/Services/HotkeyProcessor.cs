@@ -34,10 +34,7 @@ namespace MouseSteeringWheel.Services
                 _hotkeyActions[id] = callback;
                 return id;
             }
-
-            MessageBox.Show(Resources.RegistHotKeyFailedPop, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-            return 0;
-            //throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
+            throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
         }
 
         // vJoy按键对应快捷键注册，支持暂停功能
