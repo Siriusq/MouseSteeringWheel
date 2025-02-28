@@ -7,7 +7,7 @@
         xmlns:langs="clr-namespace:MouseSteeringWheel.Properties"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SettingWindow" Height="500" Width="450"
+        Title="{x:Static langs:Resources.GeneralName}" Height="500" Width="450"
         Background="#FFF3F3F3">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>

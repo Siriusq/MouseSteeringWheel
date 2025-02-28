@@ -165,6 +165,9 @@
   <data name="SensitivityName" xml:space="preserve">
     <value>靈敏度係數</value>
   </data>
+  <data name="SettingsWindowName" xml:space="preserve">
+    <value>設定</value>
+  </data>
   <data name="SteeringWheelName" xml:space="preserve">
     <value>方向盤模擬</value>
   </data>

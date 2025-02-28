@@ -165,6 +165,9 @@
   <data name="SensitivityName" xml:space="preserve">
     <value>Sensitivity</value>
   </data>
+  <data name="SettingsWindowName" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="SteeringWheelName" xml:space="preserve">
     <value>Steering Wheel</value>
   </data>

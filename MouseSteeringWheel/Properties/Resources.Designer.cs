@@ -205,6 +205,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Settings 的本地化字符串。
+        /// </summary>
+        public static string SettingsWindowName {
+            get {
+                return ResourceManager.GetString("SettingsWindowName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Steering Wheel 的本地化字符串。
         /// </summary>
         public static string SteeringWheelName {
