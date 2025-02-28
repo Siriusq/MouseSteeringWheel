@@ -463,6 +463,11 @@ namespace MouseSteeringWheel.Views
             this.Hide();
         }
 
-
+        //点击取消按钮，恢复上次的设置
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            ReadSettings();
+            this.Hide();
+        }
     }
 }

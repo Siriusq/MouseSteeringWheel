@@ -598,7 +598,7 @@
                 </Grid>
                 <Grid Grid.Row="1" Margin="2,2,0,2">
                     <Border BorderBrush="#FFC2C2C2" BorderThickness="2" CornerRadius="10" Background="White">
-                        <Button Content="{x:Static langs:Resources.CancelName}" BorderBrush="#00707070" Background="#00DDDDDD" IsCancel="True" ClipToBounds="True" BorderThickness="0,0,0,0" IsDefault="True"/>
+                        <Button Content="{x:Static langs:Resources.CancelName}" Click ="CancelButtonClick" BorderBrush="#00707070" Background="#00DDDDDD" ClipToBounds="True" BorderThickness="0,0,0,0"/>
                     </Border>
                 </Grid>
             </Grid>
