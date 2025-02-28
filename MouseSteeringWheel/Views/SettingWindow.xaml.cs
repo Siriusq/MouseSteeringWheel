@@ -35,9 +35,10 @@ namespace MouseSteeringWheel.Views
             }
         }
 
-        // 点击关闭和取消按钮时隐藏设置窗口
+        // 点击关闭时隐藏设置窗口并重置为保存的设置项目
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            ReadSettings();
             this.Hide();
             e.Cancel = true;
         }
