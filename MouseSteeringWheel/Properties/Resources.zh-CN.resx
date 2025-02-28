@@ -129,8 +129,14 @@
   <data name="DeadzoneName" xml:space="preserve">
     <value>死区百分比</value>
   </data>
+  <data name="vJoyDeviceObtainFailedTitle" xml:space="preserve">
+    <value>vJoy 设备获取失败</value>
+  </data>
   <data name="EnableName" xml:space="preserve">
     <value>开启</value>
+  </data>
+  <data name="ErrorPopTitle" xml:space="preserve">
+    <value>错误</value>
   </data>
   <data name="GeneralName" xml:space="preserve">
     <value>通用设置</value>
@@ -140,6 +146,12 @@
   </data>
   <data name="HotkeyName" xml:space="preserve">
     <value>快捷键设置</value>
+  </data>
+  <data name="InitializationFailedContent" xml:space="preserve">
+    <value>vJoy 驱动未安装或未正确初始化，请确保系统安装了 vJoy 驱动程序。</value>
+  </data>
+  <data name="InitializationFailedTitle" xml:space="preserve">
+    <value>初始化失败</value>
   </data>
   <data name="JoystickName" xml:space="preserve">
     <value>摇杆</value>
@@ -155,6 +167,9 @@
   </data>
   <data name="PauseJoystickName" xml:space="preserve">
     <value>暂停摇杆映射</value>
+  </data>
+  <data name="RegistHotKeyFailedPop" xml:space="preserve">
+    <value>快捷键注册失败！</value>
   </data>
   <data name="ResetJoystickName" xml:space="preserve">
     <value>重置摇杆位置</value>
@@ -180,13 +195,52 @@
   <data name="UIYAxisOffset" xml:space="preserve">
     <value>Y 轴偏移距离</value>
   </data>
+  <data name="vJoyDeviceBusyContent" xml:space="preserve">
+    <value>当前指定的 vJoy 设备繁忙，请检查是否有其他程序占用。</value>
+  </data>
+  <data name="vJoyDeviceBusyTitle" xml:space="preserve">
+    <value>vJoy 设备忙</value>
+  </data>
   <data name="vJoyDeviceIDName" xml:space="preserve">
     <value>vJoy 设备 ID</value>
+  </data>
+  <data name="vJoyDeviceNotFoundContent" xml:space="preserve">
+    <value>未找到指定设备，请确认指定的设备已在 vJoy 中启用</value>
+  </data>
+  <data name="vJoyDeviceNotFoundTitle" xml:space="preserve">
+    <value>未找到指定设备</value>
+  </data>
+  <data name="vJoyErrorContent" xml:space="preserve">
+    <value>vJoy 设备一般错误</value>
+  </data>
+  <data name="vJoyErrorTitle" xml:space="preserve">
+    <value>vJoy 错误</value>
+  </data>
+  <data name="vJoyVersionMismatchContent" xml:space="preserve">
+    <value>vJoy 版本不匹配。请使用 2.2.2.0 版本。</value>
+  </data>
+  <data name="vJoyVersionMismatchTitle" xml:space="preserve">
+    <value>vJoy 版本不匹配</value>
   </data>
   <data name="XAxisName" xml:space="preserve">
     <value>X 轴</value>
   </data>
   <data name="YAxisName" xml:space="preserve">
     <value>Y 轴</value>
+  </data>
+  <data name="vJoyDeviceObtainFailedContent" xml:space="preserve">
+    <value>vJoy 设备获取失败，，请检查是否有其他程序占用。</value>
+  </data>
+  <data name="vJoyXAxisNotDetectedTitle" xml:space="preserve">
+    <value>未检测到 X 轴</value>
+  </data>
+  <data name="vJoyXAxisNotDetectedContent" xml:space="preserve">
+    <value>未检测到 X 轴，请确保 vJoy 中的 X 轴已启用</value>
+  </data>
+  <data name="vJoyYAxisNotDetectedContent" xml:space="preserve">
+    <value>未检测到 Y 轴，请确保 vJoy 中的 Y 轴已启用</value>
+  </data>
+  <data name="vJoyYAxisNotDetectedTitle" xml:space="preserve">
+    <value>未检测到 Y 轴</value>
   </data>
 </root>

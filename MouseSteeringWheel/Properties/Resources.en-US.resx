@@ -129,8 +129,14 @@
   <data name="DeadzoneName" xml:space="preserve">
     <value>Deadzone</value>
   </data>
+  <data name="vJoyDeviceObtainFailedTitle" xml:space="preserve">
+    <value>vJoy Device Obtain Failed</value>
+  </data>
   <data name="EnableName" xml:space="preserve">
     <value>Enable</value>
+  </data>
+  <data name="ErrorPopTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="GeneralName" xml:space="preserve">
     <value>General</value>
@@ -140,6 +146,12 @@
   </data>
   <data name="HotkeyName" xml:space="preserve">
     <value>Hotkey</value>
+  </data>
+  <data name="InitializationFailedContent" xml:space="preserve">
+    <value>The vJoy driver is not installed or initialized correctly. Please ensure that the vJoy driver is installed on the system.</value>
+  </data>
+  <data name="InitializationFailedTitle" xml:space="preserve">
+    <value>Initialization failed</value>
   </data>
   <data name="JoystickName" xml:space="preserve">
     <value>Joystick</value>
@@ -155,6 +167,9 @@
   </data>
   <data name="PauseJoystickName" xml:space="preserve">
     <value>Pause Joystick</value>
+  </data>
+  <data name="RegistHotKeyFailedPop" xml:space="preserve">
+    <value>Hotkey registration failed!</value>
   </data>
   <data name="ResetJoystickName" xml:space="preserve">
     <value>Reset Joystick</value>
@@ -180,13 +195,52 @@
   <data name="UIYAxisOffset" xml:space="preserve">
     <value>Y-Axis Offset</value>
   </data>
+  <data name="vJoyDeviceBusyContent" xml:space="preserve">
+    <value>The currently specified vJoy device is busy, please check whether it is occupied by other programs.</value>
+  </data>
+  <data name="vJoyDeviceBusyTitle" xml:space="preserve">
+    <value>vJoy Device Busy</value>
+  </data>
   <data name="vJoyDeviceIDName" xml:space="preserve">
     <value>vJoy Device ID</value>
+  </data>
+  <data name="vJoyDeviceNotFoundContent" xml:space="preserve">
+    <value>The specified device was not found, please confirm that the specified device is enabled in vJoy</value>
+  </data>
+  <data name="vJoyDeviceNotFoundTitle" xml:space="preserve">
+    <value>vJoy Device Not Found</value>
+  </data>
+  <data name="vJoyErrorContent" xml:space="preserve">
+    <value>vJoy Device General Error</value>
+  </data>
+  <data name="vJoyErrorTitle" xml:space="preserve">
+    <value>vJoy Error</value>
+  </data>
+  <data name="vJoyVersionMismatchContent" xml:space="preserve">
+    <value>vJoy version mismatch. Please use version 2.2.2.0.</value>
+  </data>
+  <data name="vJoyVersionMismatchTitle" xml:space="preserve">
+    <value>vJoy Version Mismatch</value>
   </data>
   <data name="XAxisName" xml:space="preserve">
     <value>X-Axis</value>
   </data>
   <data name="YAxisName" xml:space="preserve">
     <value>Y-Axis</value>
+  </data>
+  <data name="vJoyDeviceObtainFailedContent" xml:space="preserve">
+    <value>vJoy Device Obtain Failed, , please check whether it is occupied by other programs.</value>
+  </data>
+  <data name="vJoyXAxisNotDetectedTitle" xml:space="preserve">
+    <value>vJoy X Axis Not Detected</value>
+  </data>
+  <data name="vJoyXAxisNotDetectedContent" xml:space="preserve">
+    <value>X-axis not detected, make sure X-axis is enabled in vJoy</value>
+  </data>
+  <data name="vJoyYAxisNotDetectedContent" xml:space="preserve">
+    <value>Y-axis not detected, make sure Y-axis is enabled in vJoy</value>
+  </data>
+  <data name="vJoyYAxisNotDetectedTitle" xml:space="preserve">
+    <value>vJoy Y Axis Not Detected</value>
   </data>
 </root>

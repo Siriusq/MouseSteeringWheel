@@ -106,6 +106,15 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Error 的本地化字符串。
+        /// </summary>
+        public static string ErrorPopTitle {
+            get {
+                return ResourceManager.GetString("ErrorPopTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 General 的本地化字符串。
         /// </summary>
         public static string GeneralName {
@@ -129,6 +138,24 @@ namespace MouseSteeringWheel.Properties {
         public static string HotkeyName {
             get {
                 return ResourceManager.GetString("HotkeyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The vJoy driver is not installed or initialized correctly. Please ensure that the vJoy driver is installed on the system. 的本地化字符串。
+        /// </summary>
+        public static string InitializationFailedContent {
+            get {
+                return ResourceManager.GetString("InitializationFailedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Initialization failed 的本地化字符串。
+        /// </summary>
+        public static string InitializationFailedTitle {
+            get {
+                return ResourceManager.GetString("InitializationFailedTitle", resourceCulture);
             }
         }
         
@@ -174,6 +201,15 @@ namespace MouseSteeringWheel.Properties {
         public static string PauseJoystickName {
             get {
                 return ResourceManager.GetString("PauseJoystickName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hotkey registration failed! 的本地化字符串。
+        /// </summary>
+        public static string RegistHotKeyFailedPop {
+            get {
+                return ResourceManager.GetString("RegistHotKeyFailedPop", resourceCulture);
             }
         }
         
@@ -250,11 +286,137 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The currently specified vJoy device is busy, please check whether it is occupied by other programs. 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceBusyContent {
+            get {
+                return ResourceManager.GetString("vJoyDeviceBusyContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device Busy 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceBusyTitle {
+            get {
+                return ResourceManager.GetString("vJoyDeviceBusyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 vJoy Device ID 的本地化字符串。
         /// </summary>
         public static string vJoyDeviceIDName {
             get {
                 return ResourceManager.GetString("vJoyDeviceIDName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The specified device was not found 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceNotFoundContent {
+            get {
+                return ResourceManager.GetString("vJoyDeviceNotFoundContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device Not Found 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceNotFoundTitle {
+            get {
+                return ResourceManager.GetString("vJoyDeviceNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device Obtain Failed, , please check whether it is occupied by other programs. 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceObtainFailedContent {
+            get {
+                return ResourceManager.GetString("vJoyDeviceObtainFailedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device Obtain Failed 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceObtainFailedTitle {
+            get {
+                return ResourceManager.GetString("vJoyDeviceObtainFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device General Error 的本地化字符串。
+        /// </summary>
+        public static string vJoyErrorContent {
+            get {
+                return ResourceManager.GetString("vJoyErrorContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Error 的本地化字符串。
+        /// </summary>
+        public static string vJoyErrorTitle {
+            get {
+                return ResourceManager.GetString("vJoyErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy version mismatch. Please use version 2.2.2.0. 的本地化字符串。
+        /// </summary>
+        public static string vJoyVersionMismatchContent {
+            get {
+                return ResourceManager.GetString("vJoyVersionMismatchContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy version mismatch 的本地化字符串。
+        /// </summary>
+        public static string vJoyVersionMismatchTitle {
+            get {
+                return ResourceManager.GetString("vJoyVersionMismatchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 X-axis not detected, make sure X-axis is enabled in vJoy 的本地化字符串。
+        /// </summary>
+        public static string vJoyXAxisNotDetectedContent {
+            get {
+                return ResourceManager.GetString("vJoyXAxisNotDetectedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy X Axis Not Detected 的本地化字符串。
+        /// </summary>
+        public static string vJoyXAxisNotDetectedTitle {
+            get {
+                return ResourceManager.GetString("vJoyXAxisNotDetectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Y-axis not detected, make sure Y-axis is enabled in vJoy 的本地化字符串。
+        /// </summary>
+        public static string vJoyYAxisNotDetectedContent {
+            get {
+                return ResourceManager.GetString("vJoyYAxisNotDetectedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Y Axis Not Detected 的本地化字符串。
+        /// </summary>
+        public static string vJoyYAxisNotDetectedTitle {
+            get {
+                return ResourceManager.GetString("vJoyYAxisNotDetectedTitle", resourceCulture);
             }
         }
         

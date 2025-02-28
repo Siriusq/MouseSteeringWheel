@@ -1,5 +1,6 @@
 ﻿// 注册全局快捷键，阻断其他程序对已注册快捷键的响应，在快捷键按下时设置vJoy相关按钮状态为按下
 
+using MouseSteeringWheel.Properties;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -32,7 +33,7 @@ namespace MouseSteeringWheel.Services
                 _hotkeyActions[id] = callback;
                 return id;
             }
-            throw new InvalidOperationException("热键注册失败");
+            throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
         }
 
         // vJoy按键对应快捷键注册，支持暂停功能

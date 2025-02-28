@@ -60,7 +60,7 @@ namespace MouseSteeringWheel.Services
         {
             if (!_joyStick.vJoyEnabled())
             {
-                _messageBoxService.ShowMessage("vJoy 驱动未安装或未正确初始化，请确保系统安装了 vJoy 驱动程序。", "初始化失败");
+                _messageBoxService.ShowMessage(Resources.InitializationFailedContent, Resources.InitializationFailedTitle);
                 return false;
             }
             return true;
@@ -72,7 +72,7 @@ namespace MouseSteeringWheel.Services
             UInt32 DllVer = 0, DrvVer = 0;
             if (!_joyStick.DriverMatch(ref DllVer, ref DrvVer))
             {
-                _messageBoxService.ShowMessage("vJoy 版本不匹配。", "版本不匹配");
+                _messageBoxService.ShowMessage(Resources.vJoyVersionMismatchContent, Resources.vJoyVersionMismatchTitle);
                 return false;
             }
             Console.WriteLine("Version of Driver Matches DLL Version ({0:X})\n", DllVer);
@@ -93,13 +93,13 @@ namespace MouseSteeringWheel.Services
                     Console.WriteLine($"vJoy Device {id} is free");
                     break;
                 case VjdStat.VJD_STAT_BUSY:
-                    _messageBoxService.ShowMessage($"vJoy Device {id} is busy", "vJoy设备忙");
+                    _messageBoxService.ShowMessage(Resources.vJoyDeviceBusyContent, Resources.vJoyDeviceBusyTitle);
                     return false;
                 case VjdStat.VJD_STAT_MISS:
-                    _messageBoxService.ShowMessage($"vJoy Device {id} is missing", "未找到指定设备");
+                    _messageBoxService.ShowMessage(Resources.vJoyDeviceNotFoundContent, Resources.vJoyDeviceNotFoundTitle);
                     return false;
                 default:
-                    _messageBoxService.ShowMessage($"vJoy Device {id} general error", "设备错误");
+                    _messageBoxService.ShowMessage(Resources.vJoyErrorContent, Resources.vJoyErrorTitle);
                     return false;
             }
 
@@ -114,7 +114,7 @@ namespace MouseSteeringWheel.Services
             // Acquire the target
             if ((status == VjdStat.VJD_STAT_OWN) ||
                     ((status == VjdStat.VJD_STAT_FREE) && (!_joyStick.AcquireVJD(id))))
-                _messageBoxService.ShowMessage($"Failed to acquire vJoy device number {id}.", "无法获取设备");
+                _messageBoxService.ShowMessage(Resources.vJoyDeviceObtainFailedContent, Resources.vJoyDeviceObtainFailedTitle);
             else
                 Console.WriteLine($"Acquired: vJoy device number {id}.");
 
@@ -125,10 +125,10 @@ namespace MouseSteeringWheel.Services
         public bool CheckVJoyDeviceProperties(uint id)
         {
             //	vJoy Device properties
-            if (!_joyStick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_X))
-                _messageBoxService.ShowMessage($"X axis not detected.", "X轴摇杆未开启");
-            else
-                Console.WriteLine("X axis activated.");
+            if (Settings.Default.XAxisEnable && !_joyStick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_X))
+                _messageBoxService.ShowMessage(Resources.vJoyXAxisNotDetectedContent, Resources.vJoyXAxisNotDetectedTitle);
+            if (Settings.Default.YAxisEnable && !_joyStick.GetVJDAxisExist(id, HID_USAGES.HID_USAGE_Y))
+                _messageBoxService.ShowMessage(Resources.vJoyYAxisNotDetectedContent, Resources.vJoyYAxisNotDetectedTitle);
 
             return true;
         }
