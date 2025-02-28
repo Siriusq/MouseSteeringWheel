@@ -3,6 +3,7 @@
 using MouseSteeringWheel.Properties;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 
@@ -33,7 +34,10 @@ namespace MouseSteeringWheel.Services
                 _hotkeyActions[id] = callback;
                 return id;
             }
-            throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
+
+            MessageBox.Show(Resources.RegistHotKeyFailedPop, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            return 0;
+            //throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
         }
 
         // vJoy按键对应快捷键注册，支持暂停功能
