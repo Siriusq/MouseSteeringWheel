@@ -1,6 +1,8 @@
 ﻿using MouseSteeringWheel.Properties;
 using MouseSteeringWheel.Services;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -188,6 +190,57 @@ namespace MouseSteeringWheel.Views
                     callback: () => Dispatcher.Invoke(() =>
                         ResetJoystickPos())
                 );
+        }
+
+        // 更新快捷键
+        public void UpdateHotKeys(Key[] hotKeyArray, ModifierKeys[] modifierKeyArray, HashSet<int> changedHotKeyID)
+        {
+            foreach (int id in changedHotKeyID)
+            {
+                Console.WriteLine($"id needs to be changed:{id}");
+                int buttonId = id;
+                _hotkeyProcessor.UnregisterHotkey(buttonId);
+                Key currentKey = hotKeyArray[id];
+                if (currentKey == Key.None) continue;
+                ModifierKeys currentModifiers = modifierKeyArray[id];
+
+                if (buttonId <= 128)
+                {
+                    _hotkeyProcessor.RegisterHotkeyWithPauseCheck(
+                                        id: buttonId,
+                                        modifiers: currentModifiers,
+                                        keyCode: (uint)KeyInterop.VirtualKeyFromKey(currentKey),
+                                        callback: () => Dispatcher.Invoke(() =>
+                                            _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
+                                    );
+                }
+                else if (buttonId == 129)// 特殊热键：暂停摇杆响应
+                    _hotkeyProcessor.RegisterHotkey(
+                            id: 129,
+                            modifiers: modifierKeyArray[129],
+                            keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[129]),
+                            callback: () => Dispatcher.Invoke(() =>
+                                _stateService.TogglePauseState())
+                        );
+                else if (buttonId == 130)
+                    // 特殊热键：打开设置
+                    _hotkeyProcessor.RegisterHotkey(
+                            id: 130,
+                            modifiers: modifierKeyArray[130],
+                            keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[130]),
+                            callback: () => Dispatcher.Invoke(() =>
+                                LoadSettingWindow())
+                        );
+                else if (buttonId == 131)
+                    // 特殊热键：摇杆位置重置
+                    _hotkeyProcessor.RegisterHotkey(
+                            id: 131,
+                            modifiers: modifierKeyArray[131],
+                            keyCode: (uint)KeyInterop.VirtualKeyFromKey(hotKeyArray[131]),
+                            callback: () => Dispatcher.Invoke(() =>
+                                ResetJoystickPos())
+                        );
+            }
         }
 
         //显示设置窗口

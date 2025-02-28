@@ -65,6 +65,7 @@ namespace MouseSteeringWheel.Views
         private ModifierKeys _currHotKeyModifiers;
         private Key[] _hotKeyArray = new Key[132];
         private ModifierKeys[] _modifierKeyArray = new ModifierKeys[132];
+        private HashSet<int> _changedHotKeyID = new HashSet<int>();
 
         // 快捷键预处理
         private void HotKeyTextBoxPreviewKeyDown(object sender, KeyEventArgs e)
@@ -158,7 +159,7 @@ namespace MouseSteeringWheel.Views
                 _hotKeyArray[_currKeyID] = _currHotKey;
                 _modifierKeyArray[_currKeyID] = _currHotKeyModifiers;
                 Console.WriteLine($"{_currHotKeyModifiers} + {_currHotKey}");
-
+                _changedHotKeyID.Add(_currKeyID);
             }
             e.Handled = true;
         }
@@ -442,6 +443,11 @@ namespace MouseSteeringWheel.Views
                 Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
             }
 
+            // 更新修改过的快捷键
+            if (Owner is MainWindow _mainWindow)
+            {
+                _mainWindow.UpdateHotKeys(_hotKeyArray, _modifierKeyArray, _changedHotKeyID);
+            }
 
             // 保存快捷键设置
             // 将数组转换为以分号分隔的字符串
