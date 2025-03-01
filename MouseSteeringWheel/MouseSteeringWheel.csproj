@@ -185,6 +185,8 @@
       <Link>vJoyInterface.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Resource Include="FodyWeavers.xml" />
+    <EmbeddedResource Include="costura-win-x64\vJoyInterface.dll" />
     <Content Include="Libraries\vJoyInterface.dll" />
     <Content Include="Libraries\vJoyInterfaceWrap.dll" />
   </ItemGroup>

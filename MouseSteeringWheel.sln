@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseSteeringWheel", "MouseSteeringWheel\MouseSteeringWheel.csproj", "{DF399933-4090-43B4-B53E-F7A0E17358AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{60C2BD21-8CA3-4168-9D1B-B6504D1CDE30}"
-	ProjectSection(SolutionItems) = preProject
-		FodyWeavers.xml = FodyWeavers.xml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
