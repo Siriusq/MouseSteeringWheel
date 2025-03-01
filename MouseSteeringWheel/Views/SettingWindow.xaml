@@ -210,7 +210,7 @@
                                 <TextBox
                                     x:Name="PauseHotKeyTextBox"
                                     Height="30"
-                                    Text="Shift Alt Ctrl P"
+                                    Text="P"
                                     VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
@@ -238,7 +238,7 @@
                                 <TextBox
                                     x:Name="SettingHotKeyTextBox"
                                     Height="30"
-                                    Text="Shift Alt Ctrl O"
+                                    Text="S"
                                     VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
@@ -266,7 +266,7 @@
                                 <TextBox
                                     x:Name="ResetJoystickHotKeyTextBox"
                                     Height="30"
-                                    Text="Shift Alt Ctrl R"
+                                    Text="R"
                                     VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
@@ -571,7 +571,7 @@
                             <TextBox
                                 x:Name="ButtonHotKeyTextBox"
                                 Height="30"
-                                Text="Shift Alt Ctrl R"
+                                Text="D1"
                                 VerticalAlignment="Center"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"

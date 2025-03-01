@@ -121,32 +121,7 @@ namespace MouseSteeringWheel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;C" +
-            "ontrol;Alt, Control;None;Alt, Control\r\nNone;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;Control;Alt, Control;None;Alt, Control\r\nN" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;N" +
-            "one;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;C" +
-            "ontrol;Alt, Control;None;Alt, Control")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None")]
         public string ModifierKeyArrayString {
             get {
                 return ((string)(this["ModifierKeyArrayString"]));
@@ -158,7 +133,7 @@ namespace MouseSteeringWheel.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"None;NumPad1;NumPad2;NumPad3;NumPad5;NumPad7;NumPad4;NumPad9;NumPad6;Home;End;Delete;Next;PageUp;Insert;Up;Down;Left;Right;Divide;Multiply;Subtract;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;D;P;Add;R")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"None;NumPad1;NumPad2;NumPad3;NumPad5;NumPad7;NumPad4;NumPad9;NumPad6;Home;End;Delete;Next;PageUp;Insert;Up;Down;Left;Right;Divide;Multiply;Subtract;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;None;P;S;R")]
         public string HotKeyArrayString {
             get {
                 return ((string)(this["HotKeyArrayString"]));
