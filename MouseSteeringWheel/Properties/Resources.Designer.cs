@@ -133,7 +133,7 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Click &amp;amp; Press Keys to Record 的本地化字符串。
+        ///   查找类似 Click &amp; Press Keys to Record 的本地化字符串。
         /// </summary>
         public static string HotkeyHintName {
             get {

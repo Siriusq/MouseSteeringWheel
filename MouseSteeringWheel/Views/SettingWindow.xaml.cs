@@ -154,12 +154,12 @@ namespace MouseSteeringWheel.Views
                 return;
             }
             _pressedKeys.Remove(e.Key);
-            Console.WriteLine(_pressedKeys.Count);
+            //Console.WriteLine(_pressedKeys.Count);
             if (_pressedKeys.Count == 0)
             {
                 _hotKeyArray[_currKeyID] = _currHotKey;
                 _modifierKeyArray[_currKeyID] = _currHotKeyModifiers;
-                Console.WriteLine($"{_currHotKeyModifiers} + {_currHotKey}");
+                //Console.WriteLine($"{_currHotKeyModifiers} + {_currHotKey}");
                 _changedHotKeyID.Add(_currKeyID);
             }
             e.Handled = true;
@@ -320,10 +320,10 @@ namespace MouseSteeringWheel.Views
             }
 
             // 输出快捷键数组
-            for (int i = 1; i < 132; i++)
-            {
-                Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
-            }
+            //for (int i = 1; i < 132; i++)
+            //{
+            //    Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
+            //}
 
             // 将快捷键还原至对应文本框
             PauseHotKeyTextBox.Text = $"{_modifierKeyArray[129]} + {_hotKeyArray[129]}";
@@ -439,10 +439,10 @@ namespace MouseSteeringWheel.Views
 
 
             // 输出快捷键数组
-            for (int i = 1; i < 132; i++)
-            {
-                Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
-            }
+            //for (int i = 1; i < 132; i++)
+            //{
+            //    Console.WriteLine($"{i},{_hotKeyArray[i]},{_modifierKeyArray[i]}");
+            //}
 
             // 更新修改过的快捷键
             if (Owner is MainWindow _mainWindow)
@@ -455,8 +455,8 @@ namespace MouseSteeringWheel.Views
             Settings.Default.HotKeyArrayString = string.Join(";", _hotKeyArray.Select(k => k.ToString()));
             Settings.Default.ModifierKeyArrayString = string.Join(";", _modifierKeyArray.Select(m => m.ToString()));
 
-            Console.WriteLine(Settings.Default.HotKeyArrayString);
-            Console.WriteLine(Settings.Default.ModifierKeyArrayString);
+            //Console.WriteLine(Settings.Default.HotKeyArrayString);
+            //Console.WriteLine(Settings.Default.ModifierKeyArrayString);
 
 
             //保存更改到Settings.settings并关闭窗口

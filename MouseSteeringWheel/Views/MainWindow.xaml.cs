@@ -197,7 +197,7 @@ namespace MouseSteeringWheel.Views
         {
             foreach (int id in changedHotKeyID)
             {
-                Console.WriteLine($"id needs to be changed:{id}");
+                //Console.WriteLine($"id needs to be changed:{id}");
                 int buttonId = id;
                 _hotkeyProcessor.UnregisterHotkey(buttonId);
                 Key currentKey = hotKeyArray[id];

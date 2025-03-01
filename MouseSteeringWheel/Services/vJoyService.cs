@@ -19,10 +19,7 @@ namespace MouseSteeringWheel.Services
             _vJoyDeviceId = (uint)Settings.Default.vJoyDeviceId;
 
             // 初始化vJoy
-            if (!InitializevJoy())
-            {
-                Console.WriteLine("Initialize Failed!");
-            }
+            InitializevJoy();
         }
 
         // 初始化vJoy并返回是否成功
@@ -46,10 +43,10 @@ namespace MouseSteeringWheel.Services
             iReport = new vJoy.JoystickState() { bDevice = (byte)_vJoyDeviceId };
 
             // 设备初始化成功
-            Console.WriteLine("Vendor: {0}\nProduct :{1}\nVersion Number:{2}\n",
-                _joyStick.GetvJoyManufacturerString(),
-                _joyStick.GetvJoyProductString(),
-                _joyStick.GetvJoySerialNumberString());
+            //Console.WriteLine("Vendor: {0}\nProduct :{1}\nVersion Number:{2}\n",
+            //    _joyStick.GetvJoyManufacturerString(),
+            //    _joyStick.GetvJoyProductString(),
+            //    _joyStick.GetvJoySerialNumberString());
             return true;
         }
 
@@ -75,7 +72,7 @@ namespace MouseSteeringWheel.Services
                 _messageBoxService.ShowMessage(Resources.vJoyVersionMismatchContent, Resources.vJoyVersionMismatchTitle);
                 return false;
             }
-            Console.WriteLine("Version of Driver Matches DLL Version ({0:X})\n", DllVer);
+            //Console.WriteLine("Version of Driver Matches DLL Version ({0:X})\n", DllVer);
             return true;
         }
 
@@ -87,10 +84,10 @@ namespace MouseSteeringWheel.Services
             switch (status)
             {
                 case VjdStat.VJD_STAT_OWN:
-                    Console.WriteLine($"vJoy Device {id} is already owned");
+                    //Console.WriteLine($"vJoy Device {id} is already owned");
                     break;
                 case VjdStat.VJD_STAT_FREE:
-                    Console.WriteLine($"vJoy Device {id} is free");
+                    //Console.WriteLine($"vJoy Device {id} is free");
                     break;
                 case VjdStat.VJD_STAT_BUSY:
                     _messageBoxService.ShowMessage(Resources.vJoyDeviceBusyContent, Resources.vJoyDeviceBusyTitle);
@@ -115,8 +112,8 @@ namespace MouseSteeringWheel.Services
             if ((status == VjdStat.VJD_STAT_OWN) ||
                     ((status == VjdStat.VJD_STAT_FREE) && (!_joyStick.AcquireVJD(id))))
                 _messageBoxService.ShowMessage(Resources.vJoyDeviceObtainFailedContent, Resources.vJoyDeviceObtainFailedTitle);
-            else
-                Console.WriteLine($"Acquired: vJoy device number {id}.");
+            //else
+            //    Console.WriteLine($"Acquired: vJoy device number {id}.");
 
             return true;
         }
@@ -215,7 +212,7 @@ namespace MouseSteeringWheel.Services
                     if (_joyStick.GetVJDStatus(_vJoyDeviceId) == VjdStat.VJD_STAT_OWN)
                     {
                         _joyStick.RelinquishVJD(_vJoyDeviceId); // 释放设备
-                        Console.WriteLine("Device Relinquished!");
+                        //Console.WriteLine("Device Relinquished!");
                     }
                 }
                 // 释放非托管资源
