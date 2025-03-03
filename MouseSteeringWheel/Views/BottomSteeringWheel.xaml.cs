@@ -6,9 +6,8 @@ using MouseSteeringWheel.Properties;
 namespace MouseSteeringWheel.Views
 {
     /// <summary>
-    /// BottomSteeringWheel.xaml 的交互逻辑
+    /// BottomSteeringWheel.xaml 的交互逻辑，方向盘 UI
     /// </summary>
-    /// 
     public partial class BottomSteeringWheel : UserControl
     {
         private readonly vJoyService _vJoyService;
@@ -27,13 +26,18 @@ namespace MouseSteeringWheel.Views
             SetUIScale();
         }
 
+        /// <summary>
+        /// 设置UI缩放
+        /// </summary>
         public void SetUIScale()
         {
             UIScale.ScaleX = Settings.Default.UIScaleFactor;
             UIScale.ScaleY = Settings.Default.UIScaleFactor;
         }
 
-        // 更新指示器位置
+        /// <summary>
+        /// 更新 UI 指示器位置
+        /// </summary>
         public void UpdateJoystickPosition(object sender, EventArgs e)
         {
             // 获取当前摇杆的 X 值

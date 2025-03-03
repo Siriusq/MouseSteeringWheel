@@ -36,6 +36,9 @@ namespace MouseSteeringWheel.Services
         public MouseEventType EventType { get; set; }
     }
 
+    /// <summary>
+    /// 鼠标移动全局勾子
+    /// </summary>
     public class MouseHookService : IDisposable
     {
         private IntPtr _hookId = IntPtr.Zero;

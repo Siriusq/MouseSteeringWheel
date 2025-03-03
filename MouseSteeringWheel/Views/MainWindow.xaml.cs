@@ -2,7 +2,6 @@
 using MouseSteeringWheel.Services;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -51,7 +50,10 @@ namespace MouseSteeringWheel.Views
         }
 
         #region 设置参数传递
-        // UI 切换
+        /// <summary>
+        /// UI 切换
+        /// </summary>
+        /// <param name="uiId">用户指定的 UI 风格</param>
         public void SwitchUIStyle(int uiId)
         {
             if (uiId == 1)
@@ -75,18 +77,26 @@ namespace MouseSteeringWheel.Views
             }
         }
 
+        /// <summary>
+        /// 设置 UI 缩放比例
+        /// </summary>
         public void SetUIScale()
         {
             _bottomSteeringWheel?.SetUIScale();
             _bottomJoystick?.SetUIScale();
         }
 
+        /// <summary>
+        /// 设置摇杆 UI 的 Y 轴偏移高度
+        /// </summary>
         public void SetUIYAxisOffset()
         {
             _bottomJoystick?.SetYAxisOffset();
         }
 
-        // XY轴对应参数
+        /// <summary>
+        /// 更新XY轴对应的设置参数
+        /// </summary>
         public void UpdateXYAxisParameters()
         {
             _mouseProcessor.UpdateParameters();
@@ -94,7 +104,9 @@ namespace MouseSteeringWheel.Views
 
         #endregion
 
-        // 初始化窗口大小和位置
+        /// <summary>
+        /// 初始化窗口，设置窗口大小和位置
+        /// </summary>
         private void InitializeWindow()
         {
             // 获取屏幕分辨率
@@ -105,12 +117,14 @@ namespace MouseSteeringWheel.Views
             this.Width = screenWidth;
             this.Height = screenHeight;
 
-            // 设置窗口位置（屏幕底部居中）
+            // 设置窗口位置（默认屏幕底部居中）
             this.Left = (screenWidth - this.Width) / 2;
             this.Top = screenHeight - this.Height;
         }
 
-        // 渲染事件的回调方法
+        /// <summary>
+        /// 渲染事件的回调方法
+        /// </summary>
         private void BottomSteeringWheelOnRendering(object sender, EventArgs e)
         {
             // 调用 CircleUI 的 UpdateJoystickPosition 方法
@@ -123,10 +137,12 @@ namespace MouseSteeringWheel.Views
             _bottomJoystick.UpdateJoystickPosition(sender, e);
         }
 
-        // 注册快捷键
+        /// <summary>
+        /// 主窗口加载完成后，初始化快捷键服务，初始化设置窗口
+        /// </summary>
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            // 初始化热键服务
+            // 初始化快捷键服务
             WindowInteropHelper windowInteropHelper = new WindowInteropHelper(this);
             _hotkeyProcessor.Initialize(windowInteropHelper.Handle);
 
@@ -137,7 +153,9 @@ namespace MouseSteeringWheel.Views
             settingWindow.RegistAllHotKey();
         }
 
-        // 初始化时注册全部快捷键
+        /// <summary>
+        /// 初始化时注册全部快捷键
+        /// </summary>
         public void RegistAllHotKey(Key[] hotKeyArray, ModifierKeys[] modifierKeyArray)
         {
             //键盘勾子，用于在快捷键抬起时重置vJoy对应按钮状态
@@ -192,12 +210,16 @@ namespace MouseSteeringWheel.Views
                 );
         }
 
-        // 更新快捷键
+        /// <summary>
+        /// 更新快捷键
+        /// </summary>
+        /// <param name="hotKeyArray"></param>
+        /// <param name="modifierKeyArray"></param>
+        /// <param name="changedHotKeyID"></param>
         public void UpdateHotKeys(Key[] hotKeyArray, ModifierKeys[] modifierKeyArray, HashSet<int> changedHotKeyID)
         {
             foreach (int id in changedHotKeyID)
             {
-                //Console.WriteLine($"id needs to be changed:{id}");
                 int buttonId = id;
                 _hotkeyProcessor.UnregisterHotkey(buttonId);
                 Key currentKey = hotKeyArray[id];
@@ -214,7 +236,8 @@ namespace MouseSteeringWheel.Views
                                             _vJoyService.MapKeyToButton(buttonId)) // 这里使用局部变量
                                     );
                 }
-                else if (buttonId == 129)// 特殊热键：暂停摇杆响应
+                else if (buttonId == 129)
+                    // 特殊热键：暂停摇杆响应
                     _hotkeyProcessor.RegisterHotkey(
                             id: 129,
                             modifiers: modifierKeyArray[129],
@@ -243,7 +266,9 @@ namespace MouseSteeringWheel.Views
             }
         }
 
-        //显示设置窗口
+        /// <summary>
+        /// 显示设置窗口
+        /// </summary>
         private void LoadSettingWindow()
         {
             //检测窗口状态，然后决定是否显示设置窗口
@@ -251,7 +276,9 @@ namespace MouseSteeringWheel.Views
                 settingWindow.ShowDialog();
         }
 
-        //摇杆位置重置
+        /// <summary>
+        /// 摇杆位置重置
+        /// </summary>
         private void ResetJoystickPos()
         {
             _vJoyService.SetJoystickX(16383);
@@ -260,6 +287,9 @@ namespace MouseSteeringWheel.Views
             _mouseProcessor.ResetMousePos();
         }
 
+        /// <summary>
+        /// 窗口关闭时，注销全部快捷键、勾子以及渲染事件
+        /// </summary>
         private void OnWindowClosed(object sender, EventArgs e)
         {
             for (int i = 1; i < 132; i++)
@@ -274,11 +304,6 @@ namespace MouseSteeringWheel.Views
             CompositionTarget.Rendering -= BottomJoystickOnRendering;
             // 关闭时重置摇杆位置
             _vJoyService.ResetJoystickPos();
-            //保存更改到Settings.settings并关闭窗口
-            //Settings.Default.Save();
         }
-
-        // 托盘图标
-
     }
 }

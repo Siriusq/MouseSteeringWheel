@@ -270,4 +270,40 @@
   <data name="vJoyButtonIDTooltip" xml:space="preserve">
     <value>對應 vJoy 按鈕的快速鍵，vJoy 支援的按鈕最大數量為 128 個，請確認已在 vJoy 中開啟了對應的按鈕數量。</value>
   </data>
+  <data name="vJoyButtonIDInvalidTitle" xml:space="preserve">
+    <value>vJoy 按鈕 ID 無效！</value>
+  </data>
+  <data name="vJoyButtonIDInvalidContent" xml:space="preserve">
+    <value>vJoy 按鈕 ID 無效！</value>
+  </data>
+  <data name="vJoyDeviceIDInvalidContent" xml:space="preserve">
+    <value>vJoy 設備 ID 無效</value>
+  </data>
+  <data name="vJoyDeviceIDInvalidTitle" xml:space="preserve">
+    <value>vJoy 設備 ID 無效</value>
+  </data>
+  <data name="vJoyDeviceIDChangedContent" xml:space="preserve">
+    <value>vJoy 設備 ID 已修改，請重新啟動程式以使變更生效</value>
+  </data>
+  <data name="vJoyDeviceIDChangedTitle" xml:space="preserve">
+    <value>程式需要重啟</value>
+  </data>
+  <data name="UIScaleFactorInvalidContent" xml:space="preserve">
+    <value>UI 縮放係數無效</value>
+  </data>
+  <data name="UIScaleFactorInvalidTitle" xml:space="preserve">
+    <value>UI 縮放係數無效</value>
+  </data>
+  <data name="UIYAxisOffsetInvalidContent" xml:space="preserve">
+    <value>UI Y軸偏移像素數值無效</value>
+  </data>
+  <data name="UIYAxisOffsetInvalidTitle" xml:space="preserve">
+    <value>UI Y軸偏移像素數值無效</value>
+  </data>
+  <data name="XYAxisParameterInvalidContent" xml:space="preserve">
+    <value>X/Y 軸數值設定無效</value>
+  </data>
+  <data name="XYAxisParameterInvalidTitle" xml:space="preserve">
+    <value>X/Y 軸數值設定無效</value>
+  </data>
 </root>

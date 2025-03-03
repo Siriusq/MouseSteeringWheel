@@ -8,7 +8,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 
 namespace MouseSteeringWheel.Views
 {
@@ -26,7 +25,9 @@ namespace MouseSteeringWheel.Views
             _messageBoxService = new MessageBoxService();
         }
 
-        // 初始化注册全部快捷键
+        /// <summary>
+        /// 由主窗口注册全部快捷键
+        /// </summary>
         public void RegistAllHotKey()
         {
             if (Owner is MainWindow mainWindow)
@@ -35,7 +36,9 @@ namespace MouseSteeringWheel.Views
             }
         }
 
-        // 点击关闭时隐藏设置窗口并重置为保存的设置项目
+        /// <summary>
+        /// 点击关闭按钮时，隐藏设置窗口，并取消所做的更改
+        /// </summary>
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             ReadSettings();
@@ -51,7 +54,7 @@ namespace MouseSteeringWheel.Views
         private void SetLanguage(string cultureName) => _currLanguage = cultureName;
         #endregion
 
-        #region UI
+        #region UI 设置
         private int _currUIStyle;
         private double _uiScaleFactor;
         private int _uiYAxisOffset;
@@ -68,7 +71,9 @@ namespace MouseSteeringWheel.Views
         private ModifierKeys[] _modifierKeyArray = new ModifierKeys[132];
         private HashSet<int> _changedHotKeyID = new HashSet<int>();
 
-        // 快捷键预处理
+        /// <summary>
+        /// 快捷键预处理，检测按下的按钮，并显示预览
+        /// </summary>
         private void HotKeyTextBoxPreviewKeyDown(object sender, KeyEventArgs e)
         {
             //判断快捷键对应的文本框编号
@@ -81,14 +86,14 @@ namespace MouseSteeringWheel.Views
                     _currKeyID = int.Parse(vJoyButtonIDTextBox.Text);
                     if (_currKeyID <= 0 || _currKeyID > 128)
                     {
-                        _messageBoxService.ShowMessage("vJoy 按键 ID 超出范围", "vJoy 按键 ID 超出范围");
+                        _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
                         e.Handled = true;
                         return;
                     }
                 }
                 catch
                 {
-                    _messageBoxService.ShowMessage("vJoy 按键 ID 非法", "vJoy 按键 ID 非法");
+                    _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
                     e.Handled = true;
                     return;
                 }
@@ -125,11 +130,17 @@ namespace MouseSteeringWheel.Views
             }
         }
 
-        //非法Key枚举
+        /// <summary>
+        /// 检测按键是否合法，排除修饰键
+        /// </summary>
         private bool IsForbiddenKey(Key key)
         {
             return Enum.IsDefined(typeof(ForbiddenKeys), key.ToString());
         }
+
+        /// <summary>
+        /// 非法按键枚举
+        /// </summary>
         private enum ForbiddenKeys
         {
             Capital, CapsLock,
@@ -143,10 +154,12 @@ namespace MouseSteeringWheel.Views
             VolumeDown, VolumeMute, VolumeUp
         };
 
-        // 快捷键预存储
+        /// <summary>
+        /// 按键抬起时，快捷键预存储
+        /// </summary>
         private void HotKeyTextBoxPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            //判断Key是否合法
+            // 判断 Key 是否合法
             if (IsForbiddenKey(e.Key))
             {
                 // 如果按键非法则阻止按键事件继续传播
@@ -154,18 +167,19 @@ namespace MouseSteeringWheel.Views
                 return;
             }
             _pressedKeys.Remove(e.Key);
-            //Console.WriteLine(_pressedKeys.Count);
+
             if (_pressedKeys.Count == 0)
             {
                 _hotKeyArray[_currKeyID] = _currHotKey;
                 _modifierKeyArray[_currKeyID] = _currHotKeyModifiers;
-                //Console.WriteLine($"{_currHotKeyModifiers} + {_currHotKey}");
                 _changedHotKeyID.Add(_currKeyID);
             }
             e.Handled = true;
         }
 
-        // ID 加减按钮处理
+        /// <summary>
+        /// 按键 ID 两侧的加减按钮点击事件处理
+        /// </summary>
         private void AddIDButtonClick(object sender, RoutedEventArgs e)
         {
             try
@@ -177,7 +191,7 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+                _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
             }
         }
 
@@ -192,10 +206,13 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+                _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
             }
         }
 
+        /// <summary>
+        /// 直接通过文本框输入的按键 ID 检测
+        /// </summary>
         private void vJoyButtonIDTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -203,7 +220,7 @@ namespace MouseSteeringWheel.Views
                 int currID = int.Parse(vJoyButtonIDTextBox.Text);
                 if (currID <= 0 || currID > 128)
                 {
-                    _messageBoxService.ShowMessage("ID 值超出范围", "ID 值超出范围");
+                    _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
                     vJoyButtonIDTextBox.Text = "1";
                     return;
                 }
@@ -213,21 +230,22 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("ID 值非法", "ID 值非法");
+                _messageBoxService.ShowMessage(Properties.Resources.vJoyButtonIDInvalidContent, Properties.Resources.vJoyButtonIDInvalidTitle);
             }
         }
 
         #endregion
 
 
-
-        //读取设置并恢复对应UI显示文本
+        /// <summary>
+        /// 读取设置并恢复对应 UI 显示文本
+        /// </summary>
         private void ReadSettings()
         {
-            //通用设置
-            //vJoy设备ID
+            // 通用设置
+            // vJoy设备ID
             vJoyDeviceID.Text = Settings.Default.vJoyDeviceId.ToString();
-            //语言设置
+            // 语言设置
             _currLanguage = Settings.Default.language;
             switch (_currLanguage)
             {
@@ -246,8 +264,8 @@ namespace MouseSteeringWheel.Views
             }
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(_currLanguage);
 
-            //UI设置
-            //UI样式
+            // UI 设置
+            // UI 样式
             _currUIStyle = Settings.Default.UIStyle;
             switch (_currUIStyle)
             {
@@ -259,7 +277,7 @@ namespace MouseSteeringWheel.Views
                     break;
             }
 
-            //UI缩放系数
+            // UI 缩放系数
             _uiScaleFactor = Settings.Default.UIScaleFactor;
             UIScaleFactor.Text = _uiScaleFactor.ToString();
 
@@ -281,7 +299,7 @@ namespace MouseSteeringWheel.Views
             YAxisDeadzone.Text = Settings.Default.YAxisDeadzone.ToString();
 
 
-            // 快捷键数组 <->字符串转换
+            // 快捷键数组 <-> 字符串转换
             // 读取热键数组
             string hotKeyStr = Settings.Default.HotKeyArrayString;
             if (!string.IsNullOrEmpty(hotKeyStr))
@@ -295,7 +313,7 @@ namespace MouseSteeringWheel.Views
                     }
                     else
                     {
-                        // 处理解析失败（例如设为默认值）
+                        // 处理解析失败，设为默认值
                         _hotKeyArray[i] = Key.None;
                     }
                 }
@@ -333,11 +351,13 @@ namespace MouseSteeringWheel.Views
             vJoyButtonIDTextBox.Text = "1";
         }
 
-        // 保存设置
+        /// <summary>
+        /// 点击保存按钮后保存设置
+        /// </summary>
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            // 保存通用设置，需重启后生效！！！
-            // 保存设备ID
+            // 保存通用设置，需重启后生效
+            // 保存设备 ID
             try
             {
                 int newvJoyDeviceID = int.Parse(vJoyDeviceID.Text);
@@ -345,29 +365,29 @@ namespace MouseSteeringWheel.Views
                 {
                     if (newvJoyDeviceID > 16 || newvJoyDeviceID <= 0)
                     {
-                        _messageBoxService.ShowMessage("vJoy 设备 ID 超出范围", "保存失败");
+                        _messageBoxService.ShowMessage(Properties.Resources.vJoyDeviceIDInvalidContent, Properties.Resources.vJoyDeviceIDInvalidTitle);
                         return;
                     }
                     else
                     {
-                        _messageBoxService.ShowMessage("vJoy 设备 ID 已修改，请重启程序以使更改生效", "程序需要重启");
+                        _messageBoxService.ShowMessage(Properties.Resources.vJoyDeviceIDChangedContent, Properties.Resources.vJoyDeviceIDChangedTitle);
                         Settings.Default.vJoyDeviceId = newvJoyDeviceID;
                     }
                 }
             }
             catch
             {
-                _messageBoxService.ShowMessage("vJoy 设备 ID 数值无效", "vJoy 设备 ID 数值无效");
+                _messageBoxService.ShowMessage(Properties.Resources.vJoyDeviceIDInvalidContent, Properties.Resources.vJoyDeviceIDInvalidTitle);
                 return;
             }
 
-            //保存语言
+            // 保存语言设置
             if (Settings.Default.language != _currLanguage)
                 Settings.Default.language = _currLanguage;
 
 
-            //保存UI设置
-            //保存UI样式
+            // 保存 UI 设置
+            // 保存 UI 样式
             if (_currUIStyle != Settings.Default.UIStyle)
             {
                 if (Owner is MainWindow mainWindow)
@@ -376,7 +396,7 @@ namespace MouseSteeringWheel.Views
                 }
                 Settings.Default.UIStyle = _currUIStyle;
             }
-            //保存UI缩放系数
+            // 保存 UI 缩放系数
             try
             {
                 double newUIScaleFactor = double.Parse(UIScaleFactor.Text);
@@ -391,7 +411,7 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("UI 缩放数值无效", "UI 缩放数值无效");
+                _messageBoxService.ShowMessage(Properties.Resources.UIScaleFactorInvalidContent, Properties.Resources.UIScaleFactorInvalidTitle);
                 return;
             }
 
@@ -410,12 +430,12 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("UI Y轴偏移像素数值无效", "UI Y轴偏移像素数值无效");
+                _messageBoxService.ShowMessage(Properties.Resources.UIYAxisOffsetInvalidContent, Properties.Resources.UIYAxisOffsetInvalidTitle);
                 return;
             }
 
 
-            // 保存XY轴设置
+            // 保存 XY 轴相关设置
             try
             {
                 Settings.Default.XAxisEnable = (bool)XAxisEnableButton.IsChecked;
@@ -433,10 +453,9 @@ namespace MouseSteeringWheel.Views
             }
             catch
             {
-                _messageBoxService.ShowMessage("XY轴数值无效", "XY轴数值无效");
+                _messageBoxService.ShowMessage(Properties.Resources.XYAxisParameterInvalidContent, Properties.Resources.XYAxisParameterInvalidTitle);
                 return;
             }
-
 
             // 输出快捷键数组
             //for (int i = 1; i < 132; i++)
@@ -458,13 +477,14 @@ namespace MouseSteeringWheel.Views
             //Console.WriteLine(Settings.Default.HotKeyArrayString);
             //Console.WriteLine(Settings.Default.ModifierKeyArrayString);
 
-
-            //保存更改到Settings.settings并关闭窗口
+            // 保存更改到Settings.settings并关闭窗口
             Settings.Default.Save();
             this.Hide();
         }
 
-        //点击取消按钮，恢复上次的设置
+        /// <summary>
+        /// 点击取消按钮后，隐藏设置窗口并取消所做的更改
+        /// </summary>
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             ReadSettings();

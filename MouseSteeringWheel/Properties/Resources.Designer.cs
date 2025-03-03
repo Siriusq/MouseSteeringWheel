@@ -304,6 +304,24 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 UI Scale Factor Invalid 的本地化字符串。
+        /// </summary>
+        public static string UIScaleFactorInvalidContent {
+            get {
+                return ResourceManager.GetString("UIScaleFactorInvalidContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 UI Scale Factor Invalid 的本地化字符串。
+        /// </summary>
+        public static string UIScaleFactorInvalidTitle {
+            get {
+                return ResourceManager.GetString("UIScaleFactorInvalidTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Scale Factor 的本地化字符串。
         /// </summary>
         public static string UIScaleFactorName {
@@ -340,11 +358,47 @@ namespace MouseSteeringWheel.Properties {
         }
         
         /// <summary>
+        ///   查找类似 UI Y-Axis Offset Number Invalid 的本地化字符串。
+        /// </summary>
+        public static string UIYAxisOffsetInvalidContent {
+            get {
+                return ResourceManager.GetString("UIYAxisOffsetInvalidContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 UI Y-Axis Offset Number Invalid 的本地化字符串。
+        /// </summary>
+        public static string UIYAxisOffsetInvalidTitle {
+            get {
+                return ResourceManager.GetString("UIYAxisOffsetInvalidTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Only in effect when the UI style is joystick, which controls the position of the joystick UI in the vertical direction of the screen. The bottom of the screen is the zero point. 的本地化字符串。
         /// </summary>
         public static string UIYAxisOffsetTooltip {
             get {
                 return ResourceManager.GetString("UIYAxisOffsetTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Button ID Invalid! 的本地化字符串。
+        /// </summary>
+        public static string vJoyButtonIDInvalidContent {
+            get {
+                return ResourceManager.GetString("vJoyButtonIDInvalidContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Button ID Invalid 的本地化字符串。
+        /// </summary>
+        public static string vJoyButtonIDInvalidTitle {
+            get {
+                return ResourceManager.GetString("vJoyButtonIDInvalidTitle", resourceCulture);
             }
         }
         
@@ -372,6 +426,42 @@ namespace MouseSteeringWheel.Properties {
         public static string vJoyDeviceBusyTitle {
             get {
                 return ResourceManager.GetString("vJoyDeviceBusyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy device ID has changed, please restart the program for the changes to take effect 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDChangedContent {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDChangedContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The program needs to be restarted 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDChangedTitle {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDChangedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device ID Invalid 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDInvalidContent {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDInvalidContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 vJoy Device ID Invalid 的本地化字符串。
+        /// </summary>
+        public static string vJoyDeviceIDInvalidTitle {
+            get {
+                return ResourceManager.GetString("vJoyDeviceIDInvalidTitle", resourceCulture);
             }
         }
         
@@ -507,6 +597,24 @@ namespace MouseSteeringWheel.Properties {
         public static string XAxisName {
             get {
                 return ResourceManager.GetString("XAxisName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 X/Y axis value is invalid 的本地化字符串。
+        /// </summary>
+        public static string XYAxisParameterInvalidContent {
+            get {
+                return ResourceManager.GetString("XYAxisParameterInvalidContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 X/Y axis value is invalid 的本地化字符串。
+        /// </summary>
+        public static string XYAxisParameterInvalidTitle {
+            get {
+                return ResourceManager.GetString("XYAxisParameterInvalidTitle", resourceCulture);
             }
         }
         

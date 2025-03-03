@@ -1,12 +1,13 @@
-﻿// 处理键位抬起时，vJoy无法自动复原对应按钮状态的问题
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
 namespace MouseSteeringWheel.Services
 {
+    /// <summary>
+    /// 处理快捷键键位抬起时，无法自动复原对应按钮状态的问题
+    /// </summary>
     public class KeyboardHookService : IDisposable
     {
         private readonly ApplicationStateService _stateService;
@@ -17,28 +18,27 @@ namespace MouseSteeringWheel.Services
         public event Action<Key, ModifierKeys> KeyDown;
         public event Action<Key, ModifierKeys> KeyUp;
 
-        private Key[] keysArray;
-        private ModifierKeys[] modifierKeysArray;
+        private Key[] _keysArray;
+        private ModifierKeys[] _modifierKeysArray;
 
         public KeyboardHookService(vJoyService _vJoyService, Key[] keys, ModifierKeys[] modifierKey, ApplicationStateService stateService)
         {
             this._stateService = stateService;
             this._vJoyService = _vJoyService;
-            this.keysArray = keys;
-            this.modifierKeysArray = modifierKey;
+            this._keysArray = keys;
+            this._modifierKeysArray = modifierKey;
             _proc = HookCallback;
             InstallHook();
 
             //this.KeyDown += OnGlobalKeyDown;
             this.KeyUp += OnGlobalKeyUp;
-
         }
 
         private void OnGlobalKeyDown(Key key, ModifierKeys modifierKeys)
         {
             for (int i = 0; i < 21; i++)
             {
-                if (key == keysArray[i] && modifierKeys == modifierKeysArray[i])
+                if (key == _keysArray[i] && modifierKeys == _modifierKeysArray[i])
                 {
                     Console.WriteLine(i + 1);
                     Application.Current.Dispatcher.Invoke(() =>
@@ -47,11 +47,14 @@ namespace MouseSteeringWheel.Services
             }
         }
 
+        /// <summary>
+        /// 检测抬起的键位对应的快捷键，然后将快捷键对应的 vJoy 按钮设置为未按下状态
+        /// </summary>
         private void OnGlobalKeyUp(Key key, ModifierKeys modifierKeys)
         {
             for (int i = 1; i <= 128; i++)
             {
-                if (key == keysArray[i] && modifierKeys == modifierKeysArray[i])
+                if (key == _keysArray[i] && modifierKeys == _modifierKeysArray[i])
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                         _vJoyService.ResetButtonStatus(i));

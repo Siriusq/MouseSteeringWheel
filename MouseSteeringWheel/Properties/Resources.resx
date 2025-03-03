@@ -270,4 +270,40 @@
   <data name="vJoyButtonIDTooltip" xml:space="preserve">
     <value>Hotkeys that correspond to vJoy buttons. vJoy supports a maximum of 128 buttons, so make sure you have enabled the corresponding number of buttons in vJoy.</value>
   </data>
+  <data name="vJoyButtonIDInvalidTitle" xml:space="preserve">
+    <value>vJoy Button ID Invalid</value>
+  </data>
+  <data name="vJoyButtonIDInvalidContent" xml:space="preserve">
+    <value>vJoy Button ID Invalid!</value>
+  </data>
+  <data name="vJoyDeviceIDInvalidContent" xml:space="preserve">
+    <value>vJoy Device ID Invalid</value>
+  </data>
+  <data name="vJoyDeviceIDInvalidTitle" xml:space="preserve">
+    <value>vJoy Device ID Invalid</value>
+  </data>
+  <data name="vJoyDeviceIDChangedContent" xml:space="preserve">
+    <value>vJoy device ID has changed, please restart the program for the changes to take effect</value>
+  </data>
+  <data name="vJoyDeviceIDChangedTitle" xml:space="preserve">
+    <value>The program needs to be restarted</value>
+  </data>
+  <data name="UIScaleFactorInvalidContent" xml:space="preserve">
+    <value>UI Scale Factor Invalid</value>
+  </data>
+  <data name="UIScaleFactorInvalidTitle" xml:space="preserve">
+    <value>UI Scale Factor Invalid</value>
+  </data>
+  <data name="UIYAxisOffsetInvalidContent" xml:space="preserve">
+    <value>UI Y-Axis Offset Number Invalid</value>
+  </data>
+  <data name="UIYAxisOffsetInvalidTitle" xml:space="preserve">
+    <value>UI Y-Axis Offset Number Invalid</value>
+  </data>
+  <data name="XYAxisParameterInvalidContent" xml:space="preserve">
+    <value>X/Y axis value is invalid</value>
+  </data>
+  <data name="XYAxisParameterInvalidTitle" xml:space="preserve">
+    <value>X/Y axis value is invalid</value>
+  </data>
 </root>

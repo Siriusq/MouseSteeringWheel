@@ -1,5 +1,4 @@
 ﻿using MouseSteeringWheel.Properties;
-using MouseSteeringWheel.Services;
 using System;
 
 namespace MouseSteeringWheel.Services
@@ -34,7 +33,9 @@ namespace MouseSteeringWheel.Services
             _hookService.MouseAction += OnMouseAction;
         }
 
-        // 更新相关参数
+        /// <summary>
+        /// 从设置中获取相关参数
+        /// </summary>
         public void UpdateParameters()
         {
             _xAxisEnable = Settings.Default.XAxisEnable;
@@ -45,9 +46,11 @@ namespace MouseSteeringWheel.Services
             _sensitivityY = Settings.Default.YAxisSensitivity;
             _nonlinearCoefficientY = Settings.Default.YAxisNonlinear;
             _deadZonePercentageY = Settings.Default.YAxisDeadzone / 100.0;
-
         }
 
+        /// <summary>
+        /// 鼠标事件处理
+        /// </summary>
         private void OnMouseAction(object sender, MouseHookEventArgs e)
         {
             switch (e.EventType)
@@ -67,7 +70,10 @@ namespace MouseSteeringWheel.Services
             }
         }
 
-        // 将鼠标的坐标映射为摇杆位置
+        // 
+        /// <summary>
+        /// 将鼠标的坐标映射为 vJoy 摇杆位置
+        /// </summary>
         private void UpdateJoystickXY(int dx, int dy)
         {
             // 设置灵敏度
@@ -78,8 +84,6 @@ namespace MouseSteeringWheel.Services
             // 将坐标转换为相对中心的比例（范围[-1,1]）
             double dxNormalized = (double)dx / Center;
             double dyNormalized = (double)dy / Center;
-
-            //Console.WriteLine($"OVal:{Center + dx}");
 
             // 计算极坐标半径（范围[0,1]）
             double r = Math.Sqrt(dxNormalized * dxNormalized + dyNormalized * dyNormalized);
@@ -110,7 +114,6 @@ namespace MouseSteeringWheel.Services
                 }
             }
 
-
             // 应用非线性变换公式：r' = r^k
             if (_yAxisEnable)
             {
@@ -138,14 +141,16 @@ namespace MouseSteeringWheel.Services
             }
             else _vJoyService.SetJoystickY(Center);
 
-            // 更新摇杆X位置，单独拿出来和Y轴更新放在一起，同步
+            // 更新摇杆 X 位置，单独拿出来和 Y 轴更新放在一起，同步
             if (_xAxisEnable)
                 _vJoyService.SetJoystickX(newJoystickX);
             else
                 _vJoyService.SetJoystickX(Center);
         }
 
-        // 重置鼠标位置
+        /// <summary>
+        /// 重置鼠标位置到屏幕中心
+        /// </summary>
         public void ResetMousePos()
         {
             // 获取物理分辨率

@@ -7,7 +7,7 @@ using MouseSteeringWheel.Properties;
 namespace MouseSteeringWheel.Views
 {
     /// <summary>
-    /// BottomJoystick.xaml 的交互逻辑
+    /// BottomJoystick.xaml 的交互逻辑，摇杆 UI
     /// </summary>
     public partial class BottomJoystick : UserControl
     {
@@ -17,7 +17,6 @@ namespace MouseSteeringWheel.Views
 
         public BottomJoystick(vJoyService vJoyService)
         {
-
             InitializeComponent();
 
             this._vJoyService = vJoyService;
@@ -28,19 +27,26 @@ namespace MouseSteeringWheel.Views
             SetUIScale();
         }
 
+        /// <summary>
+        /// 设置UI缩放
+        /// </summary>
         public void SetUIScale()
         {
             UIScale.ScaleX = Settings.Default.UIScaleFactor;
             UIScale.ScaleY = Settings.Default.UIScaleFactor;
         }
 
-        // 设置Y轴偏移
+        /// <summary>
+        /// 设置摇杆 UI 的 Y 轴偏移量，61.5 是圆心到屏幕底部的距离
+        /// </summary>
         public void SetYAxisOffset()
         {
             UIPosition.Y = -Settings.Default.UIYAxisOffset + 61.5;
         }
 
-        // 更新指示器位置
+        /// <summary>
+        /// 更新 UI 指示器位置
+        /// </summary>
         public void UpdateJoystickPosition(object sender, EventArgs e)
         {
             // 获取当前摇杆的 X 值

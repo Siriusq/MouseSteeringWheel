@@ -1,14 +1,14 @@
-﻿// 注册全局快捷键，阻断其他程序对已注册快捷键的响应，在快捷键按下时设置vJoy相关按钮状态为按下
-
-using MouseSteeringWheel.Properties;
+﻿using MouseSteeringWheel.Properties;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace MouseSteeringWheel.Services
 {
+    /// <summary>
+    /// 注册全局快捷键，阻断其他程序对已注册快捷键的响应，在快捷键按下时设置vJoy相关按钮状态为按下
+    /// </summary>
     public class HotkeyProcessor : IDisposable
     {
         private readonly Dictionary<int, Action> _hotkeyActions = new Dictionary<int, Action>();
@@ -37,7 +37,9 @@ namespace MouseSteeringWheel.Services
             throw new InvalidOperationException(Resources.RegistHotKeyFailedPop);
         }
 
-        // vJoy按键对应快捷键注册，支持暂停功能
+        /// <summary>
+        /// 注册 vJoy 按键对应的快捷键，支持暂停功能
+        /// </summary>
         public int RegisterHotkeyWithPauseCheck(
             int id,
             ModifierKeys modifiers,

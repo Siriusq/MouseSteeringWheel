@@ -1,5 +1,4 @@
-﻿using MouseSteeringWheel.Views;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MouseSteeringWheel.Services
 {
