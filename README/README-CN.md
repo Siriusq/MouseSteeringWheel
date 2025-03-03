@@ -30,7 +30,13 @@ Mouse Steering Wheel 是一个 vJoy Feeder 程序，它能够将鼠标的移动�
 - 支持英文、简体中文和繁体中文语言切换
 
 <div align=center>
-    <img src="./UI_1.png" height="200" alt="Steering Wheel UI"><img src="./UI_2.png" height="200" alt="Joystick UI">
+    <img src="./UI_1.gif" width="600" alt="Steering Wheel UI">
+    <p> 方向盘模拟 UI </p>
+</div>
+
+<div align=center>
+    <img src="./UI_2.gif" width="600" alt="Joystick UI">
+    <p> 摇杆模拟 UI </p>
 </div>
 
 # 如何使用

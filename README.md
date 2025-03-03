@@ -30,7 +30,13 @@ The program is built with the WPF framework and developed in C#. It supports onl
 - Supports English, Simplified Chinese, and Traditional Chinese language switching
 
 <div align=center>
-    <img src="./README/UI_1.png" height="200" alt="Steering Wheel UI"><img src="./README/UI_2.png" height="200" alt="Joystick UI">
+    <img src="./README/UI_1.gif" width="600" alt="Steering Wheel UI">
+    <p> Steering Wheel UI </p>
+</div>
+
+<div align=center>
+    <img src="./README/UI_2.gif" width="600" alt="Joystick UI">
+    <p> Joystick UI </p>
 </div>
 
 # How to Use
